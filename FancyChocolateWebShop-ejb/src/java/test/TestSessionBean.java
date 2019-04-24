@@ -1,6 +1,3 @@
-/*
- * Javautveckling 2018
- */
 package test;
 
 import javax.ejb.Stateless;
