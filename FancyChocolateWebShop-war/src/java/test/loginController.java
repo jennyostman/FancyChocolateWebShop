@@ -27,8 +27,9 @@ public class loginController implements Serializable {
         this.password = password;
     }
     
-    
-    
+    public boolean checkIfAdmin(){
+        return true;
+    }
     
     public loginController() {
     }
