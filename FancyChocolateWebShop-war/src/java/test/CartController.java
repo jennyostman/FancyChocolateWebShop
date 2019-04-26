@@ -17,7 +17,7 @@ public class CartController implements Serializable {
     private String chocolateName, pictureName;
     private float price;
     private int amount;
-    private List<CartDbStandIn> cartContent = null;
+    private List<CartDbStandIn2> cartContent = null;
     private boolean deleted = false;
     // Kvar: update row in JSF dataTable
     // Kvar: delete row/object in JSF dataTable
@@ -30,7 +30,7 @@ public class CartController implements Serializable {
     
     
     public CartController() {
-        CartDbStandIn c = new CartDbStandIn();
+        CartDbStandIn2 c = new CartDbStandIn2();
         cartContent = c.createCartObjects();
 //        cartContent = new ArrayList() {
 //        };
@@ -79,17 +79,17 @@ public class CartController implements Serializable {
         this.amount = amount;
     }
 
-    public List<CartDbStandIn> getCartContent() {
+    public List<CartDbStandIn2> getCartContent() {
         return cartContent;
     }
 
-    public void setCartContent(List<CartDbStandIn> cartContent) {
+    public void setCartContent(List<CartDbStandIn2> cartContent) {
         this.cartContent = cartContent;
     }
 
     
-    public void removeProduct(CartDbStandIn chocolateObj){
-        CartDbStandIn c = new CartDbStandIn();
+    public void removeProduct(CartDbStandIn2 chocolateObj){
+        CartDbStandIn2 c = new CartDbStandIn2();
         deleted = c.deleteFromCart(chocolateObj, cartContent);
     }
     
