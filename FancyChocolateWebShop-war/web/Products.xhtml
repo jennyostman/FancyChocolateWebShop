@@ -23,21 +23,22 @@
        <f:view>
            <h:form>
                 <!--obs det stor author som var nedan-->
-               <h:dataTable  value="sattInMetoderHar" var="author" bgcolor="lightgray" border="7" bodyrows="5"> 
+                <h:dataTable  value="#{marcusController.productList}" 
+                             var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
                
                    <h:column>
                             <f:facet name="header" >ProductID</f:facet>
-                            <h:outputText value="getProductIDMethod" />
+                            <h:outputText id = "productID" value="#{produkt.id}" />
                    </h:column>
                    
                    <h:column>
                             <f:facet name="header" >Product Name:</f:facet>
-                            <h:outputText value="getProductNameMethod" />
+                            <h:outputText value="#{produkt.namn}" />
                    </h:column>
                    
                    <h:column>
                             <f:facet name="header" >Product Price:</f:facet>
-                            <h:outputText value="getProductPriceMethod" />
+                            <h:outputText value="#{produkt.pris}" />
                    </h:column>
                    
                    <h:column>
