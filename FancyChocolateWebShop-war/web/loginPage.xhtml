@@ -18,7 +18,7 @@
         <h:inputSecret value="#{loginController.password}">
             <f:validator validatorId="passValidate"/>
         </h:inputSecret><br/>
-        <h:commandButton value=" Login" action="Products"></h:commandButton>
+        <h:commandButton value=" Login" action="Login"></h:commandButton>
         <h:commandButton value=" Register" action="#{registerController.show()}" immediate="true"></h:commandButton>
         </h:form>
         
@@ -41,7 +41,9 @@
                 </h:form>
             </div>
         </h:panelGroup>
-            
+        <h:form>
+            <br/><br/><h:commandButton action="Cart" value="Cart"></h:commandButton>
+        </h:form>
     </h:body>
 </html>
 
