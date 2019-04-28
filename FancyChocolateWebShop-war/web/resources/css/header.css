@@ -1,0 +1,17 @@
+
+#headerForm{
+    height: 50px;
+    border: solid 2px black;
+    background-color: aliceblue;
+    padding: 10px;
+}
+#headerSpan{
+    width: 80%;
+    font-size: 50px;
+}
+#spanButtons{
+    float: right;
+    padding-top: 30px;
+}
+
+
