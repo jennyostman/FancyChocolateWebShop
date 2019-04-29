@@ -19,8 +19,8 @@ public class CartController implements Serializable {
     private int amount;
     private List<CartDbStandIn2> cartContent = null;
     private boolean deleted = false;
-    // Kvar: update row in JSF dataTable
-    // Kvar: delete row/object in JSF dataTable
+    // Kvar: att visa summan
+    // Kvar: Att visa summan om man har rabatt
 
     /*
     Innehållet i kundvagnen sparas inte till db förrän man lägger en order i köp.
@@ -32,11 +32,6 @@ public class CartController implements Serializable {
     public CartController() {
         CartDbStandIn2 c = new CartDbStandIn2();
         cartContent = c.createCartObjects();
-//        cartContent = new ArrayList() {
-//        };
-//        cartContent.add(new CartDbStandIn("Grand-Cru-by-Pierre-Marcolni-1.jpg", "Grand Cru by Pierre Marcolni", 102.50f, 3));
-//        cartContent.add(new CartDbStandIn("Richart-Chocolate.jpg", "Richart Chocolate", 115.0f, 10));
-//        cartContent.add(new CartDbStandIn("Chocolates-with-Edible-Gold-by-DeLafee.jpg", "Chocolates with Edible Gold by DeLafee", 508.0f, 1));
     }
 
     public UIGraphic getPicture() {
@@ -86,7 +81,6 @@ public class CartController implements Serializable {
     public void setCartContent(List<CartDbStandIn2> cartContent) {
         this.cartContent = cartContent;
     }
-
     
     public void removeProduct(CartDbStandIn2 chocolateObj){
         CartDbStandIn2 c = new CartDbStandIn2();

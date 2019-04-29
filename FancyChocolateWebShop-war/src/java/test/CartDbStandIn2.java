@@ -69,7 +69,6 @@ private String chocolateName, pictureName;
                 "Richart Chocolate", 115.0f, 10));
         cartContent.add(new CartDbStandIn2("Chocolates-with-Edible-Gold-by-DeLafee.jpg", 
                 "Chocolates with Edible Gold by DeLafee", 508.0f, 1));
-        // this.cartContent = cartContent;
         return cartContent;
     }
     
@@ -85,4 +84,5 @@ private String chocolateName, pictureName;
         }
         return delete;
     }
+    
 }
