@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h2>Cart</h2>
-        <f:view afterPhase="#{cartController.phaseListener}" beforePhase="#{cartController.phaseListener}">
+        <f:view>
             <h:form>
                 <h:dataTable value="#{cartController.cartContent}" var="CartDbStandIn" cellpadding="10">
                     <h:column>
