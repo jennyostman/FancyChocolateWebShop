@@ -85,4 +85,15 @@ private String chocolateName, pictureName;
         }
         return delete;
     }
+    
+//    public boolean updateAmountInCart(CartDbStandIn2 chocolateObj, List<CartDbStandIn2> cart){
+//        boolean delete = false;
+//        int oldAmount = chocolateObj.getAmount();
+//        cart.remove(chocolateObj);
+//        // Koll om något tagits bort
+//        if(size > cart.size()){
+//            delete = true;
+//        }
+//        return delete;
+//    }
 }

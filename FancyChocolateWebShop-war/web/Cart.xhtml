@@ -8,9 +8,9 @@
     </h:head>
     <h:body>
         <h2>Cart</h2>
-        <f:view>
+        <f:view afterPhase="#{cartController.phaseListener}" beforePhase="#{cartController.phaseListener}">
             <h:form>
-                <h:dataTable value="#{cartController.cartContent}" var="CartDbStandIn">
+                <h:dataTable value="#{cartController.cartContent}" var="CartDbStandIn" cellpadding="10">
                     <h:column>
                         <f:facet name="header">Picture</f:facet>
                         <h:graphicImage name="#{CartDbStandIn.pictureName}" library="image" binding="#{cartController.picture}"></h:graphicImage>
@@ -25,14 +25,18 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
-                        <h:inputText value="#{CartDbStandIn.amount}" size="4"></h:inputText>
-                        
+                        <h:inputText value="#{CartDbStandIn.amount}" size="4">
+                            <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
+                        </h:inputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
                         <h:commandButton action="#{cartController.removeProduct(CartDbStandIn)}" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
+                <hr/>
+                <h4>Total price: </h4>
+                <h4>Premium customer price: </h4>
             </h:form>
         </f:view>
     </h:body>

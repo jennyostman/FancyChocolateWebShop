@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIGraphic;
+import javax.faces.event.PhaseEvent;
 
 
 @Named(value = "cartController")
@@ -21,6 +22,8 @@ public class CartController implements Serializable {
     private boolean deleted = false;
     // Kvar: update row in JSF dataTable
     // Kvar: delete row/object in JSF dataTable
+    // Kvar: att visa summan
+    // Kvar: Att visa summan om man har rabatt
 
     /*
     Innehållet i kundvagnen sparas inte till db förrän man lägger en order i köp.
@@ -87,6 +90,14 @@ public class CartController implements Serializable {
         this.cartContent = cartContent;
     }
 
+    public void phaseListener(PhaseEvent e){
+		System.out.println(e);
+	}
+    
+//    public void updateAmount(CartDbStandIn2 chocolateObj){
+//        CartDbStandIn2 c = new CartDbStandIn2();
+//        deleted = c.updateAmountInCart(chocolateObj, cartContent);
+//    }
     
     public void removeProduct(CartDbStandIn2 chocolateObj){
         CartDbStandIn2 c = new CartDbStandIn2();
