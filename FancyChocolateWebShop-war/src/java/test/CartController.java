@@ -81,11 +81,6 @@ public class CartController implements Serializable {
     public void setCartContent(List<CartDbStandIn2> cartContent) {
         this.cartContent = cartContent;
     }
-
-//    public void phaseListener(PhaseEvent e){
-//		System.out.println(e);
-//	}
-
     
     public void removeProduct(CartDbStandIn2 chocolateObj){
         CartDbStandIn2 c = new CartDbStandIn2();
