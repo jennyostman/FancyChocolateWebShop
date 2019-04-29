@@ -69,7 +69,6 @@ private String chocolateName, pictureName;
                 "Richart Chocolate", 115.0f, 10));
         cartContent.add(new CartDbStandIn2("Chocolates-with-Edible-Gold-by-DeLafee.jpg", 
                 "Chocolates with Edible Gold by DeLafee", 508.0f, 1));
-        // this.cartContent = cartContent;
         return cartContent;
     }
     
@@ -86,14 +85,4 @@ private String chocolateName, pictureName;
         return delete;
     }
     
-//    public boolean updateAmountInCart(CartDbStandIn2 chocolateObj, List<CartDbStandIn2> cart){
-//        boolean delete = false;
-//        int oldAmount = chocolateObj.getAmount();
-//        cart.remove(chocolateObj);
-//        // Koll om något tagits bort
-//        if(size > cart.size()){
-//            delete = true;
-//        }
-//        return delete;
-//    }
 }
