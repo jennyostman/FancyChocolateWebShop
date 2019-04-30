@@ -1,13 +1,20 @@
 package test;
 
+import databasKontakt.SessionBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 
 @Named(value = "loginController")
 @SessionScoped
 public class loginController implements Serializable {
 
+    @EJB
+    private SessionBean sessionBean;
+
+    
+    
     private String username;
     private String password;
 
@@ -32,6 +39,10 @@ public class loginController implements Serializable {
     }
     
     public loginController() {
+        sessionBean = new SessionBean();
+        //System.out.println(sessionBean.LaggTillChoklad());
+        System.out.println("test1");
+        System.out.println(sessionBean.LaggTillChoklad());
     }
     
 }
