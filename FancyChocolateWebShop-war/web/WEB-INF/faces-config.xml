@@ -20,18 +20,18 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>Products</from-view-id>
+        <from-view-id>Products.xhtml</from-view-id>
         <navigation-case>
             <from-action>toCart</from-action>
-            <to-view-id>cart</to-view-id>
+            <to-view-id>Cart.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>cart</from-view-id>
+        <from-view-id>Cart.xhtml</from-view-id>
         <navigation-case>
             <from-action>toProducts</from-action>
-            <to-view-id>Products</to-view-id>
+            <to-view-id>Products.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
