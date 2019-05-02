@@ -25,12 +25,13 @@ public class ChocolateSessionBean {
 
     
     public void saveChocolate(){
-        Chocolate c = new Chocolate();
-        c.setName("Mjölkchoklad");
-        c.setPrice(10);
-        c.setDescription("Choklad som smakar kola. Jippiie!");
-        c.setBrand("Marabou");
-        c.setInStock(23);
+        Chocolate c1 = new Chocolate("Mjölkchoklad", 10, "Choklad som smakar kola. Jippiie!", "Marabou", 23);
+        Chocolate c2 = new Chocolate("Mandelkross", 20, "Äntligen mandelkross!", "Marabou", 15);
+        Person p1 = new Person("Anna Panna", "ap", "ap", "Annavägen 12", false, true);
+        Orders or1 = new Orders(p1);
+        OrderDetails o1 = new OrderDetails(3, c1, or1);
+        
+        
         
         
         try{
@@ -38,7 +39,11 @@ public class ChocolateSessionBean {
             int size = q.getResultList().size();
             System.out.println("Storleken ar " + size);
             
-            em.persist(c);
+            em.persist(c1);
+            em.persist(c2);
+            em.persist(o1);
+            em.persist(p1);
+            em.persist(or1);
             
             size = q.getResultList().size();
             System.out.println("Storleken ar " + size);

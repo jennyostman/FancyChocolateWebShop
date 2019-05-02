@@ -8,6 +8,7 @@ import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -18,13 +19,13 @@ public class Chocolate implements Serializable {
     @Id
     @Basic(optional=false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long chocolateId;
     private String name;
     private double price;
     private String description;
     private String brand;
     private int inStock;
-
+    
     
     public Chocolate (){}
     
@@ -35,6 +36,14 @@ public class Chocolate implements Serializable {
        // System.out.println("Choklad skapats med namn " + namn);
     }
 
+    public Chocolate(String name, double price, String description, String brand, int inStock) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.brand = brand;
+        this.inStock = inStock;
+    }
+    
     public String getDescription() {
         return description;
     }
@@ -75,18 +84,18 @@ public class Chocolate implements Serializable {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
+    public Long getChocolateId() {
+        return chocolateId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setChocolateId(Long id) {
+        this.chocolateId = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (chocolateId != null ? chocolateId.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +106,7 @@ public class Chocolate implements Serializable {
             return false;
         }
         Chocolate other = (Chocolate) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.chocolateId == null && other.chocolateId != null) || (this.chocolateId != null && !this.chocolateId.equals(other.chocolateId))) {
             return false;
         }
         return true;
@@ -105,7 +114,7 @@ public class Chocolate implements Serializable {
 
     @Override
     public String toString() {
-        return "databas.Chocolate[ id=" + id + " ]";
+        return "databas.Chocolate[ id=" + chocolateId + " ]";
     }
 
 }
