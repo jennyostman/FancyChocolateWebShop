@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+            <h:outputStylesheet name="header.css" library="css" />
+            <f:view>
+                <h:form id="headerForm">
+                    <span id="headerSpan">Chocolate</span>
+                </h:form>
+                
+                <h:form>
+                    <h:dataTable value="#{adminController.customers}" var="CustomerDbStandIn" cellpadding="10">
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{CustomerDbStandIn.name}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Premium</f:facet>
+                            <h:outputText value="#{CustomerDbStandIn.premium}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Totalsumma</f:facet>
+                            <h:outputText value="#{CustomerDbStandIn.totalSum}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Orders</f:facet>
+                            <h:outputText value="#{CustomerDbStandIn.totalOrders}"></h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
+    </h:body>
+</html>
+

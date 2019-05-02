@@ -28,7 +28,7 @@ public class loginController implements Serializable {
     }
     
     public boolean checkIfAdmin(){
-        return true;
+        return false;
     }
     
     public loginController() {
