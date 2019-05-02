@@ -14,6 +14,8 @@ public class loginController implements Serializable {
     private ChocolateSessionBean chocolateSessionBean;
     
     
+    
+    
 
     private String username;
     private String password;
@@ -35,7 +37,9 @@ public class loginController implements Serializable {
     }
     
     public boolean checkIfAdmin(){
-        chocolateSessionBean.saveChocolate();
+        //chocolateSessionBean.saveChocolate();
+        System.out.println(chocolateSessionBean.getChocolateObjects());
+        System.out.println(chocolateSessionBean.testar3());
         return true;
     }
     

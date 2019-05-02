@@ -5,11 +5,14 @@
  */
 package testMarcus;
 
+import databas.Chocolate;
+import databas.ChocolateSessionBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.ejb.EJB;
 
 /**
  *
@@ -19,7 +22,15 @@ import java.util.LinkedList;
 @SessionScoped
 public class marcusController implements Serializable {
 
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
+    
+
     private ArrayList<ChokladProdukt> ProductList = new ArrayList();
+    
+    private ArrayList<Chocolate> ProductList2 = new ArrayList();
+    
+    
     
     /**
      * Creates a new instance of marcusController
@@ -28,6 +39,9 @@ public class marcusController implements Serializable {
 //    }
     
     public marcusController(){
+        
+        boolean testaDatabas=true;
+        //if(!testaDatabas){
         System.out.println("test2");
         //ProductList = new ArrayList();
         ChokladProdukt ck1 = new ChokladProdukt("\"marabo\"",19.99, 1);
@@ -37,7 +51,30 @@ public class marcusController implements Serializable {
         ProductList.add(ck2);
         ProductList.add(ck3);
         
+        //System.out.println(chocolateSessionBean.TestMetod2());
+        
+        //System.out.println(chocolateSessionBean.testar3());
+        //ProductList2 = chocolateSessionBean.getChocolateObjects();
+        System.out.println("har skriver marcusConstroller ut productlist2");
+            System.out.println(ProductList2);
+        //}
+        //else{
+           // ProductList=chocolateSessionBean.getChocolateObjects();
+                    //ChocolateSessionBean.getChocolateObjects();//getChocolateObjects
+        //}
+        
     }
+
+    public ArrayList<Chocolate> getProductList2() {
+        ProductList2 = chocolateSessionBean.getChocolateObjects();
+        return ProductList2;
+    }
+
+    public void setProductList2(ArrayList<Chocolate> ProductList2) {
+        this.ProductList2 = ProductList2;
+    }
+    
+    
 
     public ArrayList<ChokladProdukt> getProductList() {
         return ProductList;

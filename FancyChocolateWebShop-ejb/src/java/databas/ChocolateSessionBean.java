@@ -1,9 +1,14 @@
 
 package databas;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -25,14 +30,11 @@ public class ChocolateSessionBean {
 
     
     public void saveChocolate(){
-        Chocolate c1 = new Chocolate("Mjölkchoklad", 10, "Choklad som smakar kola. Jippiie!", "Marabou", 23);
+        Chocolate c1 = new Chocolate("Mjölkchoklad2", 10, "Choklad som smakar kola. Jippiie!", "Marabou", 23);
         Chocolate c2 = new Chocolate("Mandelkross", 20, "Äntligen mandelkross!", "Marabou", 15);
         Person p1 = new Person("Anna Panna", "ap", "ap", "Annavägen 12", false, true);
         Orders or1 = new Orders(p1);
         OrderDetails o1 = new OrderDetails(3, c1, or1);
-        
-        
-        
         
         try{
             Query q = em.createQuery("select o from Chocolate o");
@@ -51,10 +53,63 @@ public class ChocolateSessionBean {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    //public void 
+    //@Override
+    public ArrayList getChocolateObjects() {
+        //fillDB();
+//        PersonReal user = new PersonReal();
+//        try {
+//            Query q = em
+//                    .createQuery("SELECT p FROM PersonReal p WHERE p.fname =:fname");
+//            q.setParameter("fname", fname);
+//            user = (PersonReal) q.getSingleResult();
+//
+//        } catch (NoResultException | NonUniqueResultException e) {
+//            e.printStackTrace();
+//        }
+//        return user;
+        try{
+        Query query = em.createQuery("select o from Chocolate o");
+        //Query query =em.createNamedQuery("Point.getAll");
+        List<Chocolate> list = query.getResultList();
+            System.out.println("here is list");
+            System.out.println(list);
+        ArrayList list2 = new ArrayList(list);
+            System.out.println("here is list2");
+            System.out.println(list2);
         
+        return list2;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+//        Iterator<Chocolate> iterator = list.iterator();
+//        while(iterator.hasNext()){
+//            Point p = iterator.next();
+//            System.out.println(p);
+//        }
+    
+        return null;
+
+    }
+    
+    public String testMetod(){
+        return "testMetod tillkallad korrekt!";
     }
     
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    public String TestMetod2() {
+        return "testMetod tillkallad korrekt!";
+    }
+
+    public String testar3() {
+        return "testar03 marcus";
+    }
+    
+    
 }

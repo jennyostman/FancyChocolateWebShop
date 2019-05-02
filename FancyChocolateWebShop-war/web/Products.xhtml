@@ -25,23 +25,23 @@
        
        <f:view>
            <h:form>
-                <!--obs det stor author som var nedan-->
-                <h:dataTable  value="#{marcusController.productList}" 
+                <!--obs det stor author som var nedan #{marcusController.productList} -->
+                <h:dataTable  value="#{marcusController.productList2}" 
                              var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
                
                    <h:column>
                             <f:facet name="header" >ProductID</f:facet>
-                            <h:outputText id = "productID" value="#{produkt.id}" />
+                            <h:outputText id = "productID" value="#{produkt.chocolateId}" />
                    </h:column>
                    
                    <h:column>
                             <f:facet name="header" >Product Name:</f:facet>
-                            <h:outputText value="#{produkt.namn}" />
+                            <h:outputText value="#{produkt.name}" />
                    </h:column>
                    
                    <h:column>
                             <f:facet name="header" >Product Price:</f:facet>
-                            <h:outputText value="#{produkt.pris}" />
+                            <h:outputText value="#{produkt.price}" />
                    </h:column>
                    
                    <h:column>
