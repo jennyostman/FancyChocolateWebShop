@@ -34,6 +34,8 @@ public class loginController implements Serializable {
     
     public boolean checkIfAdmin(){
         chocolateSessionBean.saveChocolate();
+        //AdminController ac = new AdminController();
+        //ac.getCustomersList();
         return true;
     }
     

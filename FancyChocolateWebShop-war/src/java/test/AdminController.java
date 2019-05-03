@@ -7,14 +7,15 @@ import java.util.*;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 
 @Named(value = "adminController")
-@Dependent
+@SessionScoped
 public class AdminController implements Serializable{
 
     @EJB
     private ChocolateSessionBean chocolateSessionBean;
-    
+
     private String name;
     private String userName;
     private String password;
@@ -24,10 +25,9 @@ public class AdminController implements Serializable{
     
     private double totalSum;
     private int totalOrders;
-    private List<Person> customers;
+    private ArrayList<Person> customers = new ArrayList();
     
     public AdminController() {
-        customers = chocolateSessionBean.getAllCustomersForAdmin();
     }
 
     public boolean isPremium() {
@@ -54,11 +54,12 @@ public class AdminController implements Serializable{
         this.totalOrders = totalOrders;
     }
 
-    public List<Person> getCustomers() {
+    public ArrayList<Person> getCustomers() {
+        customers = chocolateSessionBean.getAllCustomersForAdmin();
         return customers;
     }
 
-    public void setCustomers(List<Person> customers) {
+    public void setCustomers(ArrayList<Person> customers) {
         this.customers = customers;
     }
 

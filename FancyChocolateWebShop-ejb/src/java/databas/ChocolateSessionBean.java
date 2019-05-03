@@ -1,6 +1,7 @@
 
 package databas;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
@@ -59,13 +60,17 @@ public class ChocolateSessionBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-    public List getAllCustomersForAdmin() {
+    public ArrayList getAllCustomersForAdmin() {
         
-        List customers = null;
+        ArrayList<Person> customers = null;
+        System.out.println("I metod");
         
         try{
             Query q = em.createQuery("select o from Person o");
-            customers = q.getResultList();
+            List<Person> customersTemp = q.getResultList();
+            System.out.println("fått listan");
+            customers = new ArrayList(customersTemp);
+            System.out.println(customers);
         }catch(Exception e){
             e.printStackTrace();
         }
