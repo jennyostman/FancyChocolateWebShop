@@ -3,13 +3,19 @@ package test;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 
 @Named(value = "registerController")
 @SessionScoped
 public class registerController implements Serializable {
 
+    @EJB
+    private RegistrationBean registrationBean;
+    
     private boolean showPopup;
-    private String username,password, firstName,lastName,address;
+    private String username,password,firstName,lastName,address;
+    
+   // private Customer customer;
 
     public String getUsername() {
         return username;
@@ -65,9 +71,26 @@ public class registerController implements Serializable {
     public void setShowPopup(boolean showPopup) {
         this.showPopup = showPopup;
     }
+
+    public RegistrationBean getRegistrationBean() {
+        return registrationBean;
+    }
+
+    public void setRegistraionBean(RegistrationBean registraionBean) {
+        this.registrationBean = registraionBean;
+    }
     
+    /*public Customer getCustomer(){
+        return customer;
+    }
+    
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+    */
     
     public void register(){
+        registrationBean.registerUser(username,password,firstName,lastName,address);
         
     }
     
