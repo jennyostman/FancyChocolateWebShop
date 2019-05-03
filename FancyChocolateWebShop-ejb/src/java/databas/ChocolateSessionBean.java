@@ -55,24 +55,13 @@ public class ChocolateSessionBean {
         }
     }
     
-    //public void 
-    //@Override
+    
+    //OBS OBS OBS NEDAN AR FEL DU HAR EJ GJORT HOGERKLICKA OCH LAGG TILL RATT METOD
     public ArrayList getChocolateObjects() {
-        //fillDB();
-//        PersonReal user = new PersonReal();
-//        try {
-//            Query q = em
-//                    .createQuery("SELECT p FROM PersonReal p WHERE p.fname =:fname");
-//            q.setParameter("fname", fname);
-//            user = (PersonReal) q.getSingleResult();
-//
-//        } catch (NoResultException | NonUniqueResultException e) {
-//            e.printStackTrace();
-//        }
-//        return user;
         try{
+            System.out.println("getChocolateObjects() tillkallas har");
         Query query = em.createQuery("select o from Chocolate o");
-        //Query query =em.createNamedQuery("Point.getAll");
+        
         List<Chocolate> list = query.getResultList();
             System.out.println("here is list");
             System.out.println(list);
@@ -85,20 +74,8 @@ public class ChocolateSessionBean {
         catch(Exception e){
             e.printStackTrace();
         }
-//        Iterator<Chocolate> iterator = list.iterator();
-//        while(iterator.hasNext()){
-//            Point p = iterator.next();
-//            System.out.println(p);
-//        }
-    
         return null;
-
     }
-    
-    public String testMetod(){
-        return "testMetod tillkallad korrekt!";
-    }
-    
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -109,6 +86,30 @@ public class ChocolateSessionBean {
 
     public String testar3() {
         return "testar03 marcus";
+    }
+
+    public ArrayList getSpecificChocolate(String chocolateName) {
+        try{
+            System.out.println("getspecifik chocolate tillkallad med variabeln " + chocolateName);
+            String temp = "SELECT o FROM Chocolate o WHERE o.name like '" + chocolateName + "'";
+            Query query = em.createQuery(temp);
+            
+            //obs obs borde anvanda det nedan men det fungerade ej... /marcus
+            //Query query = em.createQuery("SELECT o FROM Chocolate o WHERE o.name like :chocolateName");
+            //query.setParameter("\'chocolateName\'", chocolateName);
+            
+            
+        List<Chocolate> list = query.getResultList();
+        ArrayList list2 = new ArrayList(list);
+            
+        System.out.println("here is the found list");
+        System.out.println(list2);
+        return list2;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
     
     

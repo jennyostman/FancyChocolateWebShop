@@ -16,16 +16,19 @@
         <f:view>
             <h:form>
                 <h:outputText value ="Search:"></h:outputText>
-                <h:inputText value="        "></h:inputText>
-                <h:button image ="SaveButton.png" style="width:20px;height:20px" ></h:button>
+                <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
+                <h:commandButton image ="SaveButton.png" action="#{marcusController.sok()}" style="width:20px;height:20px" ></h:commandButton>
+                <h:commandButton value ="Reset!" action ="#{marcusController.reset()}"></h:commandButton>
+                
+                
             </h:form>
         </f:view>
-
+           
        
        
        <f:view>
            <h:form>
-                <!--obs det stor author som var nedan #{marcusController.productList} -->
+                
                 <h:dataTable  value="#{marcusController.productList2}" 
                              var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
                

@@ -30,33 +30,31 @@ public class marcusController implements Serializable {
     
     private ArrayList<Chocolate> ProductList2 = new ArrayList();
     
+    private  String sokTerm;
+    
+    private boolean dontrefresh=false;
     
     
-    /**
-     * Creates a new instance of marcusController
-     */
-//    public marcusController() {
-//    }
+    
     
     public marcusController(){
         
-        boolean testaDatabas=true;
-        //if(!testaDatabas){
-        System.out.println("test2");
-        //ProductList = new ArrayList();
-        ChokladProdukt ck1 = new ChokladProdukt("\"marabo\"",19.99, 1);
-        ChokladProdukt ck2 = new ChokladProdukt("\"chokladsvan\"",399, 2);
-        ChokladProdukt ck3 = new ChokladProdukt("\"chokladkex\"",4200, 3);
-        ProductList.add(ck1);
-        ProductList.add(ck2);
-        ProductList.add(ck3);
+    //obs obs  allt nedan ar gammal kod som inte langre anvands, vi behover inte dessa objekt
+    //har kvar koden for testsyfte//marcus
+//        System.out.println("test2");
+//        ChokladProdukt ck1 = new ChokladProdukt("\"marabo\"",19.99, 1);
+//        ChokladProdukt ck2 = new ChokladProdukt("\"chokladsvan\"",399, 2);
+//        ChokladProdukt ck3 = new ChokladProdukt("\"chokladkex\"",4200, 3);
+//        ProductList.add(ck1);
+//        ProductList.add(ck2);
+//        ProductList.add(ck3);
         
         //System.out.println(chocolateSessionBean.TestMetod2());
         
         //System.out.println(chocolateSessionBean.testar3());
         //ProductList2 = chocolateSessionBean.getChocolateObjects();
         System.out.println("har skriver marcusConstroller ut productlist2");
-            System.out.println(ProductList2);
+       //     System.out.println(ProductList2);
         //}
         //else{
            // ProductList=chocolateSessionBean.getChocolateObjects();
@@ -64,11 +62,39 @@ public class marcusController implements Serializable {
         //}
         
     }
+    
+    public void sok(){
+        System.out.println("soktermen ar " + sokTerm);
+        ProductList2 = chocolateSessionBean.getSpecificChocolate(sokTerm);
+    }
+
+    public String getSokTerm() {
+        return sokTerm;
+    }
+
+    public void reset(){
+        System.out.println("OBS OBS REFRESH HIT!");
+        dontrefresh=false;
+    }
+    public void setSokTerm(String sokTerm) {
+        System.out.println("setsokterm kallades, soktermen ar " + sokTerm);
+        
+        this.sokTerm = sokTerm;
+    }
+    
+    public void testaOmSokt(){
+        System.out.println("Nu soktes definitivt fel metod");
+    }
 
     public ArrayList<Chocolate> getProductList2() {
+        System.out.println("getProductList2() har tillkallats");
+        if(!dontrefresh){
         ProductList2 = chocolateSessionBean.getChocolateObjects();
+        }
+        dontrefresh=true;
         return ProductList2;
     }
+    
 
     public void setProductList2(ArrayList<Chocolate> ProductList2) {
         this.ProductList2 = ProductList2;
