@@ -1,24 +1,33 @@
 package test;
 
+import databas.ChocolateSessionBean;
+import databas.Person;
 import java.io.Serializable;
 import java.util.*;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 
 @Named(value = "adminController")
 @Dependent
 public class AdminController implements Serializable{
+
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
     
     private String name;
+    private String userName;
+    private String password;
     private String address;
+    private boolean admin;
     private boolean premium;
+    
     private double totalSum;
     private int totalOrders;
-    private List<CustomerDbStandIn> customers;
+    private List<Person> customers;
     
     public AdminController() {
-        CustomerDbStandIn cd = new CustomerDbStandIn();
-        customers = cd.getCustomersList();
+        customers = chocolateSessionBean.getAllCustomersForAdmin();
     }
 
     public boolean isPremium() {
@@ -45,11 +54,11 @@ public class AdminController implements Serializable{
         this.totalOrders = totalOrders;
     }
 
-    public List<CustomerDbStandIn> getCustomers() {
+    public List<Person> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(List<CustomerDbStandIn> customers) {
+    public void setCustomers(List<Person> customers) {
         this.customers = customers;
     }
 

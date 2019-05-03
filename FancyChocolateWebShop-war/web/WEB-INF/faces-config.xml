@@ -8,30 +8,30 @@
         <from-view-id>/loginPage.xhtml</from-view-id>
         <navigation-case>
             <from-action>Login</from-action>
-            <if>#{loginController.checkIfAdmin()}</if>
+            <if>#{!loginController.checkIfAdmin()}</if>
             <to-view-id>/Products.xhtml</to-view-id>
         </navigation-case>
         
         <navigation-case>
             <from-action>Login</from-action>
-            <if>!#{loginController.checkIfAdmin()}</if>
+            <if>#{loginController.checkIfAdmin()}</if>
             <to-view-id>/Admin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>Products.xhtml</from-view-id>
+        <from-view-id>/Products.xhtml</from-view-id>
         <navigation-case>
             <from-action>toCart</from-action>
-            <to-view-id>Cart.xhtml</to-view-id>
+            <to-view-id>/Cart.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>Cart.xhtml</from-view-id>
+        <from-view-id>/Cart.xhtml</from-view-id>
         <navigation-case>
             <from-action>toProducts</from-action>
-            <to-view-id>Products.xhtml</to-view-id>
+            <to-view-id>/Products.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

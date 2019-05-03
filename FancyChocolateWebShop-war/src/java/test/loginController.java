@@ -1,13 +1,18 @@
 package test;
 
+import databas.ChocolateSessionBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 
 @Named(value = "loginController")
 @SessionScoped
 public class loginController implements Serializable {
 
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
+    
     private String username;
     private String password;
 
@@ -28,7 +33,8 @@ public class loginController implements Serializable {
     }
     
     public boolean checkIfAdmin(){
-        return false;
+        chocolateSessionBean.saveChocolate();
+        return true;
     }
     
     public loginController() {

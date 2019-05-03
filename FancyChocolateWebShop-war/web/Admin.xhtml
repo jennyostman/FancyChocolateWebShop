@@ -14,22 +14,15 @@
                 </h:form>
                 
                 <h:form>
-                    <h:dataTable value="#{adminController.customers}" var="CustomerDbStandIn" cellpadding="10">
+                    <h:dataTable value="#{adminController.customers}" var="Person" cellpadding="10">
                         <h:column>
                             <f:facet name="header">Name</f:facet>
-                            <h:outputText value="#{CustomerDbStandIn.name}"></h:outputText>
+                            <h:outputText value="#{Person.name}"></h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">Premium</f:facet>
-                            <h:outputText value="#{CustomerDbStandIn.premium}"></h:outputText>
+                            <h:outputText value="#{Person.premium}"></h:outputText>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">Totalsumma</f:facet>
-                            <h:outputText value="#{CustomerDbStandIn.totalSum}"></h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Orders</f:facet>
-                            <h:outputText value="#{CustomerDbStandIn.totalOrders}"></h:outputText>
                         </h:column>
                     </h:dataTable>
                 </h:form>
