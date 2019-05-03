@@ -1,5 +1,6 @@
 package test;
 
+import databas.RegistrationBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -9,13 +10,22 @@ import javax.ejb.EJB;
 @SessionScoped
 public class registerController implements Serializable {
 
-    @EJB
-    private RegistrationBean registrationBean;
+
     
     private boolean showPopup;
-    private String username,password,firstName,lastName,address;
+    private String name,username,password,address;
     
-   // private Customer customer;
+    @EJB
+    private RegistrationBean registrationBean;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+            
 
     public String getUsername() {
         return username;
@@ -32,22 +42,7 @@ public class registerController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    
 
     public String getAddress() {
         return address;
@@ -57,12 +52,6 @@ public class registerController implements Serializable {
         this.address = address;
     }
             
-    public void show(){
-        showPopup = true;
-    }
-    public void hide(){
-        showPopup = false;
-    }
 
     public boolean isShowPopup(){
         return showPopup;
@@ -70,6 +59,12 @@ public class registerController implements Serializable {
     
     public void setShowPopup(boolean showPopup) {
         this.showPopup = showPopup;
+    }
+    public void show(){
+        showPopup = true;
+    }
+    public void hide(){
+        showPopup = false;
     }
 
     public RegistrationBean getRegistrationBean() {
@@ -80,22 +75,14 @@ public class registerController implements Serializable {
         this.registrationBean = registraionBean;
     }
     
-    /*public Customer getCustomer(){
-        return customer;
-    }
-    
-    public void setCustomer(Customer customer){
-        this.customer = customer;
-    }
-    */
-    
     public void register(){
-        registrationBean.registerUser(username,password,firstName,lastName,address);
+        registrationBean.registerUser(name,username,password,address);
         
     }
     
     
     public registerController() {
+        showPopup = false;
     }
     
 }
