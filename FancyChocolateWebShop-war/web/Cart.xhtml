@@ -33,6 +33,11 @@
                         <h:inputText value="#{CartDbStandIn.amount}" size="4">
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
+                        <h:outputText value="#{cartController.inStockMessage}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">In stock</f:facet>
+                        <h:outputText value="#{cartController.inStock}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
@@ -41,7 +46,9 @@
                 </h:dataTable>
                 <hr/>
                 <h4>Total price: </h4>
+                <h:outputText value="#{cartController.countTotalAmount()}"></h:outputText>
                 <h4>Premium customer price: </h4>
+                <h:commandButton action="#{cartController.buyProducts()}" value="Köp"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>

@@ -1,10 +1,14 @@
 
 package test;
 
+import databas.Chocolate;
+import databas.ChocolateSessionBean;
 import javax.inject.Named;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIGraphic;
 
@@ -13,25 +17,50 @@ import javax.faces.component.UIGraphic;
 @SessionScoped
 public class CartController implements Serializable {
 
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
+
     UIGraphic picture;
     private String chocolateName, pictureName;
     private float price;
     private int amount;
     private List<CartDbStandIn2> cartContent = null;
     private boolean deleted = false;
-    // Kvar: att visa summan
+    private int inStock;
+    private String inStockMessage = "";
+    // Kvar: Hämta en riktig cartContent. Ta bort test-carten ur konstruktorn.
     // Kvar: Att visa summan om man har rabatt
-
-    /*
-    Innehållet i kundvagnen sparas inte till db förrän man lägger en order i köp.
-    Om listan ligger i controllerklassen (här) så blir det inte MVC, för då
-    blir det logik här för att hantera listan.
-    */
     
     
     public CartController() {
+        // Här skulle man kunna uppdatera inStock-variabeln på ChocolateObj
+        
         CartDbStandIn2 c = new CartDbStandIn2();
         cartContent = c.createCartObjects();
+    }
+
+    public String getInStockMessage() {
+        return inStockMessage;
+    }
+
+    public void setInStockMessage(String inStockMessage) {
+        this.inStockMessage = inStockMessage;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public int getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
     }
 
     public UIGraphic getPicture() {
@@ -85,6 +114,46 @@ public class CartController implements Serializable {
     public void removeProduct(CartDbStandIn2 chocolateObj){
         CartDbStandIn2 c = new CartDbStandIn2();
         deleted = c.deleteFromCart(chocolateObj, cartContent);
+    }
+    
+    // Lägg till att kolla om amvändaren är premiumkund, i så fall ska den få rabatt
+    public double countTotalAmount(){
+        double totAmount = 0;
+        for (CartDbStandIn2 c : cartContent){
+            totAmount += c.getPrice();
+        }
+        return totAmount;
+    }
+    
+    
+    public void buyProducts(){
+        boolean allInStock = true;
+        // Kolla om produkterna finns i lager.
+        List<CartDbStandIn2> cartFromWeb = cartContent;
+        List<Chocolate> cartFromDb = new ArrayList(){};
+        // Varje chokladObj håller info om vad som finns i lager, men man måste göra en till koll
+        // när beställningen görs, så att det fortfarande stämmer.
+        for (CartDbStandIn2 c : cartContent){
+            int amountInStockFromWeb = c.getAmount();
+            int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(c);
+            if (amountInStockFromWeb > amountInStockFromDB){
+                allInStock = false;
+                c.setInStockMessage("Vi har bara " + amountInStockFromDB + " stycken " + c.getChocolateName());
+            }
+        }
+        
+        // Om inte allt som beställts finns i lager körs inte nedanstående
+        if (allInStock){
+            setInStockMessage("Köpet är gjort!");
+            // Skapa en orderDetails
+        
+            // Skapa en orderist
+        
+            // Lägg till order id i kundens lista
+        }
+
+        
+        
     }
     
 }
