@@ -33,16 +33,16 @@ public class ChocolateSessionBean {
         int size = q.getResultList().size();
         if (size < 1) {
 
-            Chocolate c1 = new Chocolate("Le Grand Louis XVI", 8616, " The dark chocolates with 99% cocoa", "Debauve and Gallais", 20);
-            Chocolate c2 = new Chocolate("Wispa Gold", 15316.39, "Chocolate is wrapped in an edible gold leaf", "Cadbury", 5);
-            Chocolate c3 = new Chocolate("Chocopologie Chocolate Truffle", 24895.31, "Dark chocolate, ganache, and French Perigord truffle", "Knipschildt", 5);
-            Chocolate c4 = new Chocolate("Flavored Truffles", 938.06, "Plain dark chocolate, black currant, caramell toffee ", "La Maison du Chocolat", 20);
-            Chocolate c5 = new Chocolate("Boite Maison", 1856.89, "Selection of 93 ganaches,pralines and dark chocolate truffles", "La Maison du Chocolat", 15);
-            Chocolate c6 = new Chocolate("Sweet Surprise Tower", 899.58, "Creamy milk chocolates and luscious chocolate truffles", "Godiva", 30);
-            Chocolate c7 = new Chocolate("Milk Chocolate Dipped Strawberies", 765, "12 sweet strawberries covered in smooth milk chocolate ", "Godiva", 30);
-            Chocolate c8 = new Chocolate("Chocolate Pearls", 449.80, " Dark Chocolate Pearls 55%, Dark Chocolate Crunchy Pearls 55%, CARAMÉLIA 36% Crunchy Pearls.", "Valrhona", 40);
-            Chocolate c9 = new Chocolate("Coffret Selection", 525.45, "An assortment of almonds and hazelnuts coated in milk chocolate", "Valrhona", 35);
-            Chocolate c10 = new Chocolate("Tosca", 567.25, "A box with 7 delightful artisan chocolates, the best southern European almonds covered in chocolate", "Puccini bomboni", 10);
+            Chocolate c1 = new Chocolate("Le Grand Louis XVI", 8616, " The dark chocolates with 99% cocoa", "Debauve and Gallais", 20, 0, "" , false, "Le-Grand-Louis-XVI");
+            Chocolate c2 = new Chocolate("Wispa Gold", 15316.39, "Chocolate is wrapped in an edible gold leaf", "Cadbury", 5, 0, "", false, "Wispa-gold");
+            Chocolate c3 = new Chocolate("Chocopologie Chocolate Truffle", 24895.31, "Dark chocolate, ganache, and French Perigord truffle", "Knipschildt", 5, 0, "", false, "Chocopologie-Chocolate-Truffle");
+            Chocolate c4 = new Chocolate("Flavored Truffles", 938.06, "Plain dark chocolate, black currant, caramell toffee ", "La Maison du Chocolat", 20, 0, "", false, "Chocolates1");
+            Chocolate c5 = new Chocolate("Boite Maison", 1856.89, "Selection of 93 ganaches,pralines and dark chocolate truffles", "La Maison du Chocolat", 15, 0, "", false, "Grand-Cru-by-Pierre-Marcolni-1");
+            Chocolate c6 = new Chocolate("Sweet Surprise Tower", 899.58, "Creamy milk chocolates and luscious chocolate truffles", "Godiva", 30, 0, "", false, "The-Aficionados-Collection");
+            Chocolate c7 = new Chocolate("Milk Chocolate Dipped Strawberies", 765, "12 sweet strawberries covered in smooth milk chocolate ", "Godiva", 30, 0, "",false, "Voges-Haut");
+            Chocolate c8 = new Chocolate("Chocolate Pearls", 449.80, " Dark Chocolate Pearls 55%, Dark Chocolate Crunchy Pearls 55%, CARAMÉLIA 36% Crunchy Pearls.", "Valrhona", 40, 0, "", false, "Amedei-Porcelana");
+            Chocolate c9 = new Chocolate("Coffret Selection", 525.45, "An assortment of almonds and hazelnuts coated in milk chocolate", "Valrhona", 35, 0, "", false, "Richart-Chocolate");
+            Chocolate c10 = new Chocolate("Tosca", 567.25, "A box with 7 delightful artisan chocolates, the best southern European almonds covered in chocolate", "Puccini bomboni", 10, 0, "", false, "Amedei-Toscano-Black-Truffles-in-Swarovski-Chocolate-Box");
 
             Person p1 = new Person("Alice Svensson", "Alice", "Alice123", "Annavägen 12", false, false);
             Person p2 = new Person("Maja Adolfsson", "Maja", "Maja123", "Majavägen 10", false, false);
