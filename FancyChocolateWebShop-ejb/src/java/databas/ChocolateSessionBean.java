@@ -112,5 +112,20 @@ public class ChocolateSessionBean {
         return null;
     }
     
+    public ArrayList marcusGetKunder(){
+        try{
+            Query query = em.createQuery("Select k From Person k");
+            List<Person> list2 = query.getResultList();
+            System.out.println("here are all the people");
+            System.out.println(list2);
+            ArrayList list3 = new ArrayList(list2);
+            return list3;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     
 }

@@ -34,6 +34,9 @@ public class marcusController implements Serializable {
     
     private boolean dontrefresh=false;
     
+    private boolean visaPopup = false;
+    
+    
     
     
     
@@ -109,7 +112,30 @@ public class marcusController implements Serializable {
     public void setProductList(ArrayList<ChokladProdukt> ProductList) {
         this.ProductList = ProductList;
     }
+    
+    public void skrivUtKunder(){
+        chocolateSessionBean.marcusGetKunder();
+    }
+    
+    public boolean showPopup(){
+        return true;
+    }
+    
+    public boolean hidePopup(){
+        return false;
+    }
 
+    public boolean isVisaPopup() {
+        return visaPopup;
+    }
+
+    public void setVisaPopup(boolean visaPopup) {
+        
+        System.out.println("visapopup = " + visaPopup);
+        this.visaPopup = visaPopup;
+    }
+
+    
    
     
     
