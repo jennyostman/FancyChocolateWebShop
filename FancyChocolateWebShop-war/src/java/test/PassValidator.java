@@ -16,7 +16,7 @@ public class PassValidator implements Validator{
           String pass=(String)value;
           boolean text;
           text = pass.equals("hej");
-
+         
           if(pass.isEmpty()){
               String messageText = "Password required!";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,

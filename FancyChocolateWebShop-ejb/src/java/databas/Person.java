@@ -45,7 +45,7 @@ public class Person implements Serializable {
         return order;
     }
 
-    public void setOrder(List<Orders> order) {
+    public void setOrder(List<Orders>order) {
         this.order = order;
     }
 
