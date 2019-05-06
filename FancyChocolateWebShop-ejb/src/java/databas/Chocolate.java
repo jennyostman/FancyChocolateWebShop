@@ -27,12 +27,12 @@ public class Chocolate implements Serializable {
     
     public Chocolate (){}
     
-//    public Chocolate(String name, double price, int inStock) {
-//        this.name = name;
-//        this.price = price;
-//        this.inStock = inStock;
-//       // System.out.println("Choklad skapats med namn " + namn);
-//    }
+    public Chocolate(String name, double price, int inStock) {
+        this.name = name;
+        this.price = price;
+        this.inStock = inStock;
+       
+    }
 
     public Chocolate(String name, double price, String description, String brand, int inStock) {
         this.name = name;
