@@ -21,8 +21,8 @@
         
         <h:outputText  style = "color:green" value="#{registerController.registered}"></h:outputText><br/>
         
-        <h:commandButton value=" Login" action="#{loginController.checkIfAdmin()}"></h:commandButton>
-        <h:commandButton value=" Register" action="#{registerController.show()}" immediate="true"></h:commandButton>
+        <h:commandButton value="Login" action="Login"></h:commandButton>
+        <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton>
         </h:form>
         
         <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{registerController.showPopup}" >
