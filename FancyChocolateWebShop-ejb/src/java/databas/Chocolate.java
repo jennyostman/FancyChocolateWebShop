@@ -4,11 +4,9 @@ package databas;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 
 @Entity
@@ -29,12 +27,12 @@ public class Chocolate implements Serializable {
     
     public Chocolate (){}
     
-    public Chocolate(String name, double price, int inStock) {
-        this.name = name;
-        this.price = price;
-        this.inStock = inStock;
-       // System.out.println("Choklad skapats med namn " + namn);
-    }
+//    public Chocolate(String name, double price, int inStock) {
+//        this.name = name;
+//        this.price = price;
+//        this.inStock = inStock;
+//       // System.out.println("Choklad skapats med namn " + namn);
+//    }
 
     public Chocolate(String name, double price, String description, String brand, int inStock) {
         this.name = name;
@@ -43,6 +41,8 @@ public class Chocolate implements Serializable {
         this.brand = brand;
         this.inStock = inStock;
     }
+
+    
     
     public String getDescription() {
         return description;

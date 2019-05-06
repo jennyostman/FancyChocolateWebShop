@@ -1,5 +1,6 @@
 package test;
 
+import databas.ChocolateSessionBean;
 import databas.RegistrationBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -21,6 +22,9 @@ public class registerController implements Serializable {
 
     @EJB
     private RegistrationBean registrationBean;
+    
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
 
     public String getName() {
         return name;
@@ -73,7 +77,12 @@ public class registerController implements Serializable {
     }
             
     
+    public boolean checkIfAdmin(){
+        chocolateSessionBean.fillDB();
+        return true;
+    }
 
+    
     public boolean isShowPopup(){
         return showPopup;
     }

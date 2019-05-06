@@ -13,6 +13,9 @@ public class loginController implements Serializable {
 
     @EJB
     private LoginBean login;
+   
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
     
     private String username;
     private String password;
@@ -34,18 +37,10 @@ public class loginController implements Serializable {
     }
     
     public boolean checkIfAdmin(){
+        chocolateSessionBean.fillDB();
         return true;
     }
-    
-    public boolean loggain(){
-        
-        if(login.verifyLogin(username, password)){
-        return true;
-        }
-        else
-            return false;
-    }
-    
+      
     public loginController() {
     }
     
