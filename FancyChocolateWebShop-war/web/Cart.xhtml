@@ -17,7 +17,7 @@
             <h:form>
                 <h:dataTable value="#{cartController.cartContent}" var="CartDbStandIn" cellpadding="10">
                     <h:column>
-                        <f:facet name="header">Picture</f:facet>
+                        <f:facet name="header"></f:facet>
                         <h:graphicImage name="#{CartDbStandIn.pictureName}" library="image" binding="#{cartController.picture}"></h:graphicImage>
                     </h:column>
                     <h:column>
@@ -33,11 +33,11 @@
                         <h:inputText value="#{CartDbStandIn.amount}" size="4">
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
-                        <h:outputText value="#{cartController.inStockMessage}"></h:outputText>
+                        <h:outputText value="#{CartDbStandIn.inStockMessage}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">In stock</f:facet>
-                        <h:outputText value="#{cartController.inStock}"></h:outputText>
+                        <h:outputText value="#{CartDbStandIn.inStock}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>

@@ -16,12 +16,13 @@ private String chocolateName, pictureName;
     
     public CartDbStandIn2(){}
     
-    public CartDbStandIn2(String pictureName, String name, double price, int amount, int inStock) {
+    public CartDbStandIn2(String pictureName, String name, double price, int amount, int inStock, String inStockMessage) {
         this.chocolateName = name;
         this.pictureName = pictureName;
         this.price = price;
         this.amount = amount;
         this.inStock = inStock;
+        this.inStockMessage = inStockMessage;
     }
 
     public String getInStockMessage() {
@@ -83,25 +84,12 @@ private String chocolateName, pictureName;
     // Att labba med tills vidare:
     public List<CartDbStandIn2> createCartObjects(){
         cartContent = new ArrayList(){};
-        cartContent.add(new CartDbStandIn2("Grand-Cru-by-Pierre-Marcolni-1.jpg", "Grand Cru by Pierre Marcolni", 102.50, 3, 10));
+        cartContent.add(new CartDbStandIn2("Grand-Cru-by-Pierre-Marcolni-1.jpg", 
+                "Grand Cru by Pierre Marcolni", 102.50, 15, 10, ""));
         cartContent.add(new CartDbStandIn2("Richart-Chocolate.jpg", 
-                "Richart Chocolate", 115.0, 10, 20));
+                "Richart Chocolate", 115.0, 10, 20, ""));
         cartContent.add(new CartDbStandIn2("Chocolates-with-Edible-Gold-by-DeLafee.jpg", 
-                "Chocolates with Edible Gold by DeLafee", 508.0, 1, 30));
+                "Chocolates with Edible Gold by DeLafee", 508.0, 1, 30, ""));
         return cartContent;
     }
-    
-    
-    
-    public boolean deleteFromCart(CartDbStandIn2 chocolateObj, List<CartDbStandIn2> cart){
-        boolean delete = false;
-        int size = cart.size();
-        cart.remove(chocolateObj);
-        // Koll om något tagits bort
-        if(size > cart.size()){
-            delete = true;
-        }
-        return delete;
-    }
-    
 }
