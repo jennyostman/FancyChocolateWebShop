@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Named(value = "registerController")
 @SessionScoped
 public class registerController implements Serializable {
-
+  
     private boolean showPopup;
     private String username,password, firstName,lastName,address;
 
@@ -72,7 +72,7 @@ public class registerController implements Serializable {
     }
     
     
-    public registerController() {
+    public registerController() {      
     }
     
 }
