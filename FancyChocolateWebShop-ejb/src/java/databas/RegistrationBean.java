@@ -34,11 +34,13 @@ public class RegistrationBean {
         return a;
     }
     
-    public void registerUser(String name, String username,String password,String adress){
+    public boolean registerUser(String name, String username,String password,String adress){
         
       if(findByUsername(username) == 0){
             Person reg = new Person(name,username,password,adress,false,false);
             persist(reg);
+            return true;
       }
+      return false;
     }
 }
