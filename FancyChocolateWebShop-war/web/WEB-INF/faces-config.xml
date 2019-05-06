@@ -8,7 +8,7 @@
         <from-view-id>/loginPage.xhtml</from-view-id>
         <navigation-case>
             <from-action>Login</from-action>
-            <if>#{loginController.checkIfAdmin()}</if>
+            <if>#{loginController.loggain()}</if>
             <to-view-id>/Products.xhtml</to-view-id>
         </navigation-case>
         

@@ -14,23 +14,13 @@ public class PassValidator implements Validator{
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         
           String pass=(String)value;
-          boolean text;
-          text = pass.equals("hej");
 
           if(pass.isEmpty()){
               String messageText = "Password required!";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     messageText, messageText));
           }
-           
-          else if(!text){
-               String messageText = "Wrong password!";
-                throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    messageText, messageText));
-        }
-
-
-        
+          
     }
     
 }

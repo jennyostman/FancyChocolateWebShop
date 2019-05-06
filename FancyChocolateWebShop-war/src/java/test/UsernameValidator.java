@@ -15,22 +15,12 @@ public class UsernameValidator implements Validator{
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         
           String pass=(String)value;
-          boolean text;
-          text = pass.equalsIgnoreCase("Grupp7");
-
+          
           if(pass.isEmpty()){
               String messageText = "Username required!";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     messageText, messageText));
           }
-           
-          else if(!text){
-               String messageText = "Wrong Username!";
-                throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    messageText, messageText));
-        }
-
-
         
     }
     
