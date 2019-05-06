@@ -9,20 +9,22 @@
     </h:head>
     <h:body>
         
-        <h:form>
+        <h:form id="loginForm">
+            <h:outputText></h:outputText>
         Username<br/>
         <h:inputText value="#{loginController.username}">
-            <f:validator validatorId="usernameValidate"/>
+           
         </h:inputText><br/>
         Password<br/>
         <h:inputSecret value="#{loginController.password}">
-            <f:validator validatorId="passValidate"/>
+            
         </h:inputSecret><br/>
         
         <h:outputText  style = "color:green" value="#{registerController.registered}"></h:outputText><br/>
         
-        <h:commandButton value="Login" action="Login"></h:commandButton>
-        <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton>
+        <h:commandButton id="button" value="Login" action="#{loginController.logIn()}"></h:commandButton>
+        <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton> <br/>
+        <h:message for="button" errorStyle="color: red" infoStyle="color: red"></h:message>
         </h:form>
         
         <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{registerController.showPopup}" >
