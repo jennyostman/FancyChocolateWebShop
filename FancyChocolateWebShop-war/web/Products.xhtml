@@ -11,80 +11,49 @@
         <ui:insert>
             <ui:include src="templates/header.xhtml"></ui:include>
         </ui:insert>
-        
+
         <div id ="ProductPageLeftSide">
-        <f:view>
-            <h:form>
-                <h:outputText value ="Search:"></h:outputText>
-                <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
-                <h:commandButton image ="SaveButton.png" action="#{marcusController.sok()}" style="width:20px;height:20px" ></h:commandButton>
-                <h:commandButton value ="Reset!" action ="#{marcusController.reset()}"></h:commandButton>
-                <h:commandButton value ="testafolk" action="#{marcusController.skrivUtKunder()}"></h:commandButton>
-                
-                
-            </h:form>
-        </f:view>
-           
-       
-       
-       <f:view>
-           <h:form>
-                
-                <h:dataTable  value="#{marcusController.productList2}" 
-                             var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
-               
-                   <h:column>
+            <f:view>
+                <h:form>
+                    <h:inputText value="#{cartController.sokTerm}" onchange="#{cartController.setSokTerm(sokTerm)}" ></h:inputText>
+                    <h:outputText value ="Search:"></h:outputText>
+                    <h:commandButton image ="SaveButton.png" action="#{cartController.sok()}" style="width:20px;height:20px" ></h:commandButton>
+                    <h:commandButton value ="Reset!" action ="#{cartController.reset()}"></h:commandButton>
+                    <h:commandButton value ="testafolk" action="#{cartController.skrivUtKunder()}"></h:commandButton>
+                </h:form>
+            </f:view>
+
+
+
+            <f:view>
+                <h:form>
+                    <h:dataTable  value="#{cartController.productList}" 
+                                  var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
+                        <h:column>
                             <f:facet name="header" >ProductID</f:facet>
                             <h:outputText id = "productID" value="#{produkt.chocolateId}" />
-                   </h:column>
-                   
-                   <h:column>
+                        </h:column>
+
+                        <h:column>
                             <f:facet name="header" >Product Name:</f:facet>
                             <h:outputText value="#{produkt.name}" />
-                   </h:column>
-                   
-                   <h:column>
+                        </h:column>
+
+                        <h:column>
                             <f:facet name="header" >Product Price:</f:facet>
                             <h:outputText value="#{produkt.price}" />
-                   </h:column>
-                   
-                   <h:column>
-                    <h:inputText value ="amount"></h:inputText>
-                    <h:button value ="purchase!" onclick="#{marcusController.setVisaPopup(true)}"></h:button>
-                    </h:column>
-                       
-               
-                    <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
-                         <div class ="popup-panel">
-                             <h:form>
-                                 ID <br/>
-                                 <h:outputText value ="#{produkt.chocolateId}"></h:outputText>
-                                 Name <br/>
-                                 <h:outputText value ="#{produkt.name}"></h:outputText>
-                                 Price <br/>
-                                 <h:outputText value ="#{produkt.price}"></h:outputText>
-                                 Description <br/>
-                                 <h:outputText value ="#{produkt.description}"></h:outputText>
-                                 Brand <br/>
-                                 <h:outputText value ="#{produkt.brand}"></h:outputText>
-                                 Available <br/>
-                                 <h:outputText value ="#{produkt.inStock}"></h:outputText>
-                                 <br/>
-                                 <h:inputText value ="amount"></h:inputText>
-                                 <h:button value ="purchase!"></h:button>
-                             </h:form>
-                         </div>
-                     </h:panelGroup>
+                        </h:column>
 
-                </h:dataTable>
-
-               
-           </h:form>
-       </f:view>
-            </div>
+                        <h:column>
+                            <h:inputText value ="amount"></h:inputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
+        </div>
         <div id ="ProductPageRightSide">
-            
-            
+
+
         </div>
 
     </h:body>

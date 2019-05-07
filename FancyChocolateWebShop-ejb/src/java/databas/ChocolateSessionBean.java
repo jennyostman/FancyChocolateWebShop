@@ -2,13 +2,10 @@
 package databas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -20,6 +17,7 @@ public class ChocolateSessionBean {
     @PersistenceContext(unitName = "FancyChocolateWebShop-ejbPU")
     private EntityManager em;
 
+    
     protected EntityManager getEm() {
         return em;
     }
@@ -33,16 +31,16 @@ public class ChocolateSessionBean {
         int size = q.getResultList().size();
         if (size < 1) {
 
-            Chocolate c1 = new Chocolate("Le Grand Louis XVI", 8616, " The dark chocolates with 99% cocoa", "Debauve and Gallais", 20);
-            Chocolate c2 = new Chocolate("Wispa Gold", 15316.39, "Chocolate is wrapped in an edible gold leaf", "Cadbury", 5);
-            Chocolate c3 = new Chocolate("Chocopologie Chocolate Truffle", 24895.31, "Dark chocolate, ganache, and French Perigord truffle", "Knipschildt", 5);
-            Chocolate c4 = new Chocolate("Flavored Truffles", 938.06, "Plain dark chocolate, black currant, caramell toffee ", "La Maison du Chocolat", 20);
-            Chocolate c5 = new Chocolate("Boite Maison", 1856.89, "Selection of 93 ganaches,pralines and dark chocolate truffles", "La Maison du Chocolat", 15);
-            Chocolate c6 = new Chocolate("Sweet Surprise Tower", 899.58, "Creamy milk chocolates and luscious chocolate truffles", "Godiva", 30);
-            Chocolate c7 = new Chocolate("Milk Chocolate Dipped Strawberies", 765, "12 sweet strawberries covered in smooth milk chocolate ", "Godiva", 30);
-            Chocolate c8 = new Chocolate("Chocolate Pearls", 449.80, " Dark Chocolate Pearls 55%, Dark Chocolate Crunchy Pearls 55%, CARAMÉLIA 36% Crunchy Pearls.", "Valrhona", 40);
-            Chocolate c9 = new Chocolate("Coffret Selection", 525.45, "An assortment of almonds and hazelnuts coated in milk chocolate", "Valrhona", 35);
-            Chocolate c10 = new Chocolate("Tosca", 567.25, "A box with 7 delightful artisan chocolates, the best southern European almonds covered in chocolate", "Puccini bomboni", 10);
+            Chocolate c1 = new Chocolate("Le Grand Louis XVI", 8616, " The dark chocolates with 99% cocoa", "Debauve and Gallais", 20, "", "Chocolates1.jpg");
+            Chocolate c2 = new Chocolate("Wispa Gold", 15316.39, "Chocolate is wrapped in an edible gold leaf", "Cadbury", 5, "", "Chocolates1.jpg");
+            Chocolate c3 = new Chocolate("Chocopologie Chocolate Truffle", 24895.31, "Dark chocolate, ganache, and French Perigord truffle", "Knipschildt", 5, "", "Chocolates1.jpg");
+            Chocolate c4 = new Chocolate("Flavored Truffles", 938.06, "Plain dark chocolate, black currant, caramell toffee ", "La Maison du Chocolat", 20, "", "Chocolates1.jpg");
+            Chocolate c5 = new Chocolate("Boite Maison", 1856.89, "Selection of 93 ganaches,pralines and dark chocolate truffles", "La Maison du Chocolat", 15, "", "Chocolates1.jpg");
+            Chocolate c6 = new Chocolate("Sweet Surprise Tower", 899.58, "Creamy milk chocolates and luscious chocolate truffles", "Godiva", 30, "", "Chocolates1.jpg");
+            Chocolate c7 = new Chocolate("Milk Chocolate Dipped Strawberies", 765, "12 sweet strawberries covered in smooth milk chocolate ", "Godiva", 30, "", "Chocolates1.jpg");
+            Chocolate c8 = new Chocolate("Chocolate Pearls", 449.80, " Dark Chocolate Pearls 55%, Dark Chocolate Crunchy Pearls 55%, CARAMÉLIA 36% Crunchy Pearls.", "Valrhona", 40, "", "Chocolates1.jpg");
+            Chocolate c9 = new Chocolate("Coffret Selection", 525.45, "An assortment of almonds and hazelnuts coated in milk chocolate", "Valrhona", 35, "", "Chocolates1.jpg");
+            Chocolate c10 = new Chocolate("Tosca", 567.25, "A box with 7 delightful artisan chocolates, the best southern European almonds covered in chocolate", "Puccini bomboni", 10, "", "Chocolates1.jpg");
 
             Person p1 = new Person("Alice Svensson", "Alice", "Alice123", "Annavägen 12", false, false);
             Person p2 = new Person("Maja Adolfsson", "Maja", "Maja123", "Majavägen 10", false, false);
@@ -113,12 +111,12 @@ public class ChocolateSessionBean {
     public ArrayList getChocolateObjects() {
         try{
             System.out.println("getChocolateObjects() tillkallas har");
-        Query query = em.createQuery("select o from Chocolate o");
+            Query query = em.createQuery("select o from Chocolate o");
         
-        List<Chocolate> list = query.getResultList();
+            List<Chocolate> list = query.getResultList();
             System.out.println("here is list");
             System.out.println(list);
-        ArrayList list2 = new ArrayList(list);
+            ArrayList list2 = new ArrayList(list);
             System.out.println("here is list2");
             System.out.println(list2);
         
@@ -129,6 +127,10 @@ public class ChocolateSessionBean {
         }
         return null;
     }
+    
+    
+    
+    
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -165,6 +167,7 @@ public class ChocolateSessionBean {
         return null;
     }
     
+    
     public ArrayList marcusGetKunder(){
         try{
             Query query = em.createQuery("Select k From Person k");
@@ -186,11 +189,8 @@ public class ChocolateSessionBean {
     public int amountOfChocolateInStock(Object Chocolate) {
         return 10;
     }
-    
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
+    
     public ArrayList getAllCustomersForAdmin() {
         
         ArrayList<Person> customers = null;
@@ -206,7 +206,8 @@ public class ChocolateSessionBean {
             e.printStackTrace();
         }
         return customers;
-    }
+    }    
+
 }
 
 // Add business logic below. (Right-click in editor and choose

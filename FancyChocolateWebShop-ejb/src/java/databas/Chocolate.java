@@ -23,6 +23,9 @@ public class Chocolate implements Serializable {
     private String description;
     private String brand;
     private int inStock;
+    private int amount;
+    private String inStockMessage = "";
+    String pictureName;
     
     
     public Chocolate (){}
@@ -34,15 +37,39 @@ public class Chocolate implements Serializable {
        
     }
 
-    public Chocolate(String name, double price, String description, String brand, int inStock) {
+    public Chocolate(String name, double price, String description, String brand, int inStock, String inStockMessage, String pictureName) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.brand = brand;
         this.inStock = inStock;
+        this.inStockMessage = inStockMessage;
+        this.pictureName = pictureName;
     }
 
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
     
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getInStockMessage() {
+        return inStockMessage;
+    }
+
+    public void setInStockMessage(String inStockMessage) {
+        this.inStockMessage = inStockMessage;
+    }
     
     public String getDescription() {
         return description;

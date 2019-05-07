@@ -11,8 +11,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.ejb.EJB;
+import test.CartController;
 
 /**
  *
@@ -26,7 +26,7 @@ public class marcusController implements Serializable {
     private ChocolateSessionBean chocolateSessionBean;
     
 
-    private ArrayList<ChokladProdukt> ProductList = new ArrayList();
+    // private ArrayList<ChokladProdukt> ProductList = new ArrayList();
     
     private ArrayList<Chocolate> ProductList2 = new ArrayList();
     
@@ -101,17 +101,18 @@ public class marcusController implements Serializable {
 
     public void setProductList2(ArrayList<Chocolate> ProductList2) {
         this.ProductList2 = ProductList2;
+        
     }
     
     
 
-    public ArrayList<ChokladProdukt> getProductList() {
-        return ProductList;
-    }
-
-    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
-        this.ProductList = ProductList;
-    }
+//    public ArrayList<ChokladProdukt> getProductList() {
+//        return ProductList;
+//    }
+//
+//    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
+//        this.ProductList = ProductList;
+//    }
     
     public void skrivUtKunder(){
         chocolateSessionBean.marcusGetKunder();
@@ -134,9 +135,4 @@ public class marcusController implements Serializable {
         System.out.println("visapopup = " + visaPopup);
         this.visaPopup = visaPopup;
     }
-
-    
-   
-    
-    
 }
