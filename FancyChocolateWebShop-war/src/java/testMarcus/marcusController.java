@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 /**
@@ -73,8 +74,11 @@ public class marcusController implements Serializable {
     }
     
     public void kop(){
-        
-         String mes = "Du vill kopa " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + ".";
+          String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + "!";
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                mes, null);
+        FacesContext.getCurrentInstance().addMessage("guessForm:gText", fm);
+       
         System.out.println(mes);
         antalAttKopa=0;
         
