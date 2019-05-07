@@ -40,6 +40,20 @@ public class Person implements Serializable {
         this.admin = admin;
         this.premium = premium;
     }
+    
+    public int getNumberofOrders(){
+        int size = order.size();
+        return size;
+    }
+    
+    public double getTotalSum(){
+        double total = 0;
+        for (Orders o : order){
+            total += o.getPrice();
+        }
+        
+        return total;
+    }
 
     public List<Orders> getOrder() {
         return order;
