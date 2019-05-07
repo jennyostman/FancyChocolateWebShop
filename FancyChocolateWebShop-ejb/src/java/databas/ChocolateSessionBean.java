@@ -52,7 +52,7 @@ public class ChocolateSessionBean {
             Person p6 = new Person("Leo Messi", "Messi", "Leo123", "Leovägen 3", false, false);
             Person p7 = new Person("Gabriel Agrell", "Gabriel", "Gabriel123", "Gabrielvägen 3", false, false);
             Person p8 = new Person("Elton John", "Elton", "Elton123", "Eltonvägen 3", false, false);
-            Person p9 = new Person("Lady Gaga", "Lady", "Lady123", "Ladyvägen 1", false, false);
+            Person p9 = new Person("Lady Gaga", "Lady", "Lady123", "Ladyvägen 1", false, true);
             Person p10 = new Person("Taylor Swift", "Taylor", "Taylor123", "Taylorvägen 1", false, false);
 
             Orders or1 = new Orders(p1);
