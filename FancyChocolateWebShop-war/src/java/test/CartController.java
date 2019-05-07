@@ -34,9 +34,11 @@ public class CartController implements Serializable {
     private  String sokTerm;
     private boolean dontrefresh=false;
 
-
-// Kvar: Hämta en riktig cartContent. Ta bort test-carten ur konstruktorn.
-    // Kvar: Att visa summan om man har rabatt
+    // Dölja rabatt-raden i Cart om personen inte är premium
+    // Kvar: Hämta en riktig cartContent. 
+    // Kvar: Hämta riktiga inStock-värden.
+    // Kvar: Se till att man inte kan beställa -3 varor. Och ev ge fina felmeddelanden för 0.2 eller a.
+    // Snygga till lite med visningen av priset
     
     
     public CartController() { 
@@ -65,15 +67,23 @@ public class CartController implements Serializable {
         cartContent.remove(chocolateObj);
     }
     
-    // Lägg till att kolla om användaren är premiumkund, i så fall ska den få rabatt
-    public double countTotalAmount(){
+    
+    public double countTotalAmount(Person person){
         double totAmount = 0;
         for (Chocolate c : cartContent){
             double oneProduct = c.getPrice() * c.getAmount();
             totAmount += oneProduct;
         }
         return totAmount;
-        // return 100;
+    }
+    
+    // Om kunden inte är premiumkund blir priser med rabatt samma som det vanliga priset.
+    public double countPremiumCustomerPrice(Person person){
+        double premiumPrice = countTotalAmount(person);
+        if (person.isPremium()){
+            premiumPrice = premiumPrice * 0.9;
+        }
+        return premiumPrice;
     }
     
     
@@ -134,6 +144,14 @@ public class CartController implements Serializable {
         this.ProductList = ProductList;
     }
 
+    public ChocolateSessionBean getChocolateSessionBean() {
+        return chocolateSessionBean;
+    }
+
+    public void setChocolateSessionBean(ChocolateSessionBean chocolateSessionBean) {
+        this.chocolateSessionBean = chocolateSessionBean;
+    }
+    
     public String getSokTerm() {
         return sokTerm;
     }
