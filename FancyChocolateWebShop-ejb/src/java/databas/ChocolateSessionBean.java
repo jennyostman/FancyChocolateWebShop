@@ -1,4 +1,3 @@
-
 package databas;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 
 @Stateful
 @LocalBean
@@ -59,7 +57,7 @@ public class ChocolateSessionBean {
             Orders or2 = new Orders(p2);
             Orders or3 = new Orders(p10);
             Orders or4 = new Orders(p8);
-            
+
             OrderDetails od1 = new OrderDetails(3, c1, or1);
             OrderDetails od2 = new OrderDetails(3, c8, or2);
             OrderDetails od3 = new OrderDetails(3, c2, or3);
@@ -77,8 +75,6 @@ public class ChocolateSessionBean {
                 em.persist(c9);
                 em.persist(c10);
 
-                
-
                 em.persist(p1);
                 em.persist(p2);
                 em.persist(p3);
@@ -89,12 +85,12 @@ public class ChocolateSessionBean {
                 em.persist(p8);
                 em.persist(p9);
                 em.persist(p10);
-                
+
                 em.persist(or1);
                 em.persist(or2);
                 em.persist(or3);
                 em.persist(or4);
-                
+
                 em.persist(od1);
                 em.persist(od2);
                 em.persist(od3);
@@ -103,35 +99,28 @@ public class ChocolateSessionBean {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-        
     }
-    
-    
+
     //OBS OBS OBS NEDAN AR FEL DU HAR EJ GJORT HOGERKLICKA OCH LAGG TILL RATT METOD
     public ArrayList getChocolateObjects() {
-        try{
+        try {
             System.out.println("getChocolateObjects() tillkallas har");
-        Query query = em.createQuery("select o from Chocolate o");
-        
-        List<Chocolate> list = query.getResultList();
+            Query query = em.createQuery("select o from Chocolate o");
+
+            List<Chocolate> list = query.getResultList();
             System.out.println("here is list");
             System.out.println(list);
-        ArrayList list2 = new ArrayList(list);
+            ArrayList list2 = new ArrayList(list);
             System.out.println("here is list2");
             System.out.println(list2);
-        
-        return list2;
-        }
-        catch(Exception e){
+
+            return list2;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     public String TestMetod2() {
         return "testMetod tillkallad korrekt!";
@@ -142,72 +131,58 @@ public class ChocolateSessionBean {
     }
 
     public ArrayList getSpecificChocolate(String chocolateName) {
-        try{
+        try {
             System.out.println("getspecifik chocolate tillkallad med variabeln " + chocolateName);
             String temp = "SELECT o FROM Chocolate o WHERE o.name like '" + chocolateName + "'";
             Query query = em.createQuery(temp);
-            
+
             //obs obs borde anvanda det nedan men det fungerade ej... /marcus
             //Query query = em.createQuery("SELECT o FROM Chocolate o WHERE o.name like :chocolateName");
             //query.setParameter("\'chocolateName\'", chocolateName);
-            
-            
-        List<Chocolate> list = query.getResultList();
-        ArrayList list2 = new ArrayList(list);
-            
-        System.out.println("here is the found list");
-        System.out.println(list2);
-        return list2;
-        }
-        catch(Exception e){
+            List<Chocolate> list = query.getResultList();
+            ArrayList list2 = new ArrayList(list);
+
+            System.out.println("here is the found list");
+            System.out.println(list2);
+            return list2;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    public ArrayList marcusGetKunder(){
-        try{
+
+    public ArrayList marcusGetKunder() {
+        try {
             Query query = em.createQuery("Select k From Person k");
             List<Person> list2 = query.getResultList();
             System.out.println("here are all the people");
             System.out.println(list2);
             ArrayList list3 = new ArrayList(list2);
             return list3;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    
 
-    
     public int amountOfChocolateInStock(Object Chocolate) {
         return 10;
     }
-    
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     public ArrayList getAllCustomersForAdmin() {
-        
+
         ArrayList<Person> customers = null;
         System.out.println("I metod");
-        
-        try{
-            Query q = em.createQuery("select o from Person o");
+
+        try {
+            Query q = em.createQuery("select o from Person o WHERE o.admin = false");
             List<Person> customersTemp = q.getResultList();
             System.out.println("fått listan");
             customers = new ArrayList(customersTemp);
             System.out.println(customers);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return customers;
     }
 }
-
-// Add business logic below. (Right-click in editor and choose
-// "Insert Code > Add Business Method")
