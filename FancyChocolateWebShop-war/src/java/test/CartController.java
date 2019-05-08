@@ -14,7 +14,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIGraphic;
 import javax.faces.context.FacesContext;
-import testMarcus.ChokladProdukt;
 
 
 @Named(value = "cartController")
@@ -28,7 +27,7 @@ public class CartController implements Serializable {
     private String chocolateName, pictureName;
     private float price;
     private int amount;
-    private List<Chocolate> cartContent;
+    private List<Chocolate> cartContent = new ArrayList();
     private boolean deleted = false;
     private int inStock;
     private String inStockMessage = "";
@@ -39,7 +38,7 @@ public class CartController implements Serializable {
     private boolean visaPopup = false;
     private Chocolate markeradChoklad;
     private int antalAttKopa;
-    private ArrayList<Chocolate> kundvagnsLista;
+    // private ArrayList<Chocolate> kundvagnsLista;
     
     
     
@@ -72,37 +71,49 @@ public class CartController implements Serializable {
     
     
     // Metod som lägger till valda choklad-produkter i kundvagnslistan
-    public void kop(Chocolate c){
-        //obs obs, denna metod ska ocksa tillkallas med ett antal
-        //antalet av chokladen man koper
-        //dop den variabeln till "mangd"
-        //sa funkar det bortkommenterade nedan
+    public void kop(Chocolate c, int mangd){
+       // System.out.println("mangd att kopa: " + mangd);
+       
           String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + "!";
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
                 mes, null);
         FacesContext.getCurrentInstance().addMessage("guessForm:gText", fm);
        
-        System.out.println(mes);
-        antalAttKopa=0;
-        if(kundvagnsLista==null || kundvagnsLista.size()==0){
-            kundvagnsLista = new ArrayList();
+      //  System.out.println(mes);
+        if(cartContent==null || cartContent.size()==0){
+            
+            cartContent = new ArrayList();
+            
         }
-//        boolean finnsredan=false;
-//        for(Chocolate cho: kundvagnsLista){
-//            if(cho.getChocolateId()==c.getChocolateId()){
-//                finnsredan=true;
-//                c.amount+=mangd;
-//            }
-//        }
-//        if(!finnsredan)
-        kundvagnsLista.add(c);
         
-        System.out.println(kundvagnsLista);
+        //anledningen bakom kollen nedan ar for att:
+        //ifall Listan redan innehaller en viss sorts choklad
+        //sa ska man inte lagga till den sortens choklad till listan
+        //utan bara oka antalet
+        //daremot om man lagger till en ny sorts choklad
+        //sa ska ett NYTT objekt laggas in i listan
+        boolean finnsredan=false;
+        for(Chocolate cho: cartContent){
+            if(cho.getChocolateId()==c.getChocolateId()){
+             //   System.out.println("forst finns det " + c.getAmount() + "i chocolate amount");
+                finnsredan=true;
+                c.setAmount(c.getAmount()+mangd);
+                break;
+            //    System.out.println("sedan finns det " + c.getAmount() + "i chocolate amount");
+            }
+        }
+        if(!finnsredan){
+          //  System.out.println("ny choklad!");
+          //  System.out.println("forst finns det " + c.getAmount() + "i chocolate amount");
+        c.setAmount(mangd);
+        //System.out.println("sedan finns det " + c.getAmount() + "i chocolate amount");
+        cartContent.add(c);
+        }
         
-//        String messageText = mes;
-//              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
-//                  messageText, messageText));
-             
+        //System.out.println(cartContent);
+        
+        //raden nedan aterstaller kop-rutan
+             antalAttKopa=0;
     }
     
     
@@ -235,13 +246,13 @@ public class CartController implements Serializable {
         this.visaPopup = visaPopup;
     }
 
-    public ArrayList<Chocolate> getKundvagnsLista() {
-        return kundvagnsLista;
-    }
-
-    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
-        this.kundvagnsLista = kundvagnsLista;
-    }
+//    public ArrayList<Chocolate> getKundvagnsLista() {
+//        return kundvagnsLista;
+//    }
+//
+//    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
+//        this.kundvagnsLista = kundvagnsLista;
+//    }
     
     public ChocolateSessionBean getChocolateSessionBean() {
         return chocolateSessionBean;
@@ -332,8 +343,6 @@ public class CartController implements Serializable {
     }
 
     public List<Chocolate> getCartContent() {
-        //cartContent = new ArrayList<>(ProductList);
-        //System.out.println("JENNY" + cartContent.toString());
         return cartContent;
     }
 

@@ -36,6 +36,14 @@ public class OrderDetails implements Serializable {
         this.chocolate = chocolate;
         this.orders = orders;
     }
+    
+    public double getPrice(){
+        double price = 0;
+        for (int i = 0; i < amount; i++) {
+            price += chocolate.getPrice();
+        }
+        return price;
+    }
 
     public int getAmount() {
         return amount;

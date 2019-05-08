@@ -1,4 +1,3 @@
-
 package databas;
 
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 
 @Stateful
 @LocalBean
@@ -52,16 +50,24 @@ public class ChocolateSessionBean {
             Person p8 = new Person("Elton John", "Elton", "Elton123", "Eltonvägen 3", false, false);
             Person p9 = new Person("Lady Gaga", "Lady", "Lady123", "Ladyvägen 1", false, true);
             Person p10 = new Person("Taylor Swift", "Taylor", "Taylor123", "Taylorvägen 1", false, false);
+            Person p11 = new Person("Testperson testis", "t", "t", "Testvagen 1", false, false);
 
             Orders or1 = new Orders(p1);
             Orders or2 = new Orders(p2);
             Orders or3 = new Orders(p10);
             Orders or4 = new Orders(p8);
-            
+            Orders or5 = new Orders(p8);
+
             OrderDetails od1 = new OrderDetails(3, c1, or1);
             OrderDetails od2 = new OrderDetails(3, c8, or2);
             OrderDetails od3 = new OrderDetails(3, c2, or3);
             OrderDetails od4 = new OrderDetails(1, c3, or4);
+            OrderDetails od5 = new OrderDetails(1, c3, or5);
+            OrderDetails od6 = new OrderDetails(2, c1, or5);
+            OrderDetails od7 = new OrderDetails(3, c4, or5);
+            OrderDetails od8 = new OrderDetails(3, c4, or4);
+            OrderDetails od9 = new OrderDetails(3, c1, or4);
+            OrderDetails od10 = new OrderDetails(3, c6, or4);
 
             try {
                 em.persist(c1);
@@ -75,8 +81,6 @@ public class ChocolateSessionBean {
                 em.persist(c9);
                 em.persist(c10);
 
-                
-
                 em.persist(p1);
                 em.persist(p2);
                 em.persist(p3);
@@ -87,53 +91,50 @@ public class ChocolateSessionBean {
                 em.persist(p8);
                 em.persist(p9);
                 em.persist(p10);
-                
+                em.persist(p11);
+
                 em.persist(or1);
                 em.persist(or2);
                 em.persist(or3);
                 em.persist(or4);
-                
+                em.persist(or5);
+
                 em.persist(od1);
                 em.persist(od2);
                 em.persist(od3);
                 em.persist(od4);
+                em.persist(od5);
+                em.persist(od6);
+                em.persist(od7);
+                em.persist(od8);
+                em.persist(od9);
+                em.persist(od10);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-        
     }
-    
-    
+
     //OBS OBS OBS NEDAN AR FEL DU HAR EJ GJORT HOGERKLICKA OCH LAGG TILL RATT METOD
     public ArrayList getChocolateObjects() {
-        try{
+        try {
             System.out.println("getChocolateObjects() tillkallas har");
             Query query = em.createQuery("select o from Chocolate o");
-        
+
             List<Chocolate> list = query.getResultList();
             System.out.println("here is list");
             System.out.println(list);
             ArrayList list2 = new ArrayList(list);
             System.out.println("here is list2");
             System.out.println(list2);
-        
-        return list2;
-        }
-        catch(Exception e){
+
+            return list2;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    
-    
-    
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     public String TestMetod2() {
         return "testMetod tillkallad korrekt!";
@@ -144,71 +145,60 @@ public class ChocolateSessionBean {
     }
 
     public ArrayList getSpecificChocolate(String chocolateName) {
-        try{
+        try {
             System.out.println("getspecifik chocolate tillkallad med variabeln " + chocolateName);
             String temp = "SELECT o FROM Chocolate o WHERE o.name like '" + chocolateName + "'";
             Query query = em.createQuery(temp);
-            
+
             //obs obs borde anvanda det nedan men det fungerade ej... /marcus
             //Query query = em.createQuery("SELECT o FROM Chocolate o WHERE o.name like :chocolateName");
             //query.setParameter("\'chocolateName\'", chocolateName);
-            
-            
-        List<Chocolate> list = query.getResultList();
-        ArrayList list2 = new ArrayList(list);
-            
-        System.out.println("here is the found list");
-        System.out.println(list2);
-        return list2;
-        }
-        catch(Exception e){
+            List<Chocolate> list = query.getResultList();
+            ArrayList list2 = new ArrayList(list);
+
+            System.out.println("here is the found list");
+            System.out.println(list2);
+            return list2;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    
-    public ArrayList marcusGetKunder(){
-        try{
+
+    public ArrayList marcusGetKunder() {
+        try {
             Query query = em.createQuery("Select k From Person k");
             List<Person> list2 = query.getResultList();
             System.out.println("here are all the people");
             System.out.println(list2);
             ArrayList list3 = new ArrayList(list2);
             return list3;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    
 
-    
     public int amountOfChocolateInStock(Object Chocolate) {
         return 10;
     }
 
     
     public ArrayList getAllCustomersForAdmin() {
-        
+
         ArrayList<Person> customers = null;
         System.out.println("I metod");
-        
-        try{
-            Query q = em.createQuery("select o from Person o");
+
+        try {
+            Query q = em.createQuery("select o from Person o WHERE o.admin = false");
             List<Person> customersTemp = q.getResultList();
             System.out.println("fått listan");
             customers = new ArrayList(customersTemp);
             System.out.println(customers);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return customers;
     }    
 
 }
-
-// Add business logic below. (Right-click in editor and choose
-// "Insert Code > Add Business Method")

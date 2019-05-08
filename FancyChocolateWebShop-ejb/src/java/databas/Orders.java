@@ -38,6 +38,14 @@ public class Orders implements Serializable {
         this.date = new Date();
         this.person = person;
     }
+    
+    public double getPrice(){
+        double price = 0;
+        for(OrderDetails od : orderDetails){
+            price += od.getPrice();
+        };
+        return price;
+    }
 
     public Date getDate() {
         return date;
