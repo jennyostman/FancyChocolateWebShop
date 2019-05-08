@@ -14,7 +14,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIGraphic;
 import javax.faces.context.FacesContext;
-import testMarcus.ChokladProdukt;
 
 
 @Named(value = "cartController")
@@ -39,7 +38,7 @@ public class CartController implements Serializable {
     private boolean visaPopup = false;
     private Chocolate markeradChoklad;
     private int antalAttKopa;
-    private ArrayList<Chocolate> kundvagnsLista;
+    // private ArrayList<Chocolate> kundvagnsLista;
     
     
     
@@ -84,20 +83,20 @@ public class CartController implements Serializable {
        
         System.out.println(mes);
         antalAttKopa=0;
-        if(kundvagnsLista==null || kundvagnsLista.size()==0){
-            kundvagnsLista = new ArrayList();
+        if(cartContent==null || cartContent.size()==0){
+            cartContent = new ArrayList();
         }
 //        boolean finnsredan=false;
-//        for(Chocolate cho: kundvagnsLista){
+//        for(Chocolate cho: cartContent){
 //            if(cho.getChocolateId()==c.getChocolateId()){
 //                finnsredan=true;
 //                c.amount+=mangd;
 //            }
 //        }
 //        if(!finnsredan)
-        kundvagnsLista.add(c);
+        cartContent.add(c);
         
-        System.out.println(kundvagnsLista);
+        System.out.println(cartContent);
         
 //        String messageText = mes;
 //              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -235,13 +234,13 @@ public class CartController implements Serializable {
         this.visaPopup = visaPopup;
     }
 
-    public ArrayList<Chocolate> getKundvagnsLista() {
-        return kundvagnsLista;
-    }
-
-    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
-        this.kundvagnsLista = kundvagnsLista;
-    }
+//    public ArrayList<Chocolate> getKundvagnsLista() {
+//        return kundvagnsLista;
+//    }
+//
+//    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
+//        this.kundvagnsLista = kundvagnsLista;
+//    }
     
     public ChocolateSessionBean getChocolateSessionBean() {
         return chocolateSessionBean;
@@ -332,8 +331,6 @@ public class CartController implements Serializable {
     }
 
     public List<Chocolate> getCartContent() {
-        cartContent = new ArrayList<>(ProductList);
-        System.out.println("JENNY" + cartContent.toString());
         return cartContent;
     }
 
