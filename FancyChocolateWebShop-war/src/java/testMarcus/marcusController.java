@@ -99,7 +99,6 @@ public class marcusController implements Serializable {
 //        }
 //        if(!finnsredan)
         kundvagnsLista.add(c);
-        
         System.out.println(kundvagnsLista);
         
 //        String messageText = mes;

@@ -48,7 +48,7 @@
                 <h4>Total price: </h4>
                 <h:outputText value="#{cartController.countTotalAmount()}"></h:outputText>
                 <h4>Premium customer price: </h4>
-                <h:commandButton action="#{cartController.buyProducts()}" value="Köp"></h:commandButton>
+                <h:commandButton action="#{cartController.buyProducts(cartController.kundvagnsLista,loginController.person)}" value="Köp"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>

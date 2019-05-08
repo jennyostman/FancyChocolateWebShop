@@ -1,14 +1,21 @@
 
 package test;
 
+import databas.Chocolate;
 import databas.ChocolateSessionBean;
+import databas.OrderDetails;
+import databas.Orders;
+import databas.Person;
 import javax.inject.Named;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIGraphic;
+import javax.faces.context.FacesContext;
 
 
 @Named(value = "cartController")
@@ -26,6 +33,13 @@ public class CartController implements Serializable {
     private boolean deleted = false;
     private int inStock;
     private String inStockMessage = "";
+    private int antalAttKopa;
+    private Person person;
+    private Orders order;
+    private OrderDetails orderdetails;
+
+    private ArrayList<Chocolate> kundvagnsLista;
+
     // Kvar: Hämta en riktig cartContent. Ta bort test-carten ur konstruktorn.
     // Kvar: Att visa summan om man har rabatt
     
@@ -107,6 +121,24 @@ public class CartController implements Serializable {
     public void setCartContent(List<CartDbStandIn2> cartContent) {
         this.cartContent = cartContent;
     }
+
+    public ArrayList<Chocolate> getKundvagnsLista() {
+        return kundvagnsLista;
+    }
+
+    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
+        this.kundvagnsLista = kundvagnsLista;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+    
+    
     
     // Behöver inte skötas av SessionBean. Pga innan cart sparats i db.
     public void removeProduct(CartDbStandIn2 chocolateObj){
@@ -123,8 +155,22 @@ public class CartController implements Serializable {
         return totAmount;
     }
     
+    public Orders addOrder(Person person){
+        order = new Orders(person);
+        return order;
+    }
     
-    public void buyProducts(){
+    public void addDetailsToOrder(ArrayList<Chocolate> kundvagnsLista,Orders order){
+        for(Chocolate c : kundvagnsLista){
+            orderdetails= new OrderDetails(1,c,order);
+            
+        }
+    }
+    
+    public void buyProducts(ArrayList<Chocolate> kundvagnsLista, Person person){
+        
+        Orders order = addOrder(person);
+        addDetailsToOrder(kundvagnsLista,order);
         // Kolla om produkterna finns i lager.
         boolean allInStock = true;
         // Varje chokladObj håller info om vad som finns i lager, men man måste göra en till koll
@@ -160,5 +206,37 @@ public class CartController implements Serializable {
             // Lägg till order id i kundens lista
             
         }   
+    }
+    
+        public void kop(Chocolate c){
+        //obs obs, denna metod ska ocksa tillkallas med ett antal
+        //antalet av chokladen man koper
+        //dop den variabeln till "mangd"
+        //sa funkar det bortkommenterade nedan
+          String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + c.getName() + "!";
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                mes, null);
+        FacesContext.getCurrentInstance().addMessage("guessForm:gText", fm);
+       
+        System.out.println(mes);
+        antalAttKopa=0;
+        if(kundvagnsLista==null || kundvagnsLista.size()==0){
+            kundvagnsLista = new ArrayList();
+        }
+//        boolean finnsredan=false;
+//        for(Chocolate cho: kundvagnsLista){
+//            if(cho.getChocolateId()==c.getChocolateId()){
+//                finnsredan=true;
+//                c.amount+=mangd;
+//            }
+//        }
+//        if(!finnsredan)
+        kundvagnsLista.add(c);
+        System.out.println(kundvagnsLista);
+        
+//        String messageText = mes;
+//              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//                  messageText, messageText));
+             
     }
 }

@@ -79,7 +79,7 @@
                                  <h:inputText value ="#{marcusController.antalAttKopa}" >
                                  <f:validateLongRange minimum="0" maximum="#{marcusController.markeradChoklad.inStock}"/>
                                  </h:inputText>
-                                 <h:commandButton value ="purchase!" action ="#{marcusController.kop(marcusController.markeradChoklad)}"></h:commandButton>
+                                 <h:commandButton value ="purchase!" action ="#{CartController.kop(marcusController.markeradChoklad)}"></h:commandButton>
                                  
                                 <h:commandButton value="Back" action="#{marcusController.stangChokladRuta()}" immediate="true"></h:commandButton>
                              </h:form>
