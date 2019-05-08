@@ -11,9 +11,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 /**
@@ -28,7 +28,7 @@ public class marcusController implements Serializable {
     private ChocolateSessionBean chocolateSessionBean;
     
 
-    private ArrayList<ChokladProdukt> ProductList = new ArrayList();
+    // private ArrayList<ChokladProdukt> ProductList = new ArrayList();
     
     private ArrayList<Chocolate> ProductList2 = new ArrayList();
     
@@ -41,6 +41,8 @@ public class marcusController implements Serializable {
     private Chocolate markeradChoklad;
     
     private int antalAttKopa;
+    
+    private ArrayList<Chocolate> kundvagnsLista;
     
     
     
@@ -72,11 +74,32 @@ public class marcusController implements Serializable {
         
     }
     
-    public void kop(){
-        
-         String mes = "Du vill kopa " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + ".";
+    public void kop(Chocolate c){
+        //obs obs, denna metod ska ocksa tillkallas med ett antal
+        //antalet av chokladen man koper
+        //dop den variabeln till "mangd"
+        //sa funkar det bortkommenterade nedan
+          String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + "!";
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                mes, null);
+        FacesContext.getCurrentInstance().addMessage("guessForm:gText", fm);
+       
         System.out.println(mes);
         antalAttKopa=0;
+        if(kundvagnsLista==null || kundvagnsLista.size()==0){
+            kundvagnsLista = new ArrayList();
+        }
+//        boolean finnsredan=false;
+//        for(Chocolate cho: kundvagnsLista){
+//            if(cho.getChocolateId()==c.getChocolateId()){
+//                finnsredan=true;
+//                c.amount+=mangd;
+//            }
+//        }
+//        if(!finnsredan)
+        kundvagnsLista.add(c);
+        
+        System.out.println(kundvagnsLista);
         
 //        String messageText = mes;
 //              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -142,17 +165,18 @@ public class marcusController implements Serializable {
 
     public void setProductList2(ArrayList<Chocolate> ProductList2) {
         this.ProductList2 = ProductList2;
+        
     }
     
     
 
-    public ArrayList<ChokladProdukt> getProductList() {
-        return ProductList;
-    }
-
-    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
-        this.ProductList = ProductList;
-    }
+//    public ArrayList<ChokladProdukt> getProductList() {
+//        return ProductList;
+//    }
+//
+//    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
+//        this.ProductList = ProductList;
+//    }
 
     public int getAntalAttKopa() {
         return antalAttKopa;
@@ -184,6 +208,14 @@ public class marcusController implements Serializable {
         
         System.out.println("visapopup = " + visaPopup);
         this.visaPopup = visaPopup;
+    }
+
+    public ArrayList<Chocolate> getKundvagnsLista() {
+        return kundvagnsLista;
+    }
+
+    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
+        this.kundvagnsLista = kundvagnsLista;
     }
 
     
