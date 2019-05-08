@@ -2,13 +2,10 @@
 package databas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -43,7 +40,7 @@ public class ChocolateSessionBean {
             Chocolate c8 = new Chocolate("Chocolate Pearls", 449.80, " Dark Chocolate Pearls 55%, Dark Chocolate Crunchy Pearls 55%, CARAMÉLIA 36% Crunchy Pearls.", "Valrhona", 40, 0, "", false, "Chocolates-with-Edible-Gold-by-DeLafee.jpg");
             Chocolate c9 = new Chocolate("Coffret Selection", 525.45, "An assortment of almonds and hazelnuts coated in milk chocolate", "Valrhona", 35, 0, "", false, "Amedei-Porcelana.jpg");
             Chocolate c10 = new Chocolate("Tosca", 567.25, "A box with 7 delightful artisan chocolates, the best southern European almonds covered in chocolate", "Puccini bomboni", 10, 0, "", false, "The-Aficionados-Collection.jpg");
-
+           
             Person p1 = new Person("Alice Svensson", "Alice", "Alice123", "Annavägen 12", false, false);
             Person p2 = new Person("Maja Adolfsson", "Maja", "Maja123", "Majavägen 10", false, false);
             Person p3 = new Person("Ella Asplund", "Ella", "Ella123", "Ellavägen 5", false, false);

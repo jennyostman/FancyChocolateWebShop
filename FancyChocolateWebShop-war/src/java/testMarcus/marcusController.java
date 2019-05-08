@@ -43,6 +43,8 @@ public class marcusController implements Serializable {
     
     private int antalAttKopa;
     
+    private ArrayList<Chocolate> kundvagnsLista;
+    
     
     
     
@@ -73,7 +75,11 @@ public class marcusController implements Serializable {
         
     }
     
-    public void kop(){
+    public void kop(Chocolate c){
+        //obs obs, denna metod ska ocksa tillkallas med ett antal
+        //antalet av chokladen man koper
+        //dop den variabeln till "mangd"
+        //sa funkar det bortkommenterade nedan
           String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + "!";
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
                 mes, null);
@@ -81,6 +87,20 @@ public class marcusController implements Serializable {
        
         System.out.println(mes);
         antalAttKopa=0;
+        if(kundvagnsLista==null || kundvagnsLista.size()==0){
+            kundvagnsLista = new ArrayList();
+        }
+//        boolean finnsredan=false;
+//        for(Chocolate cho: kundvagnsLista){
+//            if(cho.getChocolateId()==c.getChocolateId()){
+//                finnsredan=true;
+//                c.amount+=mangd;
+//            }
+//        }
+//        if(!finnsredan)
+        kundvagnsLista.add(c);
+        
+        System.out.println(kundvagnsLista);
         
 //        String messageText = mes;
 //              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -188,6 +208,14 @@ public class marcusController implements Serializable {
         
         System.out.println("visapopup = " + visaPopup);
         this.visaPopup = visaPopup;
+    }
+
+    public ArrayList<Chocolate> getKundvagnsLista() {
+        return kundvagnsLista;
+    }
+
+    public void setKundvagnsLista(ArrayList<Chocolate> kundvagnsLista) {
+        this.kundvagnsLista = kundvagnsLista;
     }
 
     
