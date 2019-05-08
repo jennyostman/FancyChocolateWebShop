@@ -332,8 +332,8 @@ public class CartController implements Serializable {
     }
 
     public List<Chocolate> getCartContent() {
-        cartContent = new ArrayList<>(ProductList);
-        System.out.println("JENNY" + cartContent.toString());
+        //cartContent = new ArrayList<>(ProductList);
+        //System.out.println("JENNY" + cartContent.toString());
         return cartContent;
     }
 
