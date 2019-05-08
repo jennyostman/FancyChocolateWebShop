@@ -24,8 +24,9 @@ public class Chocolate implements Serializable {
     private String brand;
     private int inStock;
     private int amount;
-    private String inStockMessage = "";
-    String pictureName;
+    private String inStockMessage;
+    private boolean showPopUp;
+    private String pictureName;
     
     
     public Chocolate (){}
@@ -37,24 +38,20 @@ public class Chocolate implements Serializable {
        
     }
 
-    public Chocolate(String name, double price, String description, String brand, int inStock, String inStockMessage, String pictureName) {
+    public Chocolate(String name, double price, String description, String brand, int inStock, int amount, String inStockMessage, boolean showPopUp, String pictureName) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.brand = brand;
         this.inStock = inStock;
+        this.amount = amount;
         this.inStockMessage = inStockMessage;
+        this.showPopUp = showPopUp;
         this.pictureName = pictureName;
     }
 
-    public String getPictureName() {
-        return pictureName;
-    }
-
-    public void setPictureName(String pictureName) {
-        this.pictureName = pictureName;
-    }
     
+
     public int getAmount() {
         return amount;
     }
@@ -69,6 +66,22 @@ public class Chocolate implements Serializable {
 
     public void setInStockMessage(String inStockMessage) {
         this.inStockMessage = inStockMessage;
+    }
+
+    public boolean isShowPopUp() {
+        return showPopUp;
+    }
+
+    public void setShowPopUp(boolean showPopUp) {
+        this.showPopUp = showPopUp;
+    }
+
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
     }
     
     public String getDescription() {
@@ -119,6 +132,8 @@ public class Chocolate implements Serializable {
         this.chocolateId = id;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

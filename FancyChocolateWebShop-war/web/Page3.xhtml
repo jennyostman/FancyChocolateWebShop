@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="style.css"></link>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <f:view>
+            <h:form>
+                <h:outputText>Typ namn</h:outputText>
+                <h:inputText value = "tralala"></h:inputText>
+                <br/>
+                <h:outputText>och jobbet</h:outputText>
+                <h:inputText value = "andra rutan"></h:inputText>
+                <h:commandButton value="En knapp" action="#{marcusController.setVisaPopup(true)}"></h:commandButton>
+            
+                     </h:form>
+        </f:view>
+        
+         <f:view>
+            <h:form>
+                <h:outputText value ="Search:"></h:outputText>
+                <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
+                <h:button image ="SaveButton.png" onclick="#{marcusController.sok()}" style="width:25px;height:25px" ></h:button>
+                <h:button value ="Reset!" onclick ="#{marcusController.reset()}"></h:button>
+                
+                </h:form>
+        </f:view>
+                
+        
+       
+            <h:dataTable  value="#{marcusController.productList2}" 
+                             var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
+                
+                <h:column>
+                            <f:facet name="header" >Product Name:</f:facet>
+                            <h:outputText value="#{produkt.name}" />
+                   </h:column>
+
+
+                
+            </h:dataTable>
+                        <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
+                         <div class ="popup-panel">
+                             <f:view>
+                                 <h:form>
+                                     hello
+                                 <br/>
+                                 this is a popuppanel
+                                 apparently
+                                 <h:commandButton value="Back" action="#{marcusController.setVisaPopup(false)}"></h:commandButton>
+                                 </h:form>
+                             </f:view>
+
+                                 
+                                 
+                         </div>
+                </h:panelGroup>
+        
+    </h:body>
+</html>
+
