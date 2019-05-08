@@ -1,15 +1,39 @@
 package test;
 
+import databas.ChocolateSessionBean;
+import databas.RegistrationBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 @Named(value = "registerController")
 @SessionScoped
 public class registerController implements Serializable {
-  
+
+
+    
     private boolean showPopup;
-    private String username,password, firstName,lastName,address;
+    private String name,username,password,address;
+    private FacesMessage facesMessage;
+    private String registered,inUse = "";
+
+    @EJB
+    private RegistrationBean registrationBean;
+    
+    @EJB
+    private ChocolateSessionBean chocolateSessionBean;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+            
 
     public String getUsername() {
         return username;
@@ -26,22 +50,7 @@ public class registerController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    
 
     public String getAddress() {
         return address;
@@ -50,14 +59,30 @@ public class registerController implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-            
-    public void show(){
-        showPopup = true;
-    }
-    public void hide(){
-        showPopup = false;
+
+    public String getRegistered() {
+        return registered;
     }
 
+    public void setRegistered() {
+        this.registered = "Register Sucessfull";
+    }
+
+    public String getInUse() {
+        return inUse;
+    }
+
+    public void setInUse() {
+        this.inUse = "Username is already in use!";
+    }
+            
+    
+    public boolean checkIfAdmin(){
+        chocolateSessionBean.fillDB();
+        return true;
+    }
+
+    
     public boolean isShowPopup(){
         return showPopup;
     }
@@ -65,14 +90,79 @@ public class registerController implements Serializable {
     public void setShowPopup(boolean showPopup) {
         this.showPopup = showPopup;
     }
+    public void show(){
+        showPopup = true;
+    }
+    public void hide(){
+        showPopup = false;
+    }
+
+    public RegistrationBean getRegistrationBean() {
+        return registrationBean;
+    }
+
+    public void setRegistraionBean(RegistrationBean registraionBean) {
+        this.registrationBean = registraionBean;
+    }
     
-    
-    public void register(){
-        
+    public FacesMessage getFacesmessage() {
+        return facesMessage;
+    }
+
+    public void setFacesMessage(FacesMessage facesmessage) {
+        this.facesMessage = facesmessage;
     }
     
     
-    public registerController() {      
+     public boolean formFilled(){
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        FacesMessage facesMessage = new FacesMessage("This field is requiered");
+        boolean isFilled = true;
+        
+        if(name.equals("")){
+            facesContext.addMessage("registerForm:name", facesMessage);
+            isFilled = false;
+        }
+        if(username.equals("")){
+            facesContext.addMessage("registerForm:username", facesMessage);
+            isFilled = false;
+        }
+        if(password.equals("")){
+            facesContext.addMessage("registerForm:password", facesMessage);
+            isFilled = false;
+        }
+        if(address.equals("")){
+            facesContext.addMessage("registerForm:adress", facesMessage);
+            isFilled = false;
+        }
+        
+        return isFilled;
+   
+    }
+    
+    
+    
+    
+    public String register(){
+        
+        
+        if(!formFilled()){
+            return "";
+        }
+        
+        
+        else if(!registrationBean.registerUser(name,username,password,address)){
+            setInUse();
+            return "";
+        }
+        setRegistered();
+        hide();
+        return "";
+    }
+    
+    public registerController() {
+        showPopup = false;
     }
     
 }

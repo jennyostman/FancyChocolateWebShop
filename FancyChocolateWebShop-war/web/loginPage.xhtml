@@ -9,32 +9,46 @@
     </h:head>
     <h:body>
         
-        <h:form>
+        <h:form id="loginForm">
+            <h:outputText></h:outputText>
         Username<br/>
         <h:inputText value="#{loginController.username}">
-            <f:validator validatorId="usernameValidate"/>
+           
         </h:inputText><br/>
         Password<br/>
         <h:inputSecret value="#{loginController.password}">
-            <f:validator validatorId="passValidate"/>
+            
         </h:inputSecret><br/>
-        <h:commandButton value=" Login" action="Login"></h:commandButton>
-        <h:commandButton value=" Register" action="#{registerController.show()}" immediate="true"></h:commandButton>
+        
+        <h:outputText  style = "color:green" value="#{registerController.registered}"></h:outputText><br/>
+        
+        <h:commandButton id="button" value="Login" action="#{loginController.logIn()}"></h:commandButton>
+        <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton> <br/>
+        <h:message for="button" errorStyle="color: red" infoStyle="color: red"></h:message>
         </h:form>
         
         <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{registerController.showPopup}" >
             <div class ="popup-panel">
-                <h:form>
+                <h:form id="registerForm">
+                    <h:outputText style="color:red" value="#{registerController.inUse}" ></h:outputText><br/>
                     Username <br/>
-                    <h:inputText value="#{registerController.username}"></h:inputText><br/>
+                    <h:inputText id="username" value="#{registerController.username}"></h:inputText>
+                    <h:message class="validator" for="password" errorStyle="color: red" infoStyle="color: red"></h:message>
+                    <br/>
+                    
                     Password <br/>
-                    <h:inputText value="#{registerController.password}"></h:inputText><br/>
-                    First name<br/>
-                    <h:inputText value="#{registerController.firstName}"></h:inputText><br/>
-                    Last name<br/>
-                    <h:inputText value="#{registerController.lastName}"></h:inputText><br/>
+                    <h:inputSecret id="password" value="#{registerController.password}"></h:inputSecret>
+                    <h:message class="validator" for="password" errorStyle="color: red" infoStyle="color: red"></h:message>
+                    <br/>
+                    
+                    Name<br/>
+                    <h:inputText id="name" value="#{registerController.name}"></h:inputText>
+                    <h:message class="validator" for="name" errorStyle="color: red" infoStyle="color: red"></h:message>
+                    <br/>
                     Address <br/>
-                    <h:inputText value="#{registerController.address}"></h:inputText><br/>
+                    <h:inputText id="adress" value="#{registerController.address}"></h:inputText>
+                    <h:message class="validator" for="adress" errorStyle="color: red" infoStyle="color: red"></h:message>
+                    <br/>
                     
                     <h:commandButton value="Back" action="#{registerController.hide()}"></h:commandButton>
                     <h:commandButton value="Register" action="#{registerController.register()}" ></h:commandButton>

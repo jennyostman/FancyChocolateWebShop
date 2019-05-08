@@ -191,8 +191,22 @@ public class ChocolateSessionBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-
-
+    public ArrayList getAllCustomersForAdmin() {
+        
+        ArrayList<Person> customers = null;
+        System.out.println("I metod");
+        
+        try{
+            Query q = em.createQuery("select o from Person o");
+            List<Person> customersTemp = q.getResultList();
+            System.out.println("fått listan");
+            customers = new ArrayList(customersTemp);
+            System.out.println(customers);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return customers;
+    }
 }
 
 // Add business logic below. (Right-click in editor and choose

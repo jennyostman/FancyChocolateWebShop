@@ -5,6 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <link rel="stylesheet" type="text/css" href="style.css"></link>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
@@ -19,7 +20,7 @@
                 <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
                 <h:commandButton image ="SaveButton.png" action="#{marcusController.sok()}" style="width:20px;height:20px" ></h:commandButton>
                 <h:commandButton value ="Reset!" action ="#{marcusController.reset()}"></h:commandButton>
-                <h:commandButton value ="testafolk" action="#{marcusController.skrivUtKunder()}"></h:commandButton>
+                <h:commandButton value ="testafolk" action="Page3"></h:commandButton>
                 
                 
             </h:form>
@@ -49,34 +50,42 @@
                    </h:column>
                    
                    <h:column>
-                    <h:inputText value ="amount"></h:inputText>
-                    <h:button value ="purchase!" onclick="#{marcusController.setVisaPopup(true)}"></h:button>
+                    <h:commandButton value ="Show!" action="#{marcusController.skickaChoklad(produkt)}"></h:commandButton>
                     </h:column>
                        
-               
-                    <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
-                         <div class ="popup-panel">
-                             <h:form>
-                                 ID <br/>
-                                 <h:outputText value ="#{produkt.chocolateId}"></h:outputText>
-                                 Name <br/>
-                                 <h:outputText value ="#{produkt.name}"></h:outputText>
-                                 Price <br/>
-                                 <h:outputText value ="#{produkt.price}"></h:outputText>
-                                 Description <br/>
-                                 <h:outputText value ="#{produkt.description}"></h:outputText>
-                                 Brand <br/>
-                                 <h:outputText value ="#{produkt.brand}"></h:outputText>
-                                 Available <br/>
-                                 <h:outputText value ="#{produkt.inStock}"></h:outputText>
-                                 <br/>
-                                 <h:inputText value ="amount"></h:inputText>
-                                 <h:button value ="purchase!"></h:button>
-                             </h:form>
-                         </div>
-                     </h:panelGroup>
+                    
+                    
 
                 </h:dataTable>
+               
+               
+               <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
+                         <div class ="popup-panel">
+                             <f:view>
+                             <h:form>
+                                 ID:  
+                                 <h:outputText value ="#{marcusController.markeradChoklad.chocolateId}"></h:outputText><br/>
+                                 Name : 
+                                 <h:outputText value ="#{marcusController.markeradChoklad.name}"></h:outputText><br/>
+                                 Price:  
+                                 <h:outputText value ="#{marcusController.markeradChoklad.price}"></h:outputText><br/>
+                                 Description:  
+                                 <h:outputText value ="#{marcusController.markeradChoklad.description}"></h:outputText><br/>
+                                 Brand : 
+                                 <h:outputText value ="#{marcusController.markeradChoklad.brand}"></h:outputText><br/>
+                                 Available : 
+                                 <h:outputText value ="#{marcusController.markeradChoklad.inStock}"></h:outputText><br/>
+                                 
+                                 <h:inputText value ="#{marcusController.antalAttKopa}" >
+                                 <f:validateLongRange minimum="0" maximum="#{marcusController.markeradChoklad.inStock}"/>
+                                 </h:inputText>
+                                 <h:commandButton value ="purchase!" action ="#{marcusController.kop(marcusController.markeradChoklad)}"></h:commandButton>
+                                 
+                                <h:commandButton value="Back" action="#{marcusController.stangChokladRuta()}" immediate="true"></h:commandButton>
+                             </h:form>
+                                  </f:view>
+                         </div>
+                     </h:panelGroup>
 
                
            </h:form>
