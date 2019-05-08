@@ -12,14 +12,14 @@
         <ui:insert>
             <ui:include src="templates/header.xhtml"></ui:include>
         </ui:insert>
-        
+
         <div id ="ProductPageLeftSide">
         <f:view>
             <h:form>
                 <h:outputText value ="Search:"></h:outputText>
-                <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
-                <h:commandButton image ="SaveButton.png" action="#{marcusController.sok()}" style="width:20px;height:20px" ></h:commandButton>
-                <h:commandButton value ="Reset!" action ="#{marcusController.reset()}"></h:commandButton>
+                <h:inputText value="#{cartController.sokTerm}" onchange="#{cartController.setSokTerm(sokTerm)}" ></h:inputText>
+                <h:commandButton image ="SaveButton.png" action="#{cartController.sok()}" style="width:20px;height:20px" ></h:commandButton>
+                <h:commandButton value ="Reset!" action ="#{cartController.reset()}"></h:commandButton>
                 <h:commandButton value ="testafolk" action="Page3"></h:commandButton>
                 
                 
@@ -31,26 +31,26 @@
        <f:view>
            <h:form>
                 
-                <h:dataTable  value="#{marcusController.productList2}" 
+                <h:dataTable  value="#{cartController.productList}" 
                              var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
                
                    <h:column>
                             <f:facet name="header" >ProductID</f:facet>
                             <h:outputText id = "productID" value="#{produkt.chocolateId}" />
-                   </h:column>
-                   
-                   <h:column>
+                        </h:column>
+
+                        <h:column>
                             <f:facet name="header" >Product Name:</f:facet>
                             <h:outputText value="#{produkt.name}" />
-                   </h:column>
-                   
-                   <h:column>
+                        </h:column>
+
+                        <h:column>
                             <f:facet name="header" >Product Price:</f:facet>
                             <h:outputText value="#{produkt.price}" />
                    </h:column>
                    
                    <h:column>
-                    <h:commandButton value ="Show!" action="#{marcusController.skickaChoklad(produkt)}"></h:commandButton>
+                    <h:commandButton value ="Show!" action="#{cartController.skickaChoklad(produkt)}"></h:commandButton>
                     </h:column>
                        
                     
@@ -59,29 +59,29 @@
                 </h:dataTable>
                
                
-               <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
+               <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{cartController.visaPopup}" >
                          <div class ="popup-panel">
                              <f:view>
                              <h:form>
                                  ID:  
-                                 <h:outputText value ="#{marcusController.markeradChoklad.chocolateId}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.chocolateId}"></h:outputText><br/>
                                  Name : 
-                                 <h:outputText value ="#{marcusController.markeradChoklad.name}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.name}"></h:outputText><br/>
                                  Price:  
-                                 <h:outputText value ="#{marcusController.markeradChoklad.price}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.price}"></h:outputText><br/>
                                  Description:  
-                                 <h:outputText value ="#{marcusController.markeradChoklad.description}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.description}"></h:outputText><br/>
                                  Brand : 
-                                 <h:outputText value ="#{marcusController.markeradChoklad.brand}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.brand}"></h:outputText><br/>
                                  Available : 
-                                 <h:outputText value ="#{marcusController.markeradChoklad.inStock}"></h:outputText><br/>
+                                 <h:outputText value ="#{cartController.markeradChoklad.inStock}"></h:outputText><br/>
                                  
-                                 <h:inputText value ="#{marcusController.antalAttKopa}" >
-                                 <f:validateLongRange minimum="0" maximum="#{marcusController.markeradChoklad.inStock}"/>
+                                 <h:inputText value ="#{cartController.antalAttKopa}" >
+                                 <f:validateLongRange minimum="0" maximum="#{cartController.markeradChoklad.inStock}"/>
                                  </h:inputText>
-                                 <h:commandButton value ="purchase!" action ="#{CartController.kop(marcusController.markeradChoklad)}"></h:commandButton>
+                                 <h:commandButton value ="purchase!" action ="#{cartController.kop(cartController.markeradChoklad)}"></h:commandButton>
                                  
-                                <h:commandButton value="Back" action="#{marcusController.stangChokladRuta()}" immediate="true"></h:commandButton>
+                                <h:commandButton value="Back" action="#{cartController.stangChokladRuta()}" immediate="true"></h:commandButton>
                              </h:form>
                                   </f:view>
                          </div>
@@ -92,8 +92,8 @@
        </f:view>
             </div>
         <div id ="ProductPageRightSide">
-            
-            
+
+
         </div>
 
     </h:body>

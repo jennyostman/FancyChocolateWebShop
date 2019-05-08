@@ -23,6 +23,10 @@ public class Chocolate implements Serializable {
     private String description;
     private String brand;
     private int inStock;
+    private int amount;
+    private String inStockMessage;
+    private boolean showPopUp;
+    private String pictureName;
     
     
     public Chocolate (){}
@@ -34,15 +38,51 @@ public class Chocolate implements Serializable {
        
     }
 
-    public Chocolate(String name, double price, String description, String brand, int inStock) {
+    public Chocolate(String name, double price, String description, String brand, int inStock, int amount, String inStockMessage, boolean showPopUp, String pictureName) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.brand = brand;
         this.inStock = inStock;
+        this.amount = amount;
+        this.inStockMessage = inStockMessage;
+        this.showPopUp = showPopUp;
+        this.pictureName = pictureName;
     }
 
     
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getInStockMessage() {
+        return inStockMessage;
+    }
+
+    public void setInStockMessage(String inStockMessage) {
+        this.inStockMessage = inStockMessage;
+    }
+
+    public boolean isShowPopUp() {
+        return showPopUp;
+    }
+
+    public void setShowPopUp(boolean showPopUp) {
+        this.showPopUp = showPopUp;
+    }
+
+    public String getPictureName() {
+        return pictureName;
+    }
+
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
     
     public String getDescription() {
         return description;
@@ -92,6 +132,8 @@ public class Chocolate implements Serializable {
         this.chocolateId = id;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -15,40 +15,41 @@
         <h2>Cart</h2>
         <f:view>
             <h:form>
-                <h:dataTable value="#{cartController.cartContent}" var="CartDbStandIn" cellpadding="10">
+                <h:dataTable value="#{cartController.cartContent}" var="Chocolate" cellpadding="10">
                     <h:column>
                         <f:facet name="header"></f:facet>
-                        <h:graphicImage name="#{CartDbStandIn.pictureName}" library="image" binding="#{cartController.picture}"></h:graphicImage>
+                        <h:graphicImage name="#{Chocolate.pictureName}" library="image" binding="#{cartController.picture}"></h:graphicImage>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Chocolate</f:facet>
-                        <h:outputText value="#{CartDbStandIn.chocolateName}"></h:outputText>
+                        <h:outputText value="#{Chocolate.name}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Price</f:facet>
-                        <h:outputText value="$#{CartDbStandIn.price}"></h:outputText>
+                        <h:outputText value="#{Chocolate.price}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
-                        <h:inputText value="#{CartDbStandIn.amount}" size="4">
+                        <h:inputText value="#{Chocolate.amount}" size="4">
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
-                        <h:outputText value="#{CartDbStandIn.inStockMessage}"></h:outputText>
+                        <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">In stock</f:facet>
-                        <h:outputText value="#{CartDbStandIn.inStock}"></h:outputText>
+                        <h:outputText value="#{Chocolate.inStock}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
-                        <h:commandButton action="#{cartController.removeProduct(CartDbStandIn)}" value="Remove"></h:commandButton>
+                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
                 <hr/>
                 <h4>Total price: </h4>
-                <h:outputText value="#{cartController.countTotalAmount()}"></h:outputText>
+                <h:outputText value="#{cartController.countTotalAmount(loginController.person)}"></h:outputText>
                 <h4>Premium customer price: </h4>
-                <h:commandButton action="#{cartController.buyProducts(cartController.kundvagnsLista,loginController.person)}" value="Köp"></h:commandButton>
+                <h:outputText value="#{cartController.countPremiumCustomerPrice(loginController.person)}"></h:outputText><br/>
+                <h:commandButton action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>

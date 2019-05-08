@@ -11,7 +11,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,7 +28,7 @@ public class marcusController implements Serializable {
     private ChocolateSessionBean chocolateSessionBean;
     
 
-    private ArrayList<ChokladProdukt> ProductList = new ArrayList();
+    // private ArrayList<ChokladProdukt> ProductList = new ArrayList();
     
     private ArrayList<Chocolate> ProductList2 = new ArrayList();
     
@@ -165,17 +164,18 @@ public class marcusController implements Serializable {
 
     public void setProductList2(ArrayList<Chocolate> ProductList2) {
         this.ProductList2 = ProductList2;
+        
     }
     
     
 
-    public ArrayList<ChokladProdukt> getProductList() {
-        return ProductList;
-    }
-
-    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
-        this.ProductList = ProductList;
-    }
+//    public ArrayList<ChokladProdukt> getProductList() {
+//        return ProductList;
+//    }
+//
+//    public void setProductList(ArrayList<ChokladProdukt> ProductList) {
+//        this.ProductList = ProductList;
+//    }
 
     public int getAntalAttKopa() {
         return antalAttKopa;
