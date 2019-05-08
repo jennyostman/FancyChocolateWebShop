@@ -38,26 +38,54 @@
                     </h:dataTable>
                 </h:form>
                 
-                
-                
+            <!--Popup-->
                 <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{adminController.showPopup}" >
                          <div class ="popup-panel">
                              <f:view>
                                 <h:form>
-                                    ID:  
+                                    <h:outputLabel value="ID: " style="font-weight: bold"></h:outputLabel>  
                                     <h:outputText value ="#{adminController.choosenCustomer.personId}"></h:outputText>
                                     <h:commandButton value="X" action="#{adminController.closePopup()}" style="float: right; background-color: red"></h:commandButton><br/>
-                                    Name : 
+                                    
+                                    <h:outputLabel value="Name: " style="font-weight: bold"></h:outputLabel>   
                                     <h:outputText value ="#{adminController.choosenCustomer.name}"></h:outputText><br/>
-                                    Address  
+                                    
+                                    <h:outputLabel value="Address: " style="font-weight: bold"></h:outputLabel>    
                                     <h:outputText value ="#{adminController.choosenCustomer.address}"></h:outputText><br/>
-                                    Premium  
-                                    <h:outputText value ="#{adminController.choosenCustomer.premium}"></h:outputText><br/>
-                                    Number of Orders: 
+                                    
+                                    <h:outputLabel value="Premium: " style="font-weight: bold"></h:outputLabel>    
+                                    <h:outputText value ="#{adminController.choosenCustomer.premiumString()}"></h:outputText><br/>
+                                    
+                                    <h:outputLabel value="Number of Orders: " style="font-weight: bold"></h:outputLabel>
                                     <h:outputText value ="#{adminController.choosenCustomer.numberofOrders}"></h:outputText><br/>
-                                    Total Sum: 
+                                    
+                                    <h:outputLabel value="Total Sum: " style="font-weight: bold"></h:outputLabel>
                                     <h:outputText value ="#{adminController.choosenCustomer.getTotalSum()}"></h:outputText><br/>
-                                </h:form>
+                                </h:form><br/>
+                                 
+                                <h:form>
+                                    <h:outputLabel value="Order History: " style="font-weight: bold"></h:outputLabel>  
+                                    <h:dataTable value="#{adminController.choosenCustomer.order}" var="Orders" cellpadding="10">
+                                       <h:column>
+                                            <h:outputLabel value="OrderID: " style="font-weight: bold"></h:outputLabel>
+                                            <h:outputText value="#{Orders.orderId}"></h:outputText><br/>
+                                            
+                                            <h:outputLabel value="Date: " style="font-weight: bold"></h:outputLabel>
+                                            <h:outputText value="#{Orders.date}"></h:outputText>
+                                           
+                                            <h:dataTable value="#{Orders.orderDetails}" var="OrderDetails" cellpadding="10"> 
+                                                <h:column>
+                                                    <f:facet name="header">Chocolate</f:facet>
+                                                    <h:outputText value="#{OrderDetails.chocolate.name}"></h:outputText>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Amount</f:facet>
+                                                    <h:outputText value="#{OrderDetails.amount}"></h:outputText>
+                                                </h:column>
+                                            </h:dataTable>
+                                       </h:column>
+                                   </h:dataTable>
+                               </h:form>
                             </f:view>
                          </div>
                      </h:panelGroup>

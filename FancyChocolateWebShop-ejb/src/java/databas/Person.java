@@ -41,6 +41,14 @@ public class Person implements Serializable {
         this.premium = premium;
     }
     
+    public String premiumString(){
+        if(premium){
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+    
     public int getNumberofOrders(){
         int size = order.size();
         return size;

@@ -57,11 +57,18 @@ public class ChocolateSessionBean {
             Orders or2 = new Orders(p2);
             Orders or3 = new Orders(p10);
             Orders or4 = new Orders(p8);
+            Orders or5 = new Orders(p8);
 
             OrderDetails od1 = new OrderDetails(3, c1, or1);
             OrderDetails od2 = new OrderDetails(3, c8, or2);
             OrderDetails od3 = new OrderDetails(3, c2, or3);
             OrderDetails od4 = new OrderDetails(1, c3, or4);
+            OrderDetails od5 = new OrderDetails(1, c3, or5);
+            OrderDetails od6 = new OrderDetails(2, c1, or5);
+            OrderDetails od7 = new OrderDetails(3, c4, or5);
+            OrderDetails od8 = new OrderDetails(3, c4, or4);
+            OrderDetails od9 = new OrderDetails(3, c1, or4);
+            OrderDetails od10 = new OrderDetails(3, c6, or4);
 
             try {
                 em.persist(c1);
@@ -90,11 +97,18 @@ public class ChocolateSessionBean {
                 em.persist(or2);
                 em.persist(or3);
                 em.persist(or4);
+                em.persist(or5);
 
                 em.persist(od1);
                 em.persist(od2);
                 em.persist(od3);
                 em.persist(od4);
+                em.persist(od5);
+                em.persist(od6);
+                em.persist(od7);
+                em.persist(od8);
+                em.persist(od9);
+                em.persist(od10);
 
             } catch (Exception e) {
                 e.printStackTrace();
