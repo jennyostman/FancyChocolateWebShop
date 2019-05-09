@@ -46,7 +46,7 @@
                 </h:dataTable>
                 <hr/>
                 <h4>Total price: </h4>
-                <h:outputText value="#{cartController.countTotalAmount(loginController.person)}"></h:outputText>
+                <h:outputText value="#{cartController.countTotalAmount()}"></h:outputText>
                 <h4>Premium customer price: </h4>
                 <h:outputText value="#{cartController.countPremiumCustomerPrice(loginController.person)}"></h:outputText><br/>
                 <h:commandButton action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>

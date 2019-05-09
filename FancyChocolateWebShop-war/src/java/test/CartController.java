@@ -40,11 +40,10 @@ public class CartController implements Serializable {
     private int antalAttKopa;
     // private ArrayList<Chocolate> kundvagnsLista;
     
-    
-    
+
+    // Avrunda så att totalpriset aldrig kan ha mer än två decimaler
     // Dölja rabatt-raden i Cart om personen inte är premium
     // Kvar: Hämta en riktig cartContent. 
-    // Kvar: Hämta riktiga inStock-värden.
     // Kvar: Se till att man inte kan beställa -3 varor. Och ev ge fina felmeddelanden för 0.2 eller a.
     // Snygga till lite med visningen av priset
     
@@ -106,7 +105,6 @@ public class CartController implements Serializable {
     
     
     public void skickaChoklad(Chocolate ck){
-        
         setMarkeradChoklad(ck);
         setVisaPopup(true);
     }
@@ -117,15 +115,13 @@ public class CartController implements Serializable {
         System.out.println("test03");
     }
     
-    
-    
-    // Behöver inte skötas av SessionBean. Pga innan cart sparats i db.
+
+    // Produkt/chokladobj tas bort ur kundvagnslistan
     public void removeProduct(Chocolate chocolateObj){
         cartContent.remove(chocolateObj);
-    }
+    }    
     
-    
-    public double countTotalAmount(Person person){
+    public double countTotalAmount(){
         double totAmount = 0;
         for (Chocolate c : cartContent){
             double oneProduct = c.getPrice() * c.getAmount();
@@ -136,7 +132,7 @@ public class CartController implements Serializable {
     
     // Om kunden inte är premiumkund blir priser med rabatt samma som det vanliga priset.
     public double countPremiumCustomerPrice(Person person){
-        double premiumPrice = countTotalAmount(person);
+        double premiumPrice = countTotalAmount();
         if (person.isPremium()){
             premiumPrice = premiumPrice * 0.9;
         }
@@ -146,14 +142,12 @@ public class CartController implements Serializable {
     
     public void buyProducts(Person person){
         // Kolla om produkterna finns i lager.
-        System.out.println(" PERSON " + person.toString());
         boolean allInStock = true;
-        // Varje chokladObj håller info om vad som finns i lager, men man måste göra en till koll
-        // när beställningen görs, så att det fortfarande stämmer.
         for (int i = 0; i < cartContent.size(); i++) {
             // Det uppdaterade inStock-värdet
-            // int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
-            int amountInStockFromDB = 10;   // Testvärde
+            System.out.println(" JENNY - kolla inStock ");
+            int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
+            // int amountInStockFromDB = 10;   // Testvärde
             // Uppdatera objektets inStock-värde
             cartContent.get(i).setInStock(amountInStockFromDB);
             
