@@ -81,7 +81,9 @@
                                  <h:inputText value ="#{cartController.antalAttKopa}" >
                                  <f:validateLongRange minimum="0" maximum="#{cartController.markeradChoklad.inStock}"/>
                                  </h:inputText>
-                                 <h:commandButton value ="purchase!" action ="#{cartController.kop(cartController.markeradChoklad,cartController.antalAttKopa)}"></h:commandButton>
+                                 <h:commandButton value ="purchase!" action ="#{cartController.stangChokladRuta()}">
+                                     <f:actionListener binding="#{cartController.kop(cartController.markeradChoklad,cartController.antalAttKopa)}"/>
+                                 </h:commandButton>
                                  
                                 <h:commandButton value="Back" action="#{cartController.stangChokladRuta()}" immediate="true"></h:commandButton>
                              </h:form>

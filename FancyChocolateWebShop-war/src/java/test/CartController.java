@@ -35,7 +35,7 @@ public class CartController implements Serializable {
     private String inStockMessage = "";
     
     private List<Chocolate> ProductList;
-    private  String sokTerm;
+    private String sokTerm;
     private boolean dontrefresh=false;
     private boolean visaPopup = false;
     private Chocolate markeradChoklad;
@@ -119,7 +119,6 @@ public class CartController implements Serializable {
     
     
     public void skickaChoklad(Chocolate ck){
-        
         setMarkeradChoklad(ck);
         setVisaPopup(true);
     }
@@ -130,28 +129,30 @@ public class CartController implements Serializable {
         //System.out.println("test03");
     }
     
-    
-    
-    // Behöver inte skötas av SessionBean. Pga innan cart sparats i db.
+
+    // Produkt/chokladobj tas bort ur kundvagnslistan
     public void removeProduct(Chocolate chocolateObj){
         cartContent.remove(chocolateObj);
-    }
+    }    
     
-    
-    public double countTotalAmount(Person person){
+    public double countTotalAmount(){
         double totAmount = 0;
         for (Chocolate c : cartContent){
             double oneProduct = c.getPrice() * c.getAmount();
             totAmount += oneProduct;
         }
+        double amountTemp = Math.round(totAmount * 100);
+        totAmount = amountTemp/100; 
         return totAmount;
     }
     
     // Om kunden inte är premiumkund blir priser med rabatt samma som det vanliga priset.
     public double countPremiumCustomerPrice(Person person){
-        double premiumPrice = countTotalAmount(person);
+        double premiumPrice = countTotalAmount();
         if (person.isPremium()){
             premiumPrice = premiumPrice * 0.9;
+            double amountTemp = Math.round(premiumPrice * 100);
+            premiumPrice = amountTemp/100; 
         }
         return premiumPrice;
     }
@@ -159,27 +160,18 @@ public class CartController implements Serializable {
     
     public String buyProducts(Person person){
         // Kolla om produkterna finns i lager.
-        //System.out.println(" PERSON " + person.toString());
         boolean allInStock = true;
-        // Varje chokladObj håller info om vad som finns i lager, men man måste göra en till koll
-        // när beställningen görs, så att det fortfarande stämmer.
         for (int i = 0; i < cartContent.size(); i++) {
-            // Det uppdaterade inStock-värdet
-            // int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
-            int amountInStockFromDB = 10;   // Testvärde
-            // Uppdatera objektets inStock-värde
+            int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
             cartContent.get(i).setInStock(amountInStockFromDB);
-            
             // Kolla om kunden beställt mer av en vara än vad som finns i db.
             // Lägg till meddelande till kunden på respektive objekt
             if (cartContent.get(i).getAmount() > amountInStockFromDB){
                 allInStock = false;
-                // Uppdatera InStockMessage på objektet
                 cartContent.get(i).setInStockMessage("Har för få i lager");
-                // cartContent.get(i).setInStockMessage("Vi har bara " + cartContent.get(i).getInStock() + " stycken " + cartContent.get(i).getChocolateName());
             }
             else if (cartContent.get(i).getAmount() <= amountInStockFromDB) {
-                // Här behövs inget meddelande
+                // Tömmer strängen
                 cartContent.get(i).setInStockMessage("");
             }              
         }        
@@ -227,7 +219,7 @@ public class CartController implements Serializable {
             return "tacksidan";
             
         }   
-        return "Cart";
+        return "";
     }
     
     public double BeraknaKundsBetalningar(Person person){

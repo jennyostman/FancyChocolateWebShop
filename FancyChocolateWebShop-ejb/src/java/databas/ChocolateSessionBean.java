@@ -179,8 +179,22 @@ public class ChocolateSessionBean {
         return null;
     }
 
-    public int amountOfChocolateInStock(Object Chocolate) {
-        return 10;
+    
+    public int amountOfChocolateInStock(Chocolate chocolate) {
+        int inStock = 0;
+        Chocolate c = new Chocolate();
+        try {
+            Query q = em.createQuery("select o from Chocolate o where o.name =:chocolateName");
+            q.setParameter("chocolateName", chocolate.getName());         
+//            Query q = em.createQuery("SELECT p FROM PersonReal p WHERE p.fname =:fname");
+//            q.setParameter("fname", fname);
+            c = (Chocolate) q.getSingleResult();
+            inStock = c.getInStock();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return inStock;
     }
 
     
@@ -211,6 +225,7 @@ public class ChocolateSessionBean {
         Query query = em.createQuery(temp);
         List<Person> list = query.getResultList();
         Person p2 = list.get(0);
+        
         //System.out.println("p2 skrivs ut:" + p2.getName() + " har id: " + p2.getPersonId());
         
 
@@ -297,7 +312,13 @@ public class ChocolateSessionBean {
                 totalsum+=o.getOrderDetails().get(x).getPrice();
             }
         }
-        //System.out.println("Person " + person.getPersonId() + " har kopt totalt for: " + totalsum);
+        
+        if(totalsum > 500000){
+            person.setPremium(true);
+            em.merge(person);
+        }
+        
+        System.out.println(totalsum);
         
 //        System.out.println(person.toString());
 //        double totalsum=0;
