@@ -47,7 +47,7 @@ public class ChocolateSessionBean {
             Person p5 = new Person("Jenny Svensson", "Jenny", "Jenny123", "Jennyvägen 1", true, false);
             Person p6 = new Person("Leo Messi", "Messi", "Leo123", "Leovägen 3", false, false);
             Person p7 = new Person("Gabriel Agrell", "Gabriel", "Gabriel123", "Gabrielvägen 3", false, false);
-            Person p8 = new Person("Elton John", "Elton", "Elton123", "Eltonvägen 3", false, false);
+            Person p8 = new Person("Elton John", "Elton", "Elton123", "Eltonvägen 3", false, true);
             Person p9 = new Person("Lady Gaga", "Lady", "Lady123", "Ladyvägen 1", false, true);
             Person p10 = new Person("Taylor Swift", "Taylor", "Taylor123", "Taylorvägen 1", false, false);
             Person p11 = new Person("Testperson testis", "t", "t", "Testvagen 1", false, false);
@@ -55,8 +55,12 @@ public class ChocolateSessionBean {
             Orders or1 = new Orders(p1);
             Orders or2 = new Orders(p2);
             Orders or3 = new Orders(p10);
-            Orders or4 = new Orders(p8);
-            Orders or5 = new Orders(p8);
+            Orders or4 = new Orders(p10);
+            Orders or5 = new Orders(p9);
+            Orders or6 = new Orders(p9);
+            Orders or7 = new Orders(p8);
+            Orders or8 = new Orders(p8);
+            Orders or9 = new Orders(p6);
 
             OrderDetails od1 = new OrderDetails(3, c1, or1);
             OrderDetails od2 = new OrderDetails(3, c8, or2);
@@ -68,6 +72,19 @@ public class ChocolateSessionBean {
             OrderDetails od8 = new OrderDetails(3, c4, or4);
             OrderDetails od9 = new OrderDetails(3, c1, or4);
             OrderDetails od10 = new OrderDetails(3, c6, or4);
+            OrderDetails od11 = new OrderDetails(5, c6, or6);
+            OrderDetails od12 = new OrderDetails(9, c1, or6);
+            OrderDetails od13 = new OrderDetails(15, c3, or6);
+            OrderDetails od14 = new OrderDetails(8, c3, or7);
+            OrderDetails od15 = new OrderDetails(6, c8, or7);
+            OrderDetails od16 = new OrderDetails(2, c6, or7);
+            OrderDetails od17 = new OrderDetails(8, c10, or7);
+            OrderDetails od18 = new OrderDetails(12, c3, or8);
+            OrderDetails od19 = new OrderDetails(10, c8, or8);
+            OrderDetails od20 = new OrderDetails(7, c6, or8);
+            OrderDetails od21 = new OrderDetails(8, c10, or8);
+            OrderDetails od22 = new OrderDetails(20, c3, or9);
+            OrderDetails od23 = new OrderDetails(2, c4, or9);
 
             try {
                 em.persist(c1);
@@ -98,6 +115,10 @@ public class ChocolateSessionBean {
                 em.persist(or3);
                 em.persist(or4);
                 em.persist(or5);
+                em.persist(or6);
+                em.persist(or7);
+                em.persist(or8);
+                em.persist(or9);
 
                 em.persist(od1);
                 em.persist(od2);
@@ -109,6 +130,19 @@ public class ChocolateSessionBean {
                 em.persist(od8);
                 em.persist(od9);
                 em.persist(od10);
+                em.persist(od11);
+                em.persist(od12);
+                em.persist(od13);
+                em.persist(od14);
+                em.persist(od15);
+                em.persist(od16);
+                em.persist(od17);
+                em.persist(od18);
+                em.persist(od19);
+                em.persist(od20);
+                em.persist(od21);
+                em.persist(od22);
+                em.persist(od23);
 
             } catch (Exception e) {
                 e.printStackTrace();
