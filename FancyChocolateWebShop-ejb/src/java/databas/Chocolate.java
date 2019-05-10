@@ -1,21 +1,14 @@
-
 package databas;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
 public class Chocolate implements Serializable {
 
-    // @Basic(fetch=LAZY)
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional=false)
+    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long chocolateId;
     private String name;
@@ -27,15 +20,14 @@ public class Chocolate implements Serializable {
     private String inStockMessage;
     private boolean showPopUp;
     private String pictureName;
-    
-    
-    public Chocolate (){}
-    
+
+    public Chocolate() {
+    }
+
     public Chocolate(String name, double price, int inStock) {
         this.name = name;
         this.price = price;
         this.inStock = inStock;
-       
     }
 
     public Chocolate(String name, double price, String description, String brand, int inStock, int amount, String inStockMessage, boolean showPopUp, String pictureName) {
@@ -49,8 +41,6 @@ public class Chocolate implements Serializable {
         this.showPopUp = showPopUp;
         this.pictureName = pictureName;
     }
-
-    
 
     public int getAmount() {
         return amount;
@@ -83,7 +73,7 @@ public class Chocolate implements Serializable {
     public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -107,7 +97,7 @@ public class Chocolate implements Serializable {
     public void setInStock(int inStock) {
         this.inStock = inStock;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -132,8 +122,6 @@ public class Chocolate implements Serializable {
         this.chocolateId = id;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -143,7 +131,6 @@ public class Chocolate implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Chocolate)) {
             return false;
         }
@@ -158,5 +145,4 @@ public class Chocolate implements Serializable {
     public String toString() {
         return "databas.Chocolate[ id=" + chocolateId + " ]";
     }
-
 }

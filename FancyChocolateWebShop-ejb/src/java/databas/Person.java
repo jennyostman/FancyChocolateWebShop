@@ -2,15 +2,9 @@
 package databas;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import static javax.persistence.CascadeType.PERSIST;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
+import javax.persistence.*;
 
 @Entity
 public class Person implements Serializable {
@@ -31,7 +25,6 @@ public class Person implements Serializable {
 
     public Person() {}
 
-   
     public Person(String name, String userName, String password, String address, boolean admin, boolean premium) {
         this.name = name;
         this.userName = userName;
@@ -120,9 +113,6 @@ public class Person implements Serializable {
         this.premium = premium;
     }
 
-    
-    
-    
     public Long getPersonId() {
         return personId;
     }
@@ -140,7 +130,6 @@ public class Person implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Person)) {
             return false;
         }
@@ -155,5 +144,4 @@ public class Person implements Serializable {
     public String toString() {
         return "databas.Person[ id=" + personId + " ]";
     }
-
 }

@@ -5,101 +5,76 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <link rel="stylesheet" type="text/css" href="style.css"></link>
-        <title>Facelet Title</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css"></link>
+        <title>Products</title>
     </h:head>
     <h:body>
         <ui:insert>
             <ui:include src="templates/header.xhtml"></ui:include>
         </ui:insert>
 
-        <div id ="ProductPageLeftSide">
         <f:view>
             <h:form>
                 <h:outputText value ="Search:"></h:outputText>
                 <h:inputText value="#{cartController.sokTerm}" onchange="#{cartController.setSokTerm(sokTerm)}" ></h:inputText>
-                <h:commandButton image ="SaveButton.png" action="#{cartController.sok()}" style="width:20px;height:20px" ></h:commandButton>
-                <h:commandButton value ="Reset!" action ="#{cartController.reset()}"></h:commandButton>
-                <!--<h:commandButton value ="testafolk" action="Page3"></h:commandButton> -->
-                
-                
+                <h:commandButton image ="resources/image/SaveButton.png" action="#{cartController.sok()}" style="width:20px; height:20px;" ></h:commandButton>
+                <h:commandButton value ="Reset!" action ="#{cartController.reset()}"></h:commandButton>  
             </h:form>
         </f:view>
-           
-       
-       
-       <f:view>
-           <h:form>
-                
-                <h:dataTable  value="#{cartController.productList}" 
-                             var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
-               
-                   <h:column>
-                            <f:facet name="header" >Picture</f:facet>
-                            <!-- binding=#{cartController.picture} -->
-                            <h:graphicImage name="#{produkt.pictureName}" library="image" ></h:graphicImage>
-                        </h:column>
 
-                        <h:column>
-                            <f:facet name="header" >Product Name:</f:facet>
-                            <h:outputText value="#{produkt.name}" />
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header" >Product Price:</f:facet>
-                            <h:outputText value="#{produkt.price}" />
-                   </h:column>
-                   
-                   <h:column>
-                    <h:commandButton value ="Show!" action="#{cartController.skickaChoklad(produkt)}"></h:commandButton>
+        <f:view>
+            <h:form>
+                <h:dataTable  value="#{cartController.productList}" var="produkt"  cellpadding="10"> 
+                    <h:column>
+                        <f:facet name="header" >Picture</f:facet>
+                        <h:graphicImage name="#{produkt.pictureName}" library="image" ></h:graphicImage>
                     </h:column>
-                       
-                    
-                    
 
+                    <h:column>
+                        <f:facet name="header" >Product Name:</f:facet>
+                        <h:outputText value="#{produkt.name}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header" >Product Price:</f:facet>
+                        <h:outputText value="#{produkt.price}" />
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton value ="Show!" action="#{cartController.skickaChoklad(produkt)}"></h:commandButton>
+                    </h:column>
                 </h:dataTable>
-               
-               
-               <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{cartController.visaPopup}" >
-                         <div class ="popup-panel">
-                             <f:view>
-                             <h:form>
-                                 Picture:  
-                                 <!-- <h:outputText value =#{cartController.markeradChoklad.chocolateId}></h:outputText><br/> -->
-                                 <h:graphicImage name="#{cartController.markeradChoklad.pictureName}" library="image" ></h:graphicImage><br/>
-                                 Name : 
-                                 <h:outputText value ="#{cartController.markeradChoklad.name}"></h:outputText><br/>
-                                 Price:  
-                                 <h:outputText value ="#{cartController.markeradChoklad.price}"></h:outputText><br/>
-                                 Description:  
-                                 <h:outputText value ="#{cartController.markeradChoklad.description}"></h:outputText><br/>
-                                 Brand : 
-                                 <h:outputText value ="#{cartController.markeradChoklad.brand}"></h:outputText><br/>
-                                 Available : 
-                                 <h:outputText value ="#{cartController.markeradChoklad.inStock}"></h:outputText><br/>
-                                 
-                                 <h:inputText value ="#{cartController.antalAttKopa}" >
-                                 <f:validateLongRange minimum="0" maximum="#{cartController.markeradChoklad.inStock}"/>
-                                 </h:inputText>
-                                 <h:commandButton value ="purchase!" action ="#{cartController.stangChokladRuta()}">
-                                     <f:actionListener binding="#{cartController.kop(cartController.markeradChoklad,cartController.antalAttKopa)}"/>
-                                 </h:commandButton>
-                                 
+
+                <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{cartController.visaPopup}" >
+                    <div class ="popup-panel">
+                        <f:view>
+                            <h:form>
+                                <h:graphicImage name="#{cartController.markeradChoklad.pictureName}" library="image" ></h:graphicImage><br/>
+                                Name : 
+                                <h:outputText value ="#{cartController.markeradChoklad.name}"></h:outputText><br/>
+                                Price:  
+                                <h:outputText value ="#{cartController.markeradChoklad.price}"></h:outputText><br/>
+                                Description:  
+                                <h:outputText value ="#{cartController.markeradChoklad.description}"></h:outputText><br/>
+                                Brand : 
+                                <h:outputText value ="#{cartController.markeradChoklad.brand}"></h:outputText><br/>
+                                Available : 
+                                <h:outputText value ="#{cartController.markeradChoklad.inStock}"></h:outputText><br/>
+
+                                <h:inputText value ="#{cartController.antalAttKopa}" >
+                                    <f:validateLongRange minimum="0" maximum="#{cartController.markeradChoklad.inStock}"/>
+                                </h:inputText>
+
+                                <h:commandButton value ="purchase!" action ="#{cartController.stangChokladRuta()}">
+                                    <f:actionListener binding="#{cartController.kop(cartController.markeradChoklad,cartController.antalAttKopa)}"/>
+                                </h:commandButton>
                                 <h:commandButton value="Back" action="#{cartController.stangChokladRuta()}" immediate="true"></h:commandButton>
-                             </h:form>
-                                  </f:view>
-                         </div>
-                     </h:panelGroup>
-
-               
-           </h:form>
-       </f:view>
-            </div>
-        <div id ="ProductPageRightSide">
-
-
-        </div>
-
+                            </h:form>
+                        </f:view>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 

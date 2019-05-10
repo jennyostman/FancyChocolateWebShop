@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Chocolate Cart</title>
-        <!--<link rel="stylesheet" type="text/css" href="resources/css/cart.css"></link>-->
 
     </h:head>
     <h:body>
@@ -35,8 +34,6 @@
                         <f:facet name="header">Amount</f:facet>
                         <h:inputText id="amountInput" value="#{Chocolate.amount}" size="4">
                             <f:validateLongRange minimum="0" maximum="#{Chocolate.inStock}"/>
-                            <!--<f:validator validatorId="amountInputValidator" />-->
-                            <!--<f:validateRegex pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />-->
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
                         <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
@@ -51,8 +48,6 @@
                         <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
-
-
             </h:form>
 
             <hr/>
@@ -66,7 +61,6 @@
                 </h:panelGrid>
                 <h:commandButton class="priceHeader" action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
             </h:form>
-
         </f:view>
     </h:body>
 </html>

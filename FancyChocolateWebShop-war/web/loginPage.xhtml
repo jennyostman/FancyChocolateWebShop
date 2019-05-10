@@ -4,43 +4,44 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <link rel="stylesheet" type="text/css" href="style.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/styleLogin.css"></link>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
-        <h:form id="loginForm">
-            <h:outputText></h:outputText>
-        Username<br/>
-        <h:inputText value="#{loginController.username}">
-           
-        </h:inputText><br/>
-        Password<br/>
-        <h:inputSecret value="#{loginController.password}">
-            
-        </h:inputSecret><br/>
-        
-        <h:outputText  style = "color:green" value="#{registerController.registered}"></h:outputText><br/>
-        
-        <h:commandButton id="button" value="Login" action="#{loginController.logIn()}"></h:commandButton>
-        <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton> <br/>
-        <h:message for="button" errorStyle="color: red" infoStyle="color: red"></h:message>
-        </h:form>
-        
+        <div align="center">
+            <h:form id="loginForm">
+                <h:outputText></h:outputText>
+                Username<br/>
+                <h:inputText value="#{loginController.username}">
+                </h:inputText><br/>
+
+                Password<br/>
+                <h:inputSecret value="#{loginController.password}">
+
+                </h:inputSecret><br/>
+
+                <h:outputText  style = "color:green" value="#{registerController.registered}"></h:outputText><br/>
+
+                <h:commandButton id="button" value="Login" action="#{loginController.logIn()}"></h:commandButton>
+                <h:commandButton value="Register" action="#{registerController.show()}" immediate="true"></h:commandButton> <br/>
+                <h:message for="button" errorStyle="color: red" infoStyle="color: red"></h:message>
+            </h:form>
+        </div>
+
         <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{registerController.showPopup}" >
-            <div class ="popup-panel">
+            <div class ="popup-panel" align="center">
                 <h:form id="registerForm">
                     <h:outputText style="color:red" value="#{registerController.inUse}" ></h:outputText><br/>
                     Username <br/>
                     <h:inputText id="username" value="#{registerController.username}"></h:inputText>
                     <h:message class="validator" for="password" errorStyle="color: red" infoStyle="color: red"></h:message>
                     <br/>
-                    
+
                     Password <br/>
                     <h:inputSecret id="password" value="#{registerController.password}"></h:inputSecret>
                     <h:message class="validator" for="password" errorStyle="color: red" infoStyle="color: red"></h:message>
                     <br/>
-                    
+
                     Name<br/>
                     <h:inputText id="name" value="#{registerController.name}"></h:inputText>
                     <h:message class="validator" for="name" errorStyle="color: red" infoStyle="color: red"></h:message>
@@ -49,15 +50,12 @@
                     <h:inputText id="adress" value="#{registerController.address}"></h:inputText>
                     <h:message class="validator" for="adress" errorStyle="color: red" infoStyle="color: red"></h:message>
                     <br/>
-                    
+
                     <h:commandButton value="Back" action="#{registerController.hide()}"></h:commandButton>
                     <h:commandButton value="Register" action="#{registerController.register()}" ></h:commandButton>
                 </h:form>
             </div>
         </h:panelGroup>
-        <h:form>
-            <br/><br/><h:commandButton action="Cart" value="Cart"></h:commandButton>
-        </h:form>
     </h:body>
 </html>
 
