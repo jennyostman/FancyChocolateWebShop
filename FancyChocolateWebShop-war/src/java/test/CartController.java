@@ -196,19 +196,20 @@ public class CartController implements Serializable {
             // Skapa en orderDetails
             List<OrderDetails> listan = new ArrayList();
             
-            
-            
             // Spara kostnad + vad kunden betalat. Behövs på adminsidan.
             for(Chocolate vara: cartContent){
                 listan.add(chocolateSessionBean.createOrderDetailsForOrder(ordern, vara));
                 chocolateSessionBean.removeChocolateFromDatabase(vara, vara.getAmount());
                 summa+=listan.get(listan.size()-1).getPrice();
             }
+            if(person.isPremium()){
+                summa*=0.9;
+                double amountTemp = Math.round(summa * 100);
+                summa = amountTemp/100;
+            }
+            summaHandlatFor+=summa;
             
-            summaHandlatFor = countPremiumCustomerPrice(person);
-            
-            ordern.setPrice(summaHandlatFor);
-            
+            ordern.setPrice(summa);
             ordern.setOrderDetails(listan);
             //System.out.println("Summa for denna kundvagns: " + summa);
             
