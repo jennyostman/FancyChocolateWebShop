@@ -12,7 +12,9 @@
             <ui:include src="templates/tack.xhtml"></ui:include>
             <h:outputText value="Du handlade for #{cartController.summaHandlatFor}"></h:outputText>
             <br/>
-            <h:outputText value="Du har total handlat for #{cartController.BeraknaKundsBetalningar(loginController.person)}"></h:outputText>
+            <!-- <h:outputText value="Du har total handlat for #{cartController.BeraknaKundsBetalningar(loginController.person)}"></h:outputText> -->
+            <br/>
+            <h:outputText value="Du har total handlat for #{cartController.totalSummaHandlatFor}"></h:outputText>
             
         </ui:insert>
     </h:body>

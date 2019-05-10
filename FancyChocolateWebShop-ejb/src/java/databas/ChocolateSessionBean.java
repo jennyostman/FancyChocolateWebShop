@@ -297,7 +297,7 @@ public class ChocolateSessionBean {
                 totalsum+=o.getOrderDetails().get(x).getPrice();
             }
         }
-        System.out.println(totalsum);
+        //System.out.println("Person " + person.getPersonId() + " har kopt totalt for: " + totalsum);
         
 //        System.out.println(person.toString());
 //        double totalsum=0;
