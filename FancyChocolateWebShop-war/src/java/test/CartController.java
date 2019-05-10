@@ -210,6 +210,7 @@ public class CartController implements Serializable {
             summaHandlatFor+=summa;
             
             ordern.setPrice(summa);
+            chocolateSessionBean.merge(ordern);
             ordern.setOrderDetails(listan);
             //System.out.println("Summa for denna kundvagns: " + summa);
             

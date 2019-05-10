@@ -23,6 +23,10 @@ public class ChocolateSessionBean {
     public void persist(Object object) {
         em.persist(object);
     }
+    
+    public void merge(Object object){
+        em.merge(object);
+    }
 
     public void fillDB() {
         Query q = em.createQuery("select o from Chocolate o");

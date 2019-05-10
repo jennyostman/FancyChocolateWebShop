@@ -41,9 +41,6 @@ public class Orders implements Serializable {
     }
     
     public double getPrice(){
-        for(OrderDetails od : orderDetails){
-            price += od.getPrice();
-        };
         return price;
     }
 
