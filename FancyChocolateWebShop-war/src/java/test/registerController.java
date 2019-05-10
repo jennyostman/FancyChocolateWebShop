@@ -13,16 +13,14 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class registerController implements Serializable {
 
-
-    
     private boolean showPopup;
-    private String name,username,password,address;
+    private String name, username, password, address;
     private FacesMessage facesMessage;
-    private String registered,inUse = "";
+    private String registered, inUse = "";
 
     @EJB
     private RegistrationBean registrationBean;
-    
+
     @EJB
     private ChocolateSessionBean chocolateSessionBean;
 
@@ -33,7 +31,6 @@ public class registerController implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-            
 
     public String getUsername() {
         return username;
@@ -50,7 +47,6 @@ public class registerController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
     public String getAddress() {
         return address;
@@ -75,25 +71,25 @@ public class registerController implements Serializable {
     public void setInUse() {
         this.inUse = "Username is already in use!";
     }
-            
-    
-    public boolean checkIfAdmin(){
+
+    public boolean checkIfAdmin() {
         chocolateSessionBean.fillDB();
         return true;
     }
 
-    
-    public boolean isShowPopup(){
+    public boolean isShowPopup() {
         return showPopup;
     }
-    
+
     public void setShowPopup(boolean showPopup) {
         this.showPopup = showPopup;
     }
-    public void show(){
+
+    public void show() {
         showPopup = true;
     }
-    public void hide(){
+
+    public void hide() {
         showPopup = false;
     }
 
@@ -104,7 +100,7 @@ public class registerController implements Serializable {
     public void setRegistraionBean(RegistrationBean registraionBean) {
         this.registrationBean = registraionBean;
     }
-    
+
     public FacesMessage getFacesmessage() {
         return facesMessage;
     }
@@ -112,47 +108,36 @@ public class registerController implements Serializable {
     public void setFacesMessage(FacesMessage facesmessage) {
         this.facesMessage = facesmessage;
     }
-    
-    
-     public boolean formFilled(){
-        
+
+    public boolean formFilled() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         FacesMessage facesMessage = new FacesMessage("This field is requiered");
         boolean isFilled = true;
-        
-        if(name.equals("")){
+
+        if (name.equals("")) {
             facesContext.addMessage("registerForm:name", facesMessage);
             isFilled = false;
         }
-        if(username.equals("")){
+        if (username.equals("")) {
             facesContext.addMessage("registerForm:username", facesMessage);
             isFilled = false;
         }
-        if(password.equals("")){
+        if (password.equals("")) {
             facesContext.addMessage("registerForm:password", facesMessage);
             isFilled = false;
         }
-        if(address.equals("")){
+        if (address.equals("")) {
             facesContext.addMessage("registerForm:adress", facesMessage);
             isFilled = false;
         }
-        
+
         return isFilled;
-   
     }
-    
-    
-    
-    
-    public String register(){
-        
-        
-        if(!formFilled()){
+
+    public String register() {
+        if (!formFilled()) {
             return "";
-        }
-        
-        
-        else if(!registrationBean.registerUser(name,username,password,address)){
+        } else if (!registrationBean.registerUser(name, username, password, address)) {
             setInUse();
             return "";
         }
@@ -160,9 +145,8 @@ public class registerController implements Serializable {
         hide();
         return "";
     }
-    
+
     public registerController() {
         showPopup = false;
     }
-    
 }

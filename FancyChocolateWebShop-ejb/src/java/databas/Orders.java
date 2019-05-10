@@ -7,13 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import static javax.persistence.CascadeType.PERSIST;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
+import javax.persistence.*;
 
 @Entity
 public class Orders implements Serializable {
@@ -31,7 +25,6 @@ public class Orders implements Serializable {
     @OneToMany(cascade=PERSIST, mappedBy="orders")
     private List<OrderDetails> orderDetails = new ArrayList();
     
-
     public Orders() {}
     
     public Orders(Person person) {
@@ -71,7 +64,6 @@ public class Orders implements Serializable {
         this.orderDetails = orderDetails;
     }
 
-    
     public Long getOrderId() {
         return orderId;
     }
@@ -89,7 +81,6 @@ public class Orders implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Orders)) {
             return false;
         }
@@ -104,5 +95,4 @@ public class Orders implements Serializable {
     public String toString() {
         return "databas.Order[ id=" + orderId + " ]";
     }
-
 }

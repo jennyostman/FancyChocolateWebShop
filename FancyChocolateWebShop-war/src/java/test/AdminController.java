@@ -6,12 +6,11 @@ import java.io.Serializable;
 import java.util.*;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 
 @Named(value = "adminController")
 @SessionScoped
-public class AdminController implements Serializable{
+public class AdminController implements Serializable {
 
     @EJB
     private ChocolateSessionBean chocolateSessionBean;
@@ -22,28 +21,28 @@ public class AdminController implements Serializable{
     private String address;
     private boolean admin;
     private boolean premium;
-    
+
     private double totalSum;
     private int totalOrders;
     private ArrayList<Person> customers = new ArrayList();
-    
+
     private Person choosenCustomer;
     private boolean showPopup = false;
-    
+
     public AdminController() {
     }
-    
-    public void sendCustumer(Person customer){
-        
+
+    public void sendCustumer(Person customer) {
+
         setChoosenCustomer(customer);
         setshowPopup(true);
     }
-    
-    public boolean showPopup(){
+
+    public boolean showPopup() {
         return true;
     }
-    
-    public boolean hidePopup(){
+
+    public boolean hidePopup() {
         return false;
     }
 
@@ -54,8 +53,8 @@ public class AdminController implements Serializable{
     public void setshowPopup(boolean showPopup) {
         this.showPopup = showPopup;
     }
-    
-    public void closePopup(){
+
+    public void closePopup() {
         setChoosenCustomer(null);
         setshowPopup(false);
     }
@@ -148,5 +147,4 @@ public class AdminController implements Serializable{
     public void setAddress(String address) {
         this.address = address;
     }
-    
 }

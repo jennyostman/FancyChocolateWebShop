@@ -16,11 +16,11 @@ public class loginController implements Serializable {
 
     @EJB
     private LoginBean login;
-   
+
     @EJB
     private ChocolateSessionBean chocolateSessionBean;
-    
-    private Person person  = null;
+
+    private Person person = null;
     private String username;
     private String password;
 
@@ -47,30 +47,25 @@ public class loginController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    public String logIn(){
+
+    public String logIn() {
         chocolateSessionBean.fillDB();
         person = login.verifyLogin(username, password);
-        
-        if(person !=null){
-            if(!person.isAdmin()){
-                return "Products"; 
-            }
-            else{
+
+        if (person != null) {
+            if (!person.isAdmin()) {
+                return "Products";
+            } else {
                 return "Admin";  //ändra till en admin sida
             }
-        }
-        else{
+        } else {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             FacesMessage facesMessage = new FacesMessage("Wrong username or password");
             facesContext.addMessage("loginForm:button", facesMessage);
             return "";
         }
     }
-    
-      
+
     public loginController() {
     }
-    
 }

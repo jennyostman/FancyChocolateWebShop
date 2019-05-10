@@ -3,15 +3,7 @@ package databas;
 
 import java.io.Serializable;
 import static javax.persistence.CascadeType.PERSIST;
-import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
+import javax.persistence.*;
 
 @Entity
 public class OrderDetails implements Serializable {
@@ -60,8 +52,6 @@ public class OrderDetails implements Serializable {
     public void setChocolate(Chocolate chocolate) {
         this.chocolate = chocolate;
     }
-
-    
     
     public Orders getOrders() {
         return orders;
@@ -71,8 +61,6 @@ public class OrderDetails implements Serializable {
         this.orders = orders;
     }
 
-    
-    
     public Long getId() {
         return id;
     }
@@ -90,7 +78,6 @@ public class OrderDetails implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof OrderDetails)) {
             return false;
         }
@@ -105,5 +92,4 @@ public class OrderDetails implements Serializable {
     public String toString() {
         return "databas.OrderDetails[ id=" + id + " ]";
     }
-
 }
