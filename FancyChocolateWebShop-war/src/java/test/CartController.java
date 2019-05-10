@@ -204,8 +204,10 @@ public class CartController implements Serializable {
                 chocolateSessionBean.removeChocolateFromDatabase(vara, vara.getAmount());
                 summa+=listan.get(listan.size()-1).getPrice();
             }
-            summaHandlatFor+=summa;
             
+            summaHandlatFor = countPremiumCustomerPrice(person);
+            
+            ordern.setPrice(summaHandlatFor);
             
             ordern.setOrderDetails(listan);
             //System.out.println("Summa for denna kundvagns: " + summa);

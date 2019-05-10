@@ -24,7 +24,8 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
     public Date date;
-    
+    private double price;
+
     @ManyToOne(cascade=PERSIST)
     public Person person;
     
@@ -40,12 +41,17 @@ public class Orders implements Serializable {
     }
     
     public double getPrice(){
-        double price = 0;
         for(OrderDetails od : orderDetails){
             price += od.getPrice();
         };
         return price;
     }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    
 
     public Date getDate() {
         return date;
