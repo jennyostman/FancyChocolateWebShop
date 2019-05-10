@@ -169,7 +169,7 @@ public class CartController implements Serializable {
             chocolateSessionBean.merge(ordern);
             ordern.setOrderDetails(listan);
 
-            //setTotalSummaHandlatFor(chocolateSessionBean.BeraknaKundsBetalningar(person));
+            setTotalSummaHandlatFor(chocolateSessionBean.BeraknaKundsBetalningar(person));
             setTotalSummaHandlatFor(getTotalSummaHandlatFor() + summa);
 
             return "tacksidan";
