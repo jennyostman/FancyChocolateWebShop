@@ -41,6 +41,7 @@ public class CartController implements Serializable {
     private Chocolate markeradChoklad;
     private int antalAttKopa;
     private double summaHandlatFor;
+    private double totalSummaHandlatFor;
     // private ArrayList<Chocolate> kundvagnsLista;
     
     
@@ -207,21 +208,18 @@ public class CartController implements Serializable {
             
             
             ordern.setOrderDetails(listan);
-            System.out.println("Summa for denna kundvagns: " + summa);
+            //System.out.println("Summa for denna kundvagns: " + summa);
             
-            System.out.println(chocolateSessionBean.BeraknaKundsBetalningar(person));
-            
+            setTotalSummaHandlatFor(chocolateSessionBean.BeraknaKundsBetalningar(person));
+            //System.out.println("getTotalSummaHandlatFor:" + getTotalSummaHandlatFor());
+            //System.out.println("nylagda summan ar "+ summa);
+            setTotalSummaHandlatFor(getTotalSummaHandlatFor()+summa);
+            //System.out.println("getTotalSummaHandlatFor : " + getTotalSummaHandlatFor());
             
             return "tacksidan";
             
-            //TODO
-            // Lägg till order id i kundens lista
-            
-            //Detta ska val inte goras?
-            //kundens lista ar for databasens skull, den ska man val inte rora manuellt?
-            //marcus
         }   
-        return "Cart";
+        return "";
     }
     
     public double BeraknaKundsBetalningar(Person person){
@@ -389,5 +387,16 @@ public class CartController implements Serializable {
     public void setSummaHandlatFor(double summaHandlatFor) {
         this.summaHandlatFor = summaHandlatFor;
     }
+
+    public double getTotalSummaHandlatFor() {
+       //totalSummaHandlatFor =  BeraknaKundsBetalningar(loginController);
+        return totalSummaHandlatFor;
+    }
+
+    public void setTotalSummaHandlatFor(double totalSummaHandlatFor) {
+        this.totalSummaHandlatFor = totalSummaHandlatFor;
+    }
+    
+    
     
 }
