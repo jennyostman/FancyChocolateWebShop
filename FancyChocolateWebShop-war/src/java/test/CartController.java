@@ -162,7 +162,7 @@ public class CartController implements Serializable {
 
             ordern.setOrderDetails(listan);
 
-            setTotalSummaHandlatFor(chocolateSessionBean.BeraknaKundsBetalningar(person));
+            //setTotalSummaHandlatFor(chocolateSessionBean.BeraknaKundsBetalningar(person));
             setTotalSummaHandlatFor(getTotalSummaHandlatFor() + summa);
 
             return "tacksidan";
