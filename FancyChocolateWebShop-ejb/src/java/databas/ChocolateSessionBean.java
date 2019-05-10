@@ -297,7 +297,14 @@ public class ChocolateSessionBean {
     }
 
     public void removeChocolateFromDatabase(Chocolate choc, int amount) {
-        //TODO
+        String temp = "SELECT c FROM Chocolate c WHERE c.chocolateId = " + choc.getChocolateId();
+        Query query = em.createQuery(temp);
+        
+        List<Chocolate> list = query.getResultList();
+        Chocolate chocolate = list.get(0);
+        
+        chocolate.setInStock(chocolate.getInStock() - amount);
+        em.merge(chocolate);
     }
 
 }
