@@ -348,7 +348,7 @@ public class ChocolateSessionBean {
 //                totalsum+=od.getPrice();
 //            }
 //        }
-//        System.out.println(totalsum);
+        System.out.println("totalsum = " + totalsum);
         return totalsum;
         
     }
