@@ -80,7 +80,7 @@ public class ChocolateSessionBean {
                 em.persist(c8);
                 em.persist(c9);
                 em.persist(c10);
-
+                
                 em.persist(p1);
                 em.persist(p2);
                 em.persist(p3);
@@ -116,7 +116,7 @@ public class ChocolateSessionBean {
         }
     }
 
-    //OBS OBS OBS NEDAN AR FEL DU HAR EJ GJORT HOGERKLICKA OCH LAGG TILL RATT METOD
+    
     public ArrayList getChocolateObjects() {
         try {
             System.out.println("getChocolateObjects() tillkallas har");
@@ -214,5 +214,161 @@ public class ChocolateSessionBean {
         }
         return customers;
     }    
+
+    public Orders createOrderForPerson(Person person) {
+       
+        long pid = person.getPersonId();
+        //System.out.println("personens id ar " + pid);
+        String temp = "SELECT o FROM Person o WHERE o.personId = " + pid;
+        //System.out.println(temp);
+        
+        Query query = em.createQuery(temp);
+        List<Person> list = query.getResultList();
+        Person p2 = list.get(0);
+        
+        //System.out.println("p2 skrivs ut:" + p2.getName() + " har id: " + p2.getPersonId());
+        
+
+        Orders order = new Orders(p2);
+//        System.out.println("nya orders info: " + order.toString());
+//        System.out.println(order.getPerson());
+//        System.out.println("Personens info=" + person.toString());
+//        System.out.println("id = " + order.getOrderId());
+        try{
+            Query q = em.createQuery("select o from Orders o");
+            int size = q.getResultList().size();
+            System.out.println("Du har skapat en order for personen " + person.getName());
+            System.out.println("antal Orders: " + size);
+            em.persist(order);
+            
+             size = q.getResultList().size();
+            System.out.println("antal Orders after: " + size);
+                System.out.println("Nu skickar createOrderForPerson tillbaka " + order.getOrderId());
+                return order;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("obs obs createOrderForPerson failade");
+        }
+        return null;
+    }
+
+
+
+    public OrderDetails createOrderDetailsForOrder(Orders order, Chocolate chocolate) {
+        System.out.println("test3");
+         boolean success = false;
+        
+        long ood = order.getOrderId();
+        String temp = "SELECT o FROM Orders o WHERE o.orderId = " + ood;
+        Query query = em.createQuery(temp);
+        List<Orders> list = query.getResultList();
+        Orders realorder = list.get(0);
+        
+        long cod = chocolate.getChocolateId();
+        temp = "SELECT o FROM Chocolate o WHERE o.chocolateId = " + cod;
+        query = em.createQuery(temp);
+        List<Chocolate> list2 = query.getResultList();
+        Chocolate realchocolate = list2.get(0);
+        
+        OrderDetails orderdetail = new OrderDetails(chocolate.getAmount(), realchocolate, realorder);
+        
+        try{
+            Query q = em.createQuery("select o from OrderDetails o");
+            int size = q.getResultList().size();
+            System.out.println("Du har skapat en orderdetail for ordern " + order);
+            System.out.println("antal orderdetails: " + size);
+            em.persist(orderdetail);
+            
+             size = q.getResultList().size();
+            System.out.println("antal orderdetails after: " + size);
+                System.out.println("Nu skickar createOrderDetailForOrder tillbaka " + orderdetail.getId());
+                return orderdetail;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("obs obs createOrderDetailForOrder failade");
+        }
+        
+        return null;
+    }
+
+    public double beraknaEnOrdersKostnad(Orders order){
+        double totalsum=0;
+        for(OrderDetails od: order.getOrderDetails()){
+            totalsum+=od.getPrice();
+        }
+        return totalsum;
+    }
+    
+    public double BeraknaKundsBetalningar(Person person) {
+        
+        double totalsum=0;
+        List<Orders> ordrar = person.getOrder();
+        List<OrderDetails> allaOD = new ArrayList();
+        for(Orders o: ordrar){
+            for(int x=0; x<o.getOrderDetails().size(); x++){
+                //allaOD.add(o.getOrderDetails().get(x));
+                totalsum+=o.getOrderDetails().get(x).getPrice();
+            }
+        }
+        
+        if(totalsum > 500000){
+            person.setPremium(true);
+            em.merge(person);
+        }
+        
+        System.out.println(totalsum);
+        
+//        System.out.println(person.toString());
+//        double totalsum=0;
+//        System.out.println("du har natt  BeraknaKundsBetalningar ");
+//        //List<Orders> ordrar = new ArrayList();
+//        
+//        System.out.println("test1");
+//        long pod = person.getPersonId();
+//        String temp = "SELECT o FROM Orders o WHERE o.orderId = " + pod;
+//        Query query = em.createQuery(temp);
+//        List<Orders> ordrar = query.getResultList();
+//        
+//        List<OrderDetails> allaOD = new ArrayList();
+//        System.out.println("test2");
+//        
+
+
+//        
+//        for(Orders order: ordrar){
+//            long ood = order.getOrderId();
+//            temp = "SELECT o FROM OrderDetails o WHERE o.id = " + ood;
+//            query = em.createQuery(temp);
+//            List<OrderDetails> orderdetails = query.getResultList();
+//            System.out.println("test3");
+//            for(OrderDetails od: orderdetails){
+//                System.out.println("test4");
+//                totalsum+=od.getPrice();
+//            }
+//        }
+//        System.out.println(totalsum);
+        return totalsum;
+        
+    }
+    
+    
+    public void removeChocolateFromDatabase(Chocolate choc, int amount){
+        //TODO
+    }
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
 
 }

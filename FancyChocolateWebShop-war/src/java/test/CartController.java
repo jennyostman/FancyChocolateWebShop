@@ -3,6 +3,8 @@ package test;
 
 import databas.Chocolate;
 import databas.ChocolateSessionBean;
+import databas.OrderDetails;
+import databas.Orders;
 import databas.Person;
 import javax.inject.Named;
 
@@ -38,8 +40,14 @@ public class CartController implements Serializable {
     private boolean visaPopup = false;
     private Chocolate markeradChoklad;
     private int antalAttKopa;
-
-
+    private double summaHandlatFor;
+    // private ArrayList<Chocolate> kundvagnsLista;
+    
+    
+    
+    // Dölja rabatt-raden i Cart om personen inte är premium
+    // Kvar: Hämta en riktig cartContent. 
+    // Kvar: Hämta riktiga inStock-värden.
     // Kvar: Se till att man inte kan beställa -3 varor. Och ev ge fina felmeddelanden för 0.2 eller a.
     // Snygga till lite med visningen av priset
     
@@ -50,12 +58,12 @@ public class CartController implements Serializable {
     
     
     public void sok(){
-        System.out.println("soktermen ar " + sokTerm);
+       // System.out.println("soktermen ar " + sokTerm);
         ProductList = chocolateSessionBean.getSpecificChocolate(sokTerm);
     }
     
     public void reset(){
-        System.out.println("OBS OBS REFRESH HIT!");
+        //System.out.println("OBS OBS REFRESH HIT!");
         dontrefresh=false;
     }
     
@@ -76,11 +84,8 @@ public class CartController implements Serializable {
        
       //  System.out.println(mes);
         if(cartContent==null || cartContent.size()==0){
-            
             cartContent = new ArrayList();
-            
         }
-        
         //anledningen bakom kollen nedan ar for att:
         //ifall Listan redan innehaller en viss sorts choklad
         //sa ska man inte lagga till den sortens choklad till listan
@@ -120,7 +125,7 @@ public class CartController implements Serializable {
     public void stangChokladRuta(){
         setMarkeradChoklad(null);
         setVisaPopup(false);
-        System.out.println("test03");
+        //System.out.println("test03");
     }
     
 
@@ -152,7 +157,7 @@ public class CartController implements Serializable {
     }
     
     
-    public void buyProducts(Person person){
+    public String buyProducts(Person person){
         // Kolla om produkterna finns i lager.
         boolean allInStock = true;
         for (int i = 0; i < cartContent.size(); i++) {
@@ -173,14 +178,54 @@ public class CartController implements Serializable {
         // Bara om allt som beställts finns i lager körs nedanstående
         if (allInStock){
             setInStockMessage("Allt fanns i db");
-            // Skapa en orderDetails
-            // Spara kostnad + vad kunden betalat. Behövs på adminsidan.
-        
+            
+            
+            
+            
+            //here is marcus stuff
+            
+            
+            System.out.println("MarcusTest Kop-funktionen reached");
             // Skapa en orderist
+            Orders ordern = chocolateSessionBean.createOrderForPerson(person);
+            
+            
         
+            double summa=0;
+            // Skapa en orderDetails
+            List<OrderDetails> listan = new ArrayList();
+            
+            
+            
+            // Spara kostnad + vad kunden betalat. Behövs på adminsidan.
+            for(Chocolate vara: cartContent){
+                listan.add(chocolateSessionBean.createOrderDetailsForOrder(ordern, vara));
+                chocolateSessionBean.removeChocolateFromDatabase(vara, vara.getAmount());
+                summa+=listan.get(listan.size()-1).getPrice();
+            }
+            summaHandlatFor+=summa;
+            
+            
+            ordern.setOrderDetails(listan);
+            System.out.println("Summa for denna kundvagns: " + summa);
+            
+            System.out.println(chocolateSessionBean.BeraknaKundsBetalningar(person));
+            
+            
+            return "tacksidan";
+            
+            //TODO
             // Lägg till order id i kundens lista
             
+            //Detta ska val inte goras?
+            //kundens lista ar for databasens skull, den ska man val inte rora manuellt?
+            //marcus
         }   
+        return "Cart";
+    }
+    
+    public double BeraknaKundsBetalningar(Person person){
+        return chocolateSessionBean.BeraknaKundsBetalningar(person);
     }
     
 
@@ -229,7 +274,7 @@ public class CartController implements Serializable {
 
     public void setVisaPopup(boolean visaPopup) {
         
-        System.out.println("visapopup = " + visaPopup);
+      //  System.out.println("visapopup = " + visaPopup);
         this.visaPopup = visaPopup;
     }
 
@@ -336,4 +381,13 @@ public class CartController implements Serializable {
     public void setCartContent(List<Chocolate> cartContent) {
         this.cartContent = cartContent;
     }
+
+    public double getSummaHandlatFor() {
+        return summaHandlatFor;
+    }
+
+    public void setSummaHandlatFor(double summaHandlatFor) {
+        this.summaHandlatFor = summaHandlatFor;
+    }
+    
 }

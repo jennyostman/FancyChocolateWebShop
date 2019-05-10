@@ -10,6 +10,10 @@
         <ui:insert>
             <ui:include src="templates/hederNoButtons.xhtml"></ui:include>
             <ui:include src="templates/tack.xhtml"></ui:include>
+            <h:outputText value="Du handlade for #{cartController.summaHandlatFor}"></h:outputText>
+            <br/>
+            <h:outputText value="Du har total handlat for #{cartController.BeraknaKundsBetalningar(loginController.person)}"></h:outputText>
+            
         </ui:insert>
     </h:body>
 </html>
