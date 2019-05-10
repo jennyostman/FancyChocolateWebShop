@@ -8,7 +8,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:view>
             <h:form>
                 <h:outputText>Typ namn</h:outputText>
@@ -17,50 +17,42 @@
                 <h:outputText>och jobbet</h:outputText>
                 <h:inputText value = "andra rutan"></h:inputText>
                 <h:commandButton value="En knapp" action="#{marcusController.setVisaPopup(true)}"></h:commandButton>
-            
-                     </h:form>
+
+            </h:form>
         </f:view>
-        
-         <f:view>
+
+        <f:view>
             <h:form>
                 <h:outputText value ="Search:"></h:outputText>
                 <h:inputText value="#{marcusController.sokTerm}" onchange="#{marcusController.setSokTerm(sokTerm)}" ></h:inputText>
                 <h:button image ="SaveButton.png" onclick="#{marcusController.sok()}" style="width:25px;height:25px" ></h:button>
                 <h:button value ="Reset!" onclick ="#{marcusController.reset()}"></h:button>
-                
-                </h:form>
+
+            </h:form>
         </f:view>
-                
-        
-       
-            <h:dataTable  value="#{marcusController.productList2}" 
-                             var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
-                
-                <h:column>
-                            <f:facet name="header" >Product Name:</f:facet>
-                            <h:outputText value="#{produkt.name}" />
-                   </h:column>
 
+        <h:dataTable  value="#{marcusController.productList2}" 
+                      var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
 
-                
-            </h:dataTable>
-                        <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
-                         <div class ="popup-panel">
-                             <f:view>
-                                 <h:form>
-                                     hello
-                                 <br/>
-                                 this is a popuppanel
-                                 apparently
-                                 <h:commandButton value="Back" action="#{marcusController.setVisaPopup(false)}"></h:commandButton>
-                                 </h:form>
-                             </f:view>
+            <h:column>
+                <f:facet name="header" >Product Name:</f:facet>
+                <h:outputText value="#{produkt.name}" />
+            </h:column>
 
-                                 
-                                 
-                         </div>
-                </h:panelGroup>
-        
+        </h:dataTable>
+        <h:panelGroup layout="block" styleClass ="popup-panel-overlay" rendered="#{marcusController.visaPopup}" >
+            <div class ="popup-panel">
+                <f:view>
+                    <h:form>
+                        hello
+                        <br/>
+                        this is a popuppanel
+                        apparently
+                        <h:commandButton value="Back" action="#{marcusController.setVisaPopup(false)}"></h:commandButton>
+                    </h:form>
+                </f:view>  
+            </div>
+        </h:panelGroup>
     </h:body>
 </html>
 

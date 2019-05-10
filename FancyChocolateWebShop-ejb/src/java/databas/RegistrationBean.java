@@ -2,13 +2,7 @@ package databas;
 
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
-import javax.faces.application.FacesMessage;
-import javax.faces.validator.ValidatorException;
-import javax.persistence.EntityManager;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
+import javax.persistence.*;
 
 @Stateless
 @LocalBean
