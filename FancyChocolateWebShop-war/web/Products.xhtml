@@ -35,8 +35,9 @@
                              var="produkt" bgcolor="lightgray" border="7" bodyrows="5"> 
                
                    <h:column>
-                            <f:facet name="header" >ProductID</f:facet>
-                            <h:outputText id = "productID" value="#{produkt.chocolateId}" />
+                            <f:facet name="header" >Picture</f:facet>
+                            <!-- binding=#{cartController.picture} -->
+                            <h:graphicImage name="#{produkt.pictureName}" library="image" ></h:graphicImage>
                         </h:column>
 
                         <h:column>
@@ -63,8 +64,9 @@
                          <div class ="popup-panel">
                              <f:view>
                              <h:form>
-                                 ID:  
-                                 <h:outputText value ="#{cartController.markeradChoklad.chocolateId}"></h:outputText><br/>
+                                 Picture:  
+                                 <!-- <h:outputText value =#{cartController.markeradChoklad.chocolateId}></h:outputText><br/> -->
+                                 <h:graphicImage name="#{cartController.markeradChoklad.pictureName}" library="image" ></h:graphicImage><br/>
                                  Name : 
                                  <h:outputText value ="#{cartController.markeradChoklad.name}"></h:outputText><br/>
                                  Price:  
@@ -79,7 +81,7 @@
                                  <h:inputText value ="#{cartController.antalAttKopa}" >
                                  <f:validateLongRange minimum="0" maximum="#{cartController.markeradChoklad.inStock}"/>
                                  </h:inputText>
-                                 <h:commandButton value ="purchase!" action ="#{cartController.kop(cartController.markeradChoklad)}"></h:commandButton>
+                                 <h:commandButton value ="purchase!" action ="#{cartController.kop(cartController.markeradChoklad,cartController.antalAttKopa)}"></h:commandButton>
                                  
                                 <h:commandButton value="Back" action="#{cartController.stangChokladRuta()}" immediate="true"></h:commandButton>
                              </h:form>

@@ -6,12 +6,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Chocolate Cart</title>
+        <!--<link rel="stylesheet" type="text/css" href="resources/css/cart.css"></link>-->
+
     </h:head>
     <h:body>
-         <ui:insert>
+        <h:outputStylesheet library="css" name="cart.css"/>
+        <ui:insert>
             <ui:include src="templates/header.xhtml"></ui:include>
         </ui:insert>
-        
+
         <h2>Cart</h2>
         <f:view>
             <h:form>
@@ -26,14 +29,18 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Price</f:facet>
-                        <h:outputText value="#{Chocolate.price}"></h:outputText>
+                        <h:outputText value="#{Chocolate.price}  kr"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
-                        <h:inputText value="#{Chocolate.amount}" size="4">
+                        <h:inputText id="amountInput" value="#{Chocolate.amount}" size="4">
+                            <f:validateLongRange minimum="0" maximum="#{Chocolate.inStock}"/>
+                            <!--<f:validator validatorId="amountInputValidator" />-->
+                            <!--<f:validateRegex pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />-->
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
                         <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
+                        <h:message for = "amountInput" style = "color:red" />
                     </h:column>
                     <h:column>
                         <f:facet name="header">In stock</f:facet>
@@ -44,13 +51,22 @@
                         <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
-                <hr/>
-                <h4>Total price: </h4>
-                <h:outputText value="#{cartController.countTotalAmount()}"></h:outputText>
-                <h4>Premium customer price: </h4>
-                <h:outputText value="#{cartController.countPremiumCustomerPrice(loginController.person)}"></h:outputText><br/>
-                <h:commandButton action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
+
+
             </h:form>
+
+            <hr/>
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel class="priceHeader" value="Total price: "></h:outputLabel>
+                    <h:outputText value="#{cartController.countTotalAmount()} kronor"></h:outputText>
+                    <h:outputLabel class="priceHeader" rendered="#{loginController.person.premium}" value="Premium price: "></h:outputLabel>
+                    <h:outputText rendered="#{loginController.person.premium}" value="#{cartController.countPremiumCustomerPrice(loginController.person)} kronor"></h:outputText>
+                </h:panelGrid>
+                <h:commandButton class="priceHeader" action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
+            </h:form>
+
         </f:view>
     </h:body>
 </html>

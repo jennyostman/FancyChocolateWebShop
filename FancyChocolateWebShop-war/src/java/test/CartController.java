@@ -27,23 +27,19 @@ public class CartController implements Serializable {
     private String chocolateName, pictureName;
     private float price;
     private int amount;
-    private List<Chocolate> cartContent;
+    private List<Chocolate> cartContent = new ArrayList();
     private boolean deleted = false;
     private int inStock;
     private String inStockMessage = "";
     
     private List<Chocolate> ProductList;
-    private  String sokTerm;
+    private String sokTerm;
     private boolean dontrefresh=false;
     private boolean visaPopup = false;
     private Chocolate markeradChoklad;
     private int antalAttKopa;
-    // private ArrayList<Chocolate> kundvagnsLista;
-    
 
-    // Avrunda så att totalpriset aldrig kan ha mer än två decimaler
-    // Dölja rabatt-raden i Cart om personen inte är premium
-    // Kvar: Hämta en riktig cartContent. 
+
     // Kvar: Se till att man inte kan beställa -3 varor. Och ev ge fina felmeddelanden för 0.2 eller a.
     // Snygga till lite med visningen av priset
     
@@ -70,37 +66,49 @@ public class CartController implements Serializable {
     
     
     // Metod som lägger till valda choklad-produkter i kundvagnslistan
-    public void kop(Chocolate c){
-        //obs obs, denna metod ska ocksa tillkallas med ett antal
-        //antalet av chokladen man koper
-        //dop den variabeln till "mangd"
-        //sa funkar det bortkommenterade nedan
+    public void kop(Chocolate c, int mangd){
+       // System.out.println("mangd att kopa: " + mangd);
+       
           String mes = "Du har köpt " + antalAttKopa + " antal av chockladen " + markeradChoklad.getName() + "!";
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,
                 mes, null);
         FacesContext.getCurrentInstance().addMessage("guessForm:gText", fm);
        
-        System.out.println(mes);
-        antalAttKopa=0;
+      //  System.out.println(mes);
         if(cartContent==null || cartContent.size()==0){
+            
             cartContent = new ArrayList();
+            
         }
-//        boolean finnsredan=false;
-//        for(Chocolate cho: cartContent){
-//            if(cho.getChocolateId()==c.getChocolateId()){
-//                finnsredan=true;
-//                c.amount+=mangd;
-//            }
-//        }
-//        if(!finnsredan)
+        
+        //anledningen bakom kollen nedan ar for att:
+        //ifall Listan redan innehaller en viss sorts choklad
+        //sa ska man inte lagga till den sortens choklad till listan
+        //utan bara oka antalet
+        //daremot om man lagger till en ny sorts choklad
+        //sa ska ett NYTT objekt laggas in i listan
+        boolean finnsredan=false;
+        for(Chocolate cho: cartContent){
+            if(cho.getChocolateId()==c.getChocolateId()){
+             //   System.out.println("forst finns det " + c.getAmount() + "i chocolate amount");
+                finnsredan=true;
+                c.setAmount(c.getAmount()+mangd);
+                break;
+            //    System.out.println("sedan finns det " + c.getAmount() + "i chocolate amount");
+            }
+        }
+        if(!finnsredan){
+          //  System.out.println("ny choklad!");
+          //  System.out.println("forst finns det " + c.getAmount() + "i chocolate amount");
+        c.setAmount(mangd);
+        //System.out.println("sedan finns det " + c.getAmount() + "i chocolate amount");
         cartContent.add(c);
+        }
         
-        System.out.println(cartContent);
+        //System.out.println(cartContent);
         
-//        String messageText = mes;
-//              throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
-//                  messageText, messageText));
-             
+        //raden nedan aterstaller kop-rutan
+             antalAttKopa=0;
     }
     
     
@@ -127,6 +135,8 @@ public class CartController implements Serializable {
             double oneProduct = c.getPrice() * c.getAmount();
             totAmount += oneProduct;
         }
+        double amountTemp = Math.round(totAmount * 100);
+        totAmount = amountTemp/100; 
         return totAmount;
     }
     
@@ -135,6 +145,8 @@ public class CartController implements Serializable {
         double premiumPrice = countTotalAmount();
         if (person.isPremium()){
             premiumPrice = premiumPrice * 0.9;
+            double amountTemp = Math.round(premiumPrice * 100);
+            premiumPrice = amountTemp/100; 
         }
         return premiumPrice;
     }
@@ -144,23 +156,16 @@ public class CartController implements Serializable {
         // Kolla om produkterna finns i lager.
         boolean allInStock = true;
         for (int i = 0; i < cartContent.size(); i++) {
-            // Det uppdaterade inStock-värdet
-            System.out.println(" JENNY - kolla inStock ");
             int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
-            // int amountInStockFromDB = 10;   // Testvärde
-            // Uppdatera objektets inStock-värde
             cartContent.get(i).setInStock(amountInStockFromDB);
-            
             // Kolla om kunden beställt mer av en vara än vad som finns i db.
             // Lägg till meddelande till kunden på respektive objekt
             if (cartContent.get(i).getAmount() > amountInStockFromDB){
                 allInStock = false;
-                // Uppdatera InStockMessage på objektet
                 cartContent.get(i).setInStockMessage("Har för få i lager");
-                // cartContent.get(i).setInStockMessage("Vi har bara " + cartContent.get(i).getInStock() + " stycken " + cartContent.get(i).getChocolateName());
             }
             else if (cartContent.get(i).getAmount() <= amountInStockFromDB) {
-                // Här behövs inget meddelande
+                // Tömmer strängen
                 cartContent.get(i).setInStockMessage("");
             }              
         }        
