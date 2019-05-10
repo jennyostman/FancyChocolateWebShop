@@ -11,7 +11,7 @@
     min-height: 100%;
 }
 .popup-panel{
-    margin: 100px;
+    margin: 100px 500px;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
