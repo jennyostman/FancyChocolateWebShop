@@ -2,19 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+                <link rel="stylesheet" type="text/css" href="templates/tacksidan.css"></link>
+
     </h:head>
     <h:body>
         <ui:insert>
             <ui:include src="templates/hederNoButtons.xhtml"></ui:include>
-            <ui:include src="templates/tack.xhtml"></ui:include>
-            <h:outputText value="Du handlade for #{cartController.summaHandlatFor}"></h:outputText>
-            <br/>
-            <h:outputText value="Du har total handlat for #{cartController.BeraknaKundsBetalningar(loginController.person)}"></h:outputText>
-            
         </ui:insert>
+            <h:outputStylesheet name="tacksidan.css" library="css"></h:outputStylesheet>
+            <f:view>
+                <h:form id="tack">
+                    <div id="tackbox">
+                        <h3 class="h3text">Tack för köpet</h3>
+                        <h3 class="h3text">och välkommen åter!</h3>
+                        <div align="center">
+                        <h:outputText value="Du handlade for #{cartController.summaHandlatFor}"/>
+                            <br/>
+                            <h:outputText value="Du har total handlat for #{cartController.BeraknaKundsBetalningar(loginController.person)}"/>                        
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
     </h:body>
 </html>
 
