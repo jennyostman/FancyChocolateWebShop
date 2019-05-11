@@ -34,13 +34,9 @@
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
                         <h:inputText id="amountInput" value="#{Chocolate.amount}" size="4">
-                            <f:validateLongRange minimum="0" maximum="#{Chocolate.inStock}"/>
-                            <!--<f:validator validatorId="amountInputValidator" />-->
-                            <!--<f:validateRegex pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$" />-->
-                            <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
+                            <f:ajax event="valueChange" execute="@form" render="@all"/>
                         </h:inputText>
                         <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
-                        <h:message for = "amountInput" style = "color:red" />
                     </h:column>
                     <h:column>
                         <f:facet name="header">In stock</f:facet>
@@ -48,23 +44,27 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
-                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
+                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove" immediate="true"></h:commandButton>
                     </h:column>
                 </h:dataTable>
-
-
             </h:form>
 
             <hr/>
 
             <h:form>
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel class="priceHeader" value="Total price: "></h:outputLabel>
-                    <h:outputText value="#{cartController.countTotalAmount()} kronor"></h:outputText>
-                    <h:outputLabel class="priceHeader" rendered="#{loginController.person.premium}" value="Premium price: "></h:outputLabel>
-                    <h:outputText rendered="#{loginController.person.premium}" value="#{cartController.countPremiumCustomerPrice(loginController.person)} kronor"></h:outputText>
-                </h:panelGrid>
-                <h:commandButton class="priceHeader" action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
+                <div style="margin-right: 50%">
+                    <div align="right" cellpadding="5">
+                        <h:outputLabel class="priceHeader" value="Total price: "></h:outputLabel>
+                        <h:outputText value="#{cartController.countTotalAmount()} kronor"></h:outputText>
+                    </div>
+                    <div align="right" cellpadding="5">
+                        <h:outputLabel class="priceHeader" rendered="#{loginController.person.premium}" value="Premium price: "></h:outputLabel>
+                        <h:outputText rendered="#{loginController.person.premium}" value="#{cartController.countPremiumCustomerPrice(loginController.person)} kronor"></h:outputText>
+                    </div>
+                    <div align="right" cellpadding="5">
+                        <h:commandButton class="priceHeader" action="#{cartController.buyProducts(loginController.person)}" value="Köp"></h:commandButton>
+                    </div>
+                </div>
             </h:form>
 
         </f:view>
