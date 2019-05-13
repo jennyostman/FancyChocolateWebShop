@@ -33,7 +33,7 @@
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
                         <h:inputText id="amountInput" value="#{Chocolate.amount}" size="4">
-                            <f:validateLongRange minimum="0" maximum="#{Chocolate.inStock}"/>
+                           
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
                         <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
