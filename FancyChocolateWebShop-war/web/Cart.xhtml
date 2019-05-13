@@ -45,7 +45,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
-                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
+                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" immediate="true" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
             </h:form>
