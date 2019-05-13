@@ -33,7 +33,7 @@
                     <h:column>
                         <f:facet name="header">Amount</f:facet>
                         <h:inputText id="amountInput" value="#{Chocolate.amount}" size="4">
-                            <f:validateLongRange minimum="0" maximum="#{Chocolate.inStock}"/>
+                            <!-- det var har vi tog bort en rad fran jennys kod, marcus skrev detta -->
                             <f:ajax event="valueChange" execute="@form" render="@all"></f:ajax>
                         </h:inputText>
                         <h:outputText value="#{Chocolate.inStockMessage}"></h:outputText>
@@ -45,7 +45,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Delete</f:facet>
-                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" value="Remove"></h:commandButton>
+                        <h:commandButton action="#{cartController.removeProduct(Chocolate)}" immediate="true" value="Remove"></h:commandButton>
                     </h:column>
                 </h:dataTable>
             </h:form>

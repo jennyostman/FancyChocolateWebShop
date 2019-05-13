@@ -49,6 +49,7 @@ public class ChocolateSessionBean {
             Person p9 = new Person("Lady Gaga", "Lady", "Lady123", "Ladyvägen 1", false, true);
             Person p10 = new Person("Taylor Swift", "Taylor", "Taylor123", "Taylorvägen 1", false, false);
             Person p11 = new Person("Testperson testis", "t", "t", "Testvagen 1", false, false);
+            Person p12 = new Person("Admin", "Admin", "Password", "Adminvagen 1", true, false);
 
             Orders or1 = new Orders(p1);
             Orders or2 = new Orders(p2);
@@ -60,29 +61,79 @@ public class ChocolateSessionBean {
             Orders or8 = new Orders(p8);
             Orders or9 = new Orders(p6);
 
+            
+//            OrderDetails od1 = new OrderDetails(3, c1, or1);
+//            OrderDetails od2 = new OrderDetails(3, c8, or2);
+//            OrderDetails od3 = new OrderDetails(3, c2, or3);
+//            OrderDetails od4 = new OrderDetails(1, c3, or4);
+//            OrderDetails od5 = new OrderDetails(1, c3, or5);
+//            OrderDetails od6 = new OrderDetails(2, c1, or5);
+//            OrderDetails od7 = new OrderDetails(3, c4, or5);
+//            OrderDetails od8 = new OrderDetails(3, c4, or4);
+//            OrderDetails od9 = new OrderDetails(3, c1, or4);
+//            OrderDetails od10 = new OrderDetails(3, c6, or4);
+//            OrderDetails od11 = new OrderDetails(5, c6, or6);
+//            OrderDetails od12 = new OrderDetails(9, c1, or6);
+//            OrderDetails od13 = new OrderDetails(15, c3, or6);
+//            OrderDetails od14 = new OrderDetails(8, c3, or7);
+//            OrderDetails od15 = new OrderDetails(6, c8, or7);
+//            OrderDetails od16 = new OrderDetails(2, c6, or7);
+//            OrderDetails od17 = new OrderDetails(8, c10, or7);
+//            OrderDetails od18 = new OrderDetails(12, c3, or8);
+//            OrderDetails od19 = new OrderDetails(10, c8, or8);
+//            OrderDetails od20 = new OrderDetails(7, c6, or8);
+//            OrderDetails od21 = new OrderDetails(8, c10, or8);
+//            OrderDetails od22 = new OrderDetails(20, c3, or9);
+//            OrderDetails od23 = new OrderDetails(2, c4, or9);
+//            
+            
+//            har ar vara andrade saker
             OrderDetails od1 = new OrderDetails(3, c1, or1);
+            or1.setPrice((3*c1.getPrice())+or1.getPrice());
             OrderDetails od2 = new OrderDetails(3, c8, or2);
+            or2.setPrice((3*c1.getPrice())+or2.getPrice());
             OrderDetails od3 = new OrderDetails(3, c2, or3);
+            or3.setPrice((3*c2.getPrice())+or3.getPrice());
             OrderDetails od4 = new OrderDetails(1, c3, or4);
+            or4.setPrice((1*c3.getPrice())+or4.getPrice());
             OrderDetails od5 = new OrderDetails(1, c3, or5);
+            or5.setPrice((1*c3.getPrice())+or5.getPrice());
             OrderDetails od6 = new OrderDetails(2, c1, or5);
+            or5.setPrice((2*c1.getPrice())+or5.getPrice());
             OrderDetails od7 = new OrderDetails(3, c4, or5);
+            or5.setPrice((3*c4.getPrice())+or5.getPrice());
             OrderDetails od8 = new OrderDetails(3, c4, or4);
+            or4.setPrice((3*c4.getPrice())+or4.getPrice());
             OrderDetails od9 = new OrderDetails(3, c1, or4);
+            or4.setPrice((3*c1.getPrice())+or4.getPrice());
             OrderDetails od10 = new OrderDetails(3, c6, or4);
+            or4.setPrice((3*c6.getPrice())+or4.getPrice());
             OrderDetails od11 = new OrderDetails(5, c6, or6);
+            or6.setPrice((5*c6.getPrice())+or6.getPrice());
             OrderDetails od12 = new OrderDetails(9, c1, or6);
+            or6.setPrice((9*c1.getPrice())+or6.getPrice());
             OrderDetails od13 = new OrderDetails(15, c3, or6);
+            or6.setPrice((15*c3.getPrice())+or6.getPrice());
             OrderDetails od14 = new OrderDetails(8, c3, or7);
+            or7.setPrice((8*c3.getPrice())+or7.getPrice());
             OrderDetails od15 = new OrderDetails(6, c8, or7);
+            or7.setPrice((6*c8.getPrice())+or7.getPrice());
             OrderDetails od16 = new OrderDetails(2, c6, or7);
-            OrderDetails od17 = new OrderDetails(8, c10, or7);
-            OrderDetails od18 = new OrderDetails(12, c3, or8);
-            OrderDetails od19 = new OrderDetails(10, c8, or8);
-            OrderDetails od20 = new OrderDetails(7, c6, or8);
-            OrderDetails od21 = new OrderDetails(8, c10, or8);
-            OrderDetails od22 = new OrderDetails(20, c3, or9);
-            OrderDetails od23 = new OrderDetails(2, c4, or9);
+           or7.setPrice((2*c6.getPrice())+or7.getPrice());            
+           OrderDetails od17 = new OrderDetails(8, c10, or7);
+           or7.setPrice((8*c10.getPrice())+or7.getPrice());            
+           OrderDetails od18 = new OrderDetails(12, c3, or8);
+           or8.setPrice((12*c3.getPrice())+or8.getPrice());            
+           OrderDetails od19 = new OrderDetails(10, c8, or8);
+           or8.setPrice((10*c8.getPrice())+or8.getPrice());            
+           OrderDetails od20 = new OrderDetails(7, c6, or8);
+           or8.setPrice((7*c6.getPrice())+or8.getPrice());            
+           OrderDetails od21 = new OrderDetails(8, c10, or8);
+           or8.setPrice((8*c10.getPrice())+or8.getPrice());            
+           OrderDetails od22 = new OrderDetails(20, c3, or9);
+           or9.setPrice((20*c3.getPrice())+or9.getPrice());            
+           OrderDetails od23 = new OrderDetails(2, c4, or9);
+           or9.setPrice((2*c4.getPrice())+or9.getPrice());
 
             try {
                 em.persist(c1);
@@ -107,6 +158,7 @@ public class ChocolateSessionBean {
                 em.persist(p9);
                 em.persist(p10);
                 em.persist(p11);
+                em.persist(p12);
 
                 em.persist(or1);
                 em.persist(or2);
@@ -145,6 +197,25 @@ public class ChocolateSessionBean {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
+//            List<OrderDetails> listan = new ArrayList();
+//            
+//            // Spara kostnad + vad kunden betalat. Behövs på adminsidan.
+//            for (Chocolate vara : cartContent) {
+//                listan.add(chocolateSessionBean.createOrderDetailsForOrder(ordern, vara));
+//                chocolateSessionBean.removeChocolateFromDatabase(vara, vara.getAmount());
+//                summa += listan.get(listan.size() - 1).getPrice();
+//            }
+//            if(person.isPremium()){
+//                summa*=0.9;
+//                double amountTemp = Math.round(summa * 100);
+//                summa = amountTemp/100;
+//            }
+//            summaHandlatFor+=summa;
+//            
+//            ordern.setPrice(summa);
+//            
+//            
         }
     }
 
