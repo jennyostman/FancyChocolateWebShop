@@ -124,21 +124,50 @@ public class CartController implements Serializable {
         return premiumPrice;
     }
 
+
     public String buyProducts(Person person) {
-        // Kolla om produkterna finns i lager.
-        boolean allInStock = true;
-        for (int i = 0; i < cartContent.size(); i++) {
-            int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
-            cartContent.get(i).setInStock(amountInStockFromDB);
-            // Kolla om kunden beställt mer av en vara än vad som finns i db.
-            // Lägg till meddelande till kunden på respektive objekt
-            if (cartContent.get(i).getAmount() > amountInStockFromDB) {
-                allInStock = false;
-                cartContent.get(i).setInStockMessage("Har för få i lager");
-            } else if (cartContent.get(i).getAmount() <= amountInStockFromDB) {
-                // Tömmer strängen
-                cartContent.get(i).setInStockMessage("");
-            }
+
+       // Kolla om produkterna finns i lager.
+
+       boolean allInStock = true;
+
+       for (int i = 0; i < cartContent.size(); i++) {
+
+           int amountInStockFromDB = chocolateSessionBean.amountOfChocolateInStock(cartContent.get(i));
+
+           cartContent.get(i).setInStock(amountInStockFromDB);
+
+           // Kolla om kunden beställt mer av en vara än vad som finns i db.
+
+           // Lägg till meddelande till kunden på respektive objekt
+
+           if (cartContent.get(i).getAmount() > 0){
+
+               if (cartContent.get(i).getAmount() > amountInStockFromDB) {
+
+               allInStock = false;
+
+               cartContent.get(i).setInStockMessage("Har för få i lager");
+
+               }
+
+               else if (cartContent.get(i).getAmount() <= amountInStockFromDB) {
+
+               // Tömmer strängen
+
+               cartContent.get(i).setInStockMessage("");
+
+               }
+
+           }
+
+           else {
+
+               allInStock = false;
+
+               cartContent.get(i).setInStockMessage("Använd bara siffror");
+
+           }
         }
 
         // Bara om allt som beställts finns i lager körs nedanstående
