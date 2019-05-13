@@ -192,6 +192,10 @@ public class CartController implements Serializable {
                 double amountTemp = Math.round(summa * 100);
                 summa = amountTemp/100;
             }
+            //decimalfix
+            double temp = Math.round(summa * 100);
+            summa = temp / 100;
+            
             summaHandlatFor+=summa;
             
             ordern.setPrice(summa);

@@ -361,6 +361,9 @@ public class ChocolateSessionBean {
         for (Orders o : ordrar) {
             for (int x = 0; x < o.getOrderDetails().size(); x++) {
                 totalsum += o.getOrderDetails().get(x).getPrice();
+                // decimalfix
+                double temp = Math.round(totalsum * 100);
+                totalsum = temp / 100;
             }
         }
 

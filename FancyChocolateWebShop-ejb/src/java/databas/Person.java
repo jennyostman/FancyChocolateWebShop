@@ -51,6 +51,9 @@ public class Person implements Serializable {
         double total = 0;
         for (Orders o : order){
             total += o.getPrice();
+            // decimalfix
+            double totalSum = Math.round(total * 100);
+            total = totalSum / 100;
         }
         
         return total;
