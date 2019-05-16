@@ -51,6 +51,10 @@ public class CartController implements Serializable {
     public void reset() {
         dontrefresh = false;
     }
+    
+    public void emptyCart(){
+        cartContent = new ArrayList();
+    }
 
     public void testaOmSokt() {
         System.out.println("Nu soktes definitivt fel metod");

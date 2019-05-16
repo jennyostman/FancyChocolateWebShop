@@ -16,6 +16,7 @@
                     <span id="spanButtons">
                         <h:commandButton value="Products" action="Products"></h:commandButton>
                         <h:commandButton value="Cart " action="Cart"></h:commandButton>
+                        <h:commandButton value="Log Out " action="#{loginController.logOut()}" actionListener="#{cartController.emptyCart()}"></h:commandButton>
                     </span>
                 </h:form>
             </f:view>

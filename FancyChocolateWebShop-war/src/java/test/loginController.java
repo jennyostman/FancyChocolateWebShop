@@ -23,6 +23,15 @@ public class loginController implements Serializable {
     private Person person = null;
     private String username;
     private String password;
+    
+    public String logOut(){
+        person = null;
+        return "loginPage.xhtml";
+    }
+    
+    public void logOutOnly(){
+        person = null;
+    }
 
     public Person getPerson() {
         return person;

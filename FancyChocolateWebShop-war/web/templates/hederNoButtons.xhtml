@@ -13,6 +13,10 @@
             <f:view>
                     <h:form id="headerForm">
                         <span id="headerSpan">Chocolate</span>
+                        <span id="spanButtons">
+                        <h:commandButton value="Products " action="Products.xhtml" actionListener="#{cartController.emptyCart()}"></h:commandButton>
+                        <h:commandButton value="Log Out " action="#{loginController.logOut()}" actionListener="#{cartController.emptyCart()}"></h:commandButton>
+                    </span>
                     </h:form>
             </f:view>
         </ui:composition>
